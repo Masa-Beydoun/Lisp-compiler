@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/gen" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="file://C:/masa/antlr4/antlr-intellij-plugin-v4/lib" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://C:/masa/antlr4/antlr-intellij-plugin-v4/lib" recursive="false" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <ANNOTATIONS>
+          <root url="jar://$MODULE_DIR$/../../antlr-intellij-plugin-v4-1.24.zip!/" />
+        </ANNOTATIONS>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../antlr-intellij-plugin-v4-1.24.zip!/" />
+          <root url="jar://$MODULE_DIR$/../../antlr-intellij-plugin-v4-1.24.zip!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$MODULE_DIR$/../../antlr-intellij-plugin-v4-1.24.zip!/" />
+        </JAVADOC>
+        <NATIVE>
+          <root url="jar://$MODULE_DIR$/../../antlr-intellij-plugin-v4-1.24.zip!/" />
+        </NATIVE>
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/../../antlr-intellij-plugin-v4-1.24.zip!/" />
+          <root url="jar://$MODULE_DIR$/../../antlr-intellij-plugin-v4-1.24.zip!/" />
+        </SOURCES>
+        <jarDirectory url="jar://$MODULE_DIR$/../../antlr-intellij-plugin-v4-1.24.zip!/" recursive="false" />
+        <jarDirectory url="jar://$MODULE_DIR$/../../antlr-intellij-plugin-v4-1.24.zip!/" recursive="false" type="SOURCES" />
+      </library>
+    </orderEntry>
+  </component>
+</module>
