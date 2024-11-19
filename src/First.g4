@@ -4,13 +4,18 @@ lexer grammar First;
 // WhiteSpace
 WS: [ \t\r\n]+ -> skip;
 
+MULTI_LINE_COMMENT  : '#|' .*? '|#' -> skip ;
+SINGLE_LINE_COMMENT : ';' ~[\r\n]* -> skip ;
+
+
+
 COMMA : ',' ;
-SEMI_COLON: ';';
+SEMI_COLON:';';
 COLON: ':';
 DOT: '.';
 QUESTION_MARK: '?';
 HASH_TAG: '#';
-DOUBLE_QUOTATION: '"';
+
 
 NUMBER : SCIENTIFIC | COMPLEX | FLOAT;
 INTEGER: ('+' | '-')? ('0' | [1-9][0-9]*);
@@ -41,9 +46,7 @@ OPEN_BRACKET: '[';
 CLOSE_BRACKET: ']';
 OPEN_PAREN: '(';
 CLOSE_PAREN: ')';
-//For multi-line comments, you can use the #| and |# delimiters:
-COMMENTS1 : '#|';
-COMMENTS2 : '|#';
+
 
 
 
@@ -71,12 +74,6 @@ EXPORT: 'export';
 PRINT : 'print';
 T : 't' ;
 DIRECTIVE : '~' [SD%~];
-
-
-
-FORMAT_TEMPLATE: STRING ;
-STREAM : [a-zA-Z_][a-zA-Z0-9_-]*;
-
 
 
 // Arithmatic Operators
@@ -121,25 +118,24 @@ OR: '||';
 DEFPARAMETER :'defparameter' ;
 DEFvar: 'defvar';
 
+STRING
+    : '"' (ESC | ~["\\])* '"'
+    | '"' (ESC | ~["\\])* EOF {throw new RuntimeException("Unclosed string literal at line " + getLine() + ", column " + getCharPositionInLine());}
+    ;
 
-//variable (identifier)
-SYMBOL : [a-zA-Z_][a-zA-Z_0-9]* ;
+fragment ESC
+    : '\\' (['"\\nrt] | UNICODE_ESCAPE)
+    ;
 
+fragment UNICODE_ESCAPE
+    : 'u' HEX HEX HEX HEX
+    ;
 
-STRING : '"' ( ESC_SEQ | ~[\\"\n\r] )* '"'
-      {
-          // Java code to handle the unescaping within ANTLR
-          String text = getText();
-          setText(text.substring(1, text.length() - 1)  // Remove the surrounding quotes
-                     .replace("\\\\", "\\")
-                     .replace("\\n", "\n")
-                     .replace("\\t", "\t")
-                     .replace("\\r", "\r")
-                     .replace("\\b", "\b")
-                     .replace("\\f", "\f")
-                     .replace("\\\"", "\""));
-      };
+fragment HEX
+    : [0-9a-fA-F]
+    ;
 
-fragment ESC_SEQ : '\\' [nrtbf\\"] ;
+STREAM : [a-zA-Z_][a-zA-Z0-9_-]*;
+
 
 
