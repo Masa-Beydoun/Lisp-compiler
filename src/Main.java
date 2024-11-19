@@ -8,11 +8,8 @@ public class Main {
     public static void main(String[] args) {
         try {
             // Read the content of the input file
-<<<<<<< HEAD
             String inputFilePath = "src/testLisp.lisp";
-=======
-            String inputFilePath = "C:\\Users\\Masa\\Downloads\\spring-security-test\\compiler\\src\\testLisp.lisp";
->>>>>>> adddc83c0bca27aacf234f929394dbfd4a527fd7
+
             String input = new String(Files.readAllBytes(Paths.get(inputFilePath)));
 
             // Create a CharStream from the input

@@ -4,10 +4,27 @@ lexer grammar First;
 WS: [ \t\r\n]+ -> skip;
 
 
-MULTI_LINE_COMMENT  : '#|' .*? '|#' -> skip ;
-SINGLE_LINE_COMMENT : ';' ~[\r\n]* -> skip ;
+COMMENT: ';' .*? '\n' -> skip;
+BLOCK_COMMENT: ';;' .*? '\n' -> skip;
+MULTI_LINE_COMMENT: '#|' .*? '|#' -> skip;
 
+STRING
+    : '"' (ESC | ~["\\])* '"' {
+        // Unescape the string content
+        setText(getText()
+            .substring(1, getText().length() - 1) // Remove surrounding quotes
+            .replace("\\\"", "\"")               // Unescape double quotes
+            .replace("\\\\", "\\")               // Unescape backslashes
+            .replace("\\n", "\n")                // Unescape newlines
+            .replace("\\t", "\t")                // Unescape tabs
+            .replace("\\r", "\r"));              // Unescape carriage returns
+    }
+    | '"' (ESC | ~["\\])* EOF {
+        throw new RuntimeException("Unclosed string literal at line " + getLine() + ", column " + getCharPositionInLine());
+    }
+    ;
 
+SPECIAL_VARIABLE: '*' IDENTIFIER '*';
 
 COMMA : ',' ;
 SEMI_COLON:';';
@@ -23,20 +40,10 @@ FLOAT: ('+' | '-')? [0-9]+ '.' [0-9]+;
 SCIENTIFIC: ('+' | '-')? [0-9]+ ('.' [0-9]+)? ('e' | 'E') ('+' | '-')? [0-9]+;
 COMPLEX: '#c(' NUMBER NUMBER ')';
 CONSTANT : 'pi' | 'e';
-BOOLEAN : 'T' | 'NIL';
-NIL: 'nil';
+
 
 DOUBLE_QUOTATION: '"';
 QUOTE_SYMBOL: '\'';
-
-// Number
-NUMBER: INTEGER | FLOAT | RATIONAL | COMPLEX;
-SIGN: '+' | '-';
-INTEGER: SIGN? [0-9]+;
-FLOAT: SIGN? [0-9]+ ('/'| '.' [0-9]+)? ([eE] SIGN? [0-9]+)?;
-RATIONAL: INTEGER '/' INTEGER;
-COMPLEX: '#c(' NUMBER NUMBER ')';
-CONSTANT: 'pi' | 'e';
 
 // Null Literal
 NULL: NIL;
@@ -59,11 +66,6 @@ CLOSE_BRACKET: ']';
 OPEN_PAREN: '(';
 CLOSE_PAREN: ')';
 
-
-
-
-// Loop Constructs and Control Flow
-RETURN: 'return';
 // loops :
 LOOP: 'loop';
 DOLIST: 'dolist';
@@ -76,26 +78,14 @@ WHILE: 'while';
 // Keywords
 CONST: 'const';
 VAR: 'var';
-<<<<<<< HEAD
-SETQ:'setq';
 
 IMPORT: 'import';
 EXPORT: 'export';
 
 /////////////////////////////PRINTING/////////////////////
 PRINT : 'print';
-T : 't' ;
-DIRECTIVE : '~' [SD%~];
-=======
-IMPORT: 'import';
-EXPORT: 'export';
-
-// print
-PRINT : 'print';
 FORMAT: 'format';
-DIRECTIVE: '~'[SD%~];
-
-// Operators
+DIRECTIVE : '~' [SD%~];
 
 // Arithmatic Operators
 PLUS : '+';
@@ -103,11 +93,8 @@ MINUS : '-';
 MULTIPLY : '*';
 DIV :'/' ;
 MODULUS: '%';
-<<<<<<< HEAD
 FLOOR : 'floor';
 CEILING : 'ceiling';
-FLOOR: 'floor';
-CEILING: 'ceiling';
 MOD: 'mod';
 SIN: 'sin';
 COS: 'cos';
@@ -115,22 +102,7 @@ TAN:'tan';
 SQRT:'sqrt';
 EXP: 'exp';
 EXPT: 'expt';
-<<<<<<< HEAD
 CONS: 'cons';
-CAR: 'car';
-CDR: 'cdr';
-
-
-LIST : 'list' ;
-PUSH: 'push';
-POP: 'pop';
-
-
-
-DEFUN:'defun';
-REST:'&rest';
-KEY:'&key';
-
 CAR: 'car';
 CDR: 'cdr';
 
@@ -139,32 +111,10 @@ BIT_AND: '&';
 BIT_XOR: '^';
 BIT_OR: '|';
 
-// IDENTIFIER
-DEFPARAMETER :'defparameter' ;
-DEFvar: 'defvar';
-
-STRING
-    : '"' (ESC | ~["\\])* '"' {
-        // Unescape the string content
-        setText(getText()
-            .substring(1, getText().length() - 1) // Remove surrounding quotes
-            .replace("\\\"", "\"")               // Unescape double quotes
-            .replace("\\\\", "\\")               // Unescape backslashes
-            .replace("\\n", "\n")                // Unescape newlines
-            .replace("\\t", "\t")                // Unescape tabs
-            .replace("\\r", "\r"));              // Unescape carriage returns
-    }
-    | '"' (ESC | ~["\\])* EOF {
-        throw new RuntimeException("Unclosed string literal at line " + getLine() + ", column " + getCharPositionInLine());
-    }
-    ;
 //Identifier
 IDENTIFIER: [a-zA-Z_][a-zA-Z0-9_]* ;
-SPECIAL_VARIABLE: '*' IDENTIFIER '*';
 
-COMMENT: ';' .*? '\n' -> skip;
-BLOCK_COMMENT: ';;' .*? '\n' -> skip;
-MULTI_LINE_COMMENT: '#|' .*? '|#' -> skip;
+
 
 fragment ESC
     : '\\' (['"\\nrt] | UNICODE_ESCAPE)
@@ -245,23 +195,16 @@ INTERSECTION: 'intersection';
 UNION: 'union';
 SETDIFFERENCE: 'set-difference';
 
-//
-CONS: 'cons';
 //List
 LIST : 'list' ;
-
 REST: '&rest';
 KEY: '&key';
 
 //string
-STRING: '"' (ESC | ~["\\] | '\n')* '"';
-STRING_FORMAT: '"' .*? '"';
-fragment ESC: '\\' ('"' | '\\' | 'n');
-FORMAT_TEMPLATE: STRING;
-STREAM: [a-zA-Z_][a-zA-Z0-9_-]*;
+
 
 
 //Atom
-ATOM: NUMBER | SYMBOL | STRING;
+ATOM: NUMBER | STREAM | STRING;
 
 
