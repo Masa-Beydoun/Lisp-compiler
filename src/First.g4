@@ -12,19 +12,16 @@ QUESTION_MARK: '?';
 HASH_TAG: '#';
 DOUBLE_QUOTATION: '"';
 
-
-// Number
-NUMBER : [1-9]+;
-INTEGER: '0' | [1-9][0-9]*;
-FLOAT: [0-9]+ '.'[0-9]+;
-
+NUMBER : SCIENTIFIC | COMPLEX | FLOAT;
+INTEGER: ('+' | '-')? ('0' | [1-9][0-9]*);
+FLOAT: ('+' | '-')? [0-9]+ '.' [0-9]+;
+SCIENTIFIC: ('+' | '-')? [0-9]+ ('.' [0-9]+)? ('e' | 'E') ('+' | '-')? [0-9]+;
+COMPLEX: '#c(' NUMBER NUMBER ')';
+CONSTANT : 'pi' | 'e';
 BOOLEAN : 'T' | 'NIL';
-//BOOLEAN: 'true' | 'false';
+NIL: 'nil';
 
-// Null Literal
-NULL: 'nil';
 
-// Comparison Operators
 EQUALS: '==';
 NOT: '!';
 ASSING: '=';
@@ -49,6 +46,7 @@ COMMENTS1 : '#|';
 COMMENTS2 : '|#';
 
 
+
 // Loop Constructs and Control Flow
 RETURN: 'return';
 IF: 'if';
@@ -64,19 +62,21 @@ WHILE: 'while';
 CONST: 'const';
 LET: 'let';
 VAR: 'var';
+SETQ:'setq';
 
 IMPORT: 'import';
 EXPORT: 'export';
 
-
-
-////////////////////////////////////////////////
-// print
+/////////////////////////////PRINTING/////////////////////
 PRINT : 'print';
+T : 't' ;
+DIRECTIVE : '~' [SD%~];
 
 
-///////////////////////////////////////////////////
-// Operators
+
+FORMAT_TEMPLATE: STRING ;
+STREAM : [a-zA-Z_][a-zA-Z0-9_-]*;
+
 
 
 // Arithmatic Operators
@@ -85,6 +85,30 @@ MINUS : '-';
 MULTIPLY : '*';
 DIV :'/' ;
 MODULUS: '%';
+FLOOR : 'floor';
+CEILING : 'ceiling';
+MOD: 'mod';
+SIN: 'sin';
+COS: 'cos';
+TAN:'tan';
+SQRT:'sqrt';
+EXP: 'exp';
+EXPT: 'expt';
+CONS: 'cons';
+CAR: 'car';
+CDR: 'cdr';
+
+
+LIST : 'list' ;
+
+PUSH: 'push';
+POP: 'pop';
+
+
+
+DEFUN:'defun';
+REST:'&rest';
+KEY:'&key';
 
 // Logical Operators
 BIT_AND: '&';
@@ -93,14 +117,12 @@ BIT_OR: '|';
 AND: '&&';
 OR: '||';
 
-////////////////////////////////////////////////
 // IDENTIFIER
 DEFPARAMETER :'defparameter' ;
 DEFvar: 'defvar';
-////////////////////////////////////////////////
+
 
 //variable (identifier)
-IDENTIFIER: [a-zA-Z_][a-zA-Z0-9_]* ;
 SYMBOL : [a-zA-Z_][a-zA-Z_0-9]* ;
 
 
@@ -118,7 +140,6 @@ STRING : '"' ( ESC_SEQ | ~[\\"\n\r] )* '"'
                      .replace("\\\"", "\""));
       };
 
-// Rule for escape sequences
 fragment ESC_SEQ : '\\' [nrtbf\\"] ;
 
 
