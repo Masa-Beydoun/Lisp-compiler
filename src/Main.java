@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
         try {
             // Read the content of the input file
-            String inputFilePath = "C:\\Users\\Masa\\Downloads\\spring-security-test\\compiler\\src\\input.txt";
+            String inputFilePath = "C:\\Users\\Masa\\Downloads\\spring-security-test\\compiler\\src\\testLisp.lisp";
             String input = new String(Files.readAllBytes(Paths.get(inputFilePath)));
 
             // Create a CharStream from the input
