@@ -119,9 +119,21 @@ DEFPARAMETER :'defparameter' ;
 DEFvar: 'defvar';
 
 STRING
-    : '"' (ESC | ~["\\])* '"'
-    | '"' (ESC | ~["\\])* EOF {throw new RuntimeException("Unclosed string literal at line " + getLine() + ", column " + getCharPositionInLine());}
+    : '"' (ESC | ~["\\])* '"' {
+        // Unescape the string content
+        setText(getText()
+            .substring(1, getText().length() - 1) // Remove surrounding quotes
+            .replace("\\\"", "\"")               // Unescape double quotes
+            .replace("\\\\", "\\")               // Unescape backslashes
+            .replace("\\n", "\n")                // Unescape newlines
+            .replace("\\t", "\t")                // Unescape tabs
+            .replace("\\r", "\r"));              // Unescape carriage returns
+    }
+    | '"' (ESC | ~["\\])* EOF {
+        throw new RuntimeException("Unclosed string literal at line " + getLine() + ", column " + getCharPositionInLine());
+    }
     ;
+
 
 fragment ESC
     : '\\' (['"\\nrt] | UNICODE_ESCAPE)
