@@ -3,12 +3,21 @@
 
 ;; Demonstration of strings with escape characters and special symbols
 
+<<<<<<< HEAD
 ;; (defparameter *escaped-string*
 ;;   "This is a string with a newline:
 ;;  And a tab:	(Done!) the  newline:
 ;;  and a tab")
 
 ;; (defparameter *quote-in-string* "He said, \"Lisp is amazing!\"")
+=======
+(defparameter *escaped-string*
+  "This is a string with a newline:
+And a tab:	(Done!) the  newline:
+and a tab")
+
+(defparameter *quote-in-string* "He said, \"Lisp is amazing!\"")
+>>>>>>> adddc83c0bca27aacf234f929394dbfd4a527fd7
 (defparameter *backslash-string* "This path contains a backslash: C:\\Users\\Lisp")
 
 
