@@ -24,6 +24,13 @@ STRING
     }
     ;
 
+fragment ESC: '\\' (['"\\nrt] | UNICODE_ESCAPE) ;
+
+fragment UNICODE_ESCAPE: 'u' HEX HEX HEX HEX;
+
+fragment HEX
+    : [0-9a-fA-F];
+
 SPECIAL_VARIABLE: '*' IDENTIFIER '*';
 
 COMMA : ',' ;
@@ -40,10 +47,6 @@ FLOAT: ('+' | '-')? [0-9]+ '.' [0-9]+;
 SCIENTIFIC: ('+' | '-')? [0-9]+ ('.' [0-9]+)? ('e' | 'E') ('+' | '-')? [0-9]+;
 COMPLEX: '#c(' NUMBER NUMBER ')';
 CONSTANT : 'pi' | 'e';
-
-
-DOUBLE_QUOTATION: '"';
-QUOTE_SYMBOL: '\'';
 
 // Null Literal
 NULL: NIL;
@@ -78,14 +81,13 @@ WHILE: 'while';
 // Keywords
 CONST: 'const';
 VAR: 'var';
-
 IMPORT: 'import';
 EXPORT: 'export';
 
 /////////////////////////////PRINTING/////////////////////
 PRINT : 'print';
 FORMAT: 'format';
-DIRECTIVE : '~' [SD%~];
+DIRECTIVE: '~' [aADdS%~];
 
 // Arithmatic Operators
 PLUS : '+';
@@ -110,26 +112,6 @@ CDR: 'cdr';
 BIT_AND: '&';
 BIT_XOR: '^';
 BIT_OR: '|';
-
-//Identifier
-IDENTIFIER: [a-zA-Z_][a-zA-Z0-9_]* ;
-
-
-
-fragment ESC
-    : '\\' (['"\\nrt] | UNICODE_ESCAPE)
-    ;
-
-fragment UNICODE_ESCAPE
-    : 'u' HEX HEX HEX HEX
-    ;
-
-fragment HEX
-    : [0-9a-fA-F]
-    ;
-
-STREAM : [a-zA-Z_][a-zA-Z0-9_-]*;
-//Keywords
 
 //Assignment
 SETQ: 'setq';
@@ -158,7 +140,6 @@ AREF: 'aref';
 //Boolean literals
 T: 't';
 NIL: 'nil';
-BOOLEAN: T | NIL;
 
 //Conditional keywords
 IF: 'if';
@@ -200,11 +181,5 @@ LIST : 'list' ;
 REST: '&rest';
 KEY: '&key';
 
-//string
-
-
-
-//Atom
-ATOM: NUMBER | STREAM | STRING;
-
-
+STREAM : [a-zA-Z_][a-zA-Z0-9_-]*;
+IDENTIFIER: [a-zA-Z_][a-zA-Z0-9_-]* ;
