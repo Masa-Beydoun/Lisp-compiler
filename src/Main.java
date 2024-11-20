@@ -7,19 +7,12 @@ import java.nio.file.Paths;
 public class Main {
     public static void main(String[] args) {
         try {
-            // Read the content of the input file
             String inputFilePath = "src/testLisp.lisp";
 
             String input = new String(Files.readAllBytes(Paths.get(inputFilePath)));
-
-            // Create a CharStream from the input
             CharStream charStream = CharStreams.fromString(input);
-
-            // Instantiate the lexer
             First lexer = new First(charStream);
-
-            // Use a custom error listener for lexical errors
-            lexer.removeErrorListeners(); // Remove default error listeners
+            lexer.removeErrorListeners();
             lexer.addErrorListener(new BaseErrorListener() {
                 @Override
                 public void syntaxError(Recognizer<?, ?> recognizer, Object offendingSymbol,
@@ -29,10 +22,7 @@ public class Main {
                 }
             });
 
-            // Create a token stream from the lexer
             CommonTokenStream tokens = new CommonTokenStream(lexer);
-
-            // Print the tokens with their details
             tokens.fill();
             int index = 0;
             for (Token token : tokens.getTokens()) {

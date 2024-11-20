@@ -84,7 +84,7 @@ VAR: 'var';
 IMPORT: 'import';
 EXPORT: 'export';
 
-/////////////////////////////PRINTING/////////////////////
+
 PRINT : 'print';
 FORMAT: 'format';
 DIRECTIVE: '~' [aADdS%~];
