@@ -3,10 +3,16 @@ import org.antlr.v4.runtime.tree.*;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class Main {
     public static void main(String[] args) {
+        parsing();
 
+    }
+
+    public static void parsing(){
         String inputFileName = ".\\src\\input.txt";
 
         try {
@@ -18,6 +24,48 @@ public class Main {
 
             System.out.println(tree.toStringTree(parser));
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void readTokens(){
+        try {
+            String inputFilePath = "src/testLisp.lisp";
+
+            String input = new String(Files.readAllBytes(Paths.get(inputFilePath)));
+            CharStream charStream = CharStreams.fromString(input);
+            LispLexer lexer = new LispLexer(charStream);
+            lexer.removeErrorListeners();
+            lexer.addErrorListener(new BaseErrorListener() {
+                @Override
+                public void syntaxError(Recognizer<?, ?> recognizer, Object offendingSymbol,
+                                        int line, int charPositionInLine,
+                                        String msg, RecognitionException e) {
+                    System.err.println("Lexical Error at line " + line + ", column " + charPositionInLine + ": " + msg);
+                }
+            });
+
+            CommonTokenStream tokens = new CommonTokenStream(lexer);
+            tokens.fill();
+            int index = 0;
+            for (Token token : tokens.getTokens()) {
+                String tokenType = LispLexer.VOCABULARY.getSymbolicName(token.getType());
+                if (tokenType == null) {
+                    tokenType = "UNKNOWN";
+                }
+
+                if (token.getType() != Token.EOF) {
+                    System.out.println(
+                            "Index: " + index +
+                                    ", Line: " + token.getLine() +
+                                    ", Column: " + token.getCharPositionInLine() +
+                                    ", Type: " + tokenType +
+                                    ", Value: '" + token.getText() + "'"
+                    );
+                }
+                index++;
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
