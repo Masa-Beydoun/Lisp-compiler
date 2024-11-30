@@ -16,6 +16,12 @@ public interface LispParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitProgram(LispParser.ProgramContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link LispParser#temporary_assigment}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTemporary_assigment(LispParser.Temporary_assigmentContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link LispParser#setq}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -27,16 +33,4 @@ public interface LispParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitLet(LispParser.LetContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link LispParser#list}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitList(LispParser.ListContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link LispParser#expression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitExpression(LispParser.ExpressionContext ctx);
 }

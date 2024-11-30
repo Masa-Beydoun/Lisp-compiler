@@ -2,6 +2,7 @@ import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -10,23 +11,24 @@ public class Main {
     public static void main(String[] args) {
         parsing();
 
-        readTokens();
+//        readTokens();
     }
 
     public static void parsing(){
         String inputFileName = "./src/input.txt";
 
         try {
-            CharStream input = CharStreams.fromStream(new FileInputStream(inputFileName));
-            LispLexer lexer = new LispLexer(input);
+            CharStream charStream = CharStreams.fromStream(new FileInputStream(inputFileName));
+            LispLexer lexer = new LispLexer(charStream);
             CommonTokenStream tokens = new CommonTokenStream(lexer);
             LispParser parser = new LispParser(tokens);
-            ParseTree tree = parser.program(); // Replace 'start' with your actual starting rule
 
+            ParseTree tree = parser.program();
             System.out.println(tree.toStringTree(parser));
-
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 

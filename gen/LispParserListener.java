@@ -17,6 +17,16 @@ public interface LispParserListener extends ParseTreeListener {
 	 */
 	void exitProgram(LispParser.ProgramContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link LispParser#temporary_assigment}.
+	 * @param ctx the parse tree
+	 */
+	void enterTemporary_assigment(LispParser.Temporary_assigmentContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LispParser#temporary_assigment}.
+	 * @param ctx the parse tree
+	 */
+	void exitTemporary_assigment(LispParser.Temporary_assigmentContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link LispParser#setq}.
 	 * @param ctx the parse tree
 	 */
@@ -36,24 +46,4 @@ public interface LispParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitLet(LispParser.LetContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link LispParser#list}.
-	 * @param ctx the parse tree
-	 */
-	void enterList(LispParser.ListContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link LispParser#list}.
-	 * @param ctx the parse tree
-	 */
-	void exitList(LispParser.ListContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link LispParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void enterExpression(LispParser.ExpressionContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link LispParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void exitExpression(LispParser.ExpressionContext ctx);
 }
