@@ -2,12 +2,9 @@ parser grammar LispParser;
 
 options { tokenVocab=LispLexer; } // Ensure it uses the lexer
 
-program:  (setq  | temporary_assigment | let)*  | EOF;
+program: OPEN_PAREN (setq  | temporary_assigment | let)*  CLOSE_PAREN | EOF;
 
-temporary_assigment : OPEN_PAREN IDENTIFIER NUMBER CLOSE_PAREN;
-setq: OPEN_PAREN SETQ IDENTIFIER NUMBER CLOSE_PAREN ;
-let: OPEN_PAREN LET IDENTIFIER NUMBER CLOSE_PAREN;
-
-//list: OPEN_PAREN (expression)* CLOSE_PAREN;
-//expression: list | NUMBER | SYMBOL;
+temporary_assigment :  IDENTIFIER NUMBER ;
+setq:  SETQ IDENTIFIER NUMBER  ;
+let:  LET IDENTIFIER NUMBER ;
 
