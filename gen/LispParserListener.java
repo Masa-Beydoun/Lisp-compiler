@@ -27,6 +27,16 @@ public interface LispParserListener extends ParseTreeListener {
 	 */
 	void exitSetq(LispParser.SetqContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link LispParser#let}.
+	 * @param ctx the parse tree
+	 */
+	void enterLet(LispParser.LetContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LispParser#let}.
+	 * @param ctx the parse tree
+	 */
+	void exitLet(LispParser.LetContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link LispParser#list}.
 	 * @param ctx the parse tree
 	 */

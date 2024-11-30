@@ -22,6 +22,12 @@ public interface LispParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSetq(LispParser.SetqContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link LispParser#let}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLet(LispParser.LetContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link LispParser#list}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
