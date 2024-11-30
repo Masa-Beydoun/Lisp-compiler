@@ -10,9 +10,21 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  */
 public interface LispParserVisitor<T> extends ParseTreeVisitor<T> {
 	/**
+	 * Visit a parse tree produced by {@link LispParser#setq}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSetq(LispParser.SetqContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link LispParser#list}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitList(LispParser.ListContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LispParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExpression(LispParser.ExpressionContext ctx);
 }

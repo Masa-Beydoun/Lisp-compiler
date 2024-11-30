@@ -8,63 +8,6 @@ COMMENT: ';' .*? '\n' -> skip;
 BLOCK_COMMENT: ';;' .*? '\n' -> skip;
 MULTI_LINE_COMMENT: '#|' .*? '|#' -> skip;
 
-STRING
-    : '"' (ESC | ~["\\])* '"' {
-        // Unescape the string content
-        setText(getText()
-            .substring(1, getText().length() - 1) // Remove surrounding quotes
-            .replace("\\\"", "\"")               // Unescape double quotes
-            .replace("\\\\", "\\")               // Unescape backslashes
-            .replace("\\n", "\n")                // Unescape newlines
-            .replace("\\t", "\t")                // Unescape tabs
-            .replace("\\r", "\r"));              // Unescape carriage returns
-    }
-    | '"' (ESC | ~["\\])* EOF {
-        throw new RuntimeException("Unclosed string literal at line " + getLine() + ", column " + getCharPositionInLine());
-    }
-    ;
-
-fragment ESC: '\\' (['"\\nrt] | UNICODE_ESCAPE) ;
-
-fragment UNICODE_ESCAPE: 'u' HEX HEX HEX HEX;
-
-fragment HEX
-    : [0-9a-fA-F];
-
-
-FORMAT_STRING
-    : '"' (FORMAT_ESC | DIRECTIVE | ~["\\])* '"' {
-        setText(getText()
-            .substring(1, getText().length() - 1) // Remove surrounding quotes
-            .replace("\\\"", "\"")               // Unescape double quotes
-            .replace("\\\\", "\\")               // Unescape backslashes
-            .replace("\\n", "\n")                // Unescape newlines
-            .replace("\\t", "\t")                // Unescape tabs
-            .replace("\\r", "\r")                // Unescape carriage returns
-            .replace("~%", "\n")                 // Handle newline directive
-            .replace("~~", "~"));                // Handle literal tilde
-    }
-    | '"' (FORMAT_ESC | DIRECTIVE | ~["\\])* EOF {
-        throw new RuntimeException("Unclosed format string literal at line " + getLine() + ", column " + getCharPositionInLine());
-    }
-    ;
-
-fragment FORMAT_ESC: '\\' (['"\\nrt] | UNICODE_ESCAPE);
-// Specific Format Directives
-DIRECTIVE_NEWLINE: '~%';         // Represents a newline.
-DIRECTIVE_TAB: '~T';             // Represents a tab.
-DIRECTIVE_LITERAL: '~~';         // Represents a literal tilde (~).
-DIRECTIVE_DECIMAL: '~D';         // Format decimal numbers.
-DIRECTIVE_STRING: '~A';          // Format string-like data.
-DIRECTIVE_FLOAT: '~F';           // Format floating-point numbers.
-DIRECTIVE_EXPONENT: '~E';        // Format numbers in scientific notation.
-DIRECTIVE_PERCENT: '~S';         // Format data with escaping (safe representation).
-
-// General Directive Fallback
-DIRECTIVE: '~' [a-zA-Z%~];  // Matches any general directive not explicitly defined.
-
-
-
 SPECIAL_VARIABLE: '*' IDENTIFIER '*';
 
 COMMA : ',' ;
@@ -214,6 +157,65 @@ SETDIFFERENCE: 'set-difference';
 LIST : 'list' ;
 REST: '&rest';
 KEY: '&key';
+
+STRING
+    : '"' (ESC | ~["\\])* '"' {
+        // Unescape the string content
+        setText(getText()
+            .substring(1, getText().length() - 1) // Remove surrounding quotes
+            .replace("\\\"", "\"")               // Unescape double quotes
+            .replace("\\\\", "\\")               // Unescape backslashes
+            .replace("\\n", "\n")                // Unescape newlines
+            .replace("\\t", "\t")                // Unescape tabs
+            .replace("\\r", "\r"));              // Unescape carriage returns
+    }
+    | '"' (ESC | ~["\\])* EOF {
+        throw new RuntimeException("Unclosed string literal at line " + getLine() + ", column " + getCharPositionInLine());
+    }
+    ;
+
+fragment ESC: '\\' (['"\\nrt] | UNICODE_ESCAPE) ;
+
+fragment UNICODE_ESCAPE: 'u' HEX HEX HEX HEX;
+
+fragment HEX
+    : [0-9a-fA-F];
+
+
+FORMAT_STRING
+    : '"' (FORMAT_ESC | DIRECTIVE | ~["\\])* '"' {
+        setText(getText()
+            .substring(1, getText().length() - 1) // Remove surrounding quotes
+            .replace("\\\"", "\"")               // Unescape double quotes
+            .replace("\\\\", "\\")               // Unescape backslashes
+            .replace("\\n", "\n")                // Unescape newlines
+            .replace("\\t", "\t")                // Unescape tabs
+            .replace("\\r", "\r")                // Unescape carriage returns
+            .replace("~%", "\n")                 // Handle newline directive
+            .replace("~~", "~"));                // Handle literal tilde
+    }
+    | '"' (FORMAT_ESC | DIRECTIVE | ~["\\])* EOF {
+        throw new RuntimeException("Unclosed format string literal at line " + getLine() + ", column " + getCharPositionInLine());
+    }
+    ;
+
+fragment FORMAT_ESC: '\\' (['"\\nrt] | UNICODE_ESCAPE);
+// Specific Format Directives
+DIRECTIVE_NEWLINE: '~%';         // Represents a newline.
+DIRECTIVE_TAB: '~T';             // Represents a tab.
+DIRECTIVE_LITERAL: '~~';         // Represents a literal tilde (~).
+DIRECTIVE_DECIMAL: '~D';         // Format decimal numbers.
+DIRECTIVE_STRING: '~A';          // Format string-like data.
+DIRECTIVE_FLOAT: '~F';           // Format floating-point numbers.
+DIRECTIVE_EXPONENT: '~E';        // Format numbers in scientific notation.
+DIRECTIVE_PERCENT: '~S';         // Format data with escaping (safe representation).
+
+// General Directive Fallback
+DIRECTIVE: '~' [a-zA-Z%~];  // Matches any general directive not explicitly defined.
+
+
+
+
 
 STREAM : [a-zA-Z_][a-zA-Z0-9_-]*;
 IDENTIFIER: [a-zA-Z_][a-zA-Z0-9_-]* ;
