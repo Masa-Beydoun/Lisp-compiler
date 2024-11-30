@@ -214,8 +214,5 @@ DIRECTIVE_PERCENT: '~S';         // Format data with escaping (safe representati
 DIRECTIVE: '~' [a-zA-Z%~];  // Matches any general directive not explicitly defined.
 
 
-
-
-
 STREAM : [a-zA-Z_][a-zA-Z0-9_-]*;
 IDENTIFIER: [a-zA-Z_][a-zA-Z0-9_-]* ;
