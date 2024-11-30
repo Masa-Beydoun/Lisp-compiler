@@ -1,4 +1,4 @@
-lexer grammar First;
+lexer grammar LispLexer;
 
 // WhiteSpace
 WS: [ \t\r\n]+ -> skip;
