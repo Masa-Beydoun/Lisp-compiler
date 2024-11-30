@@ -18,7 +18,7 @@ QUESTION_MARK: '?';
 HASH_TAG: '#';
 
 
-NUMBER : SCIENTIFIC | COMPLEX | FLOAT;
+NUMBER : INTEGER | FLOAT | SCIENTIFIC | COMPLEX | FLOAT;
 INTEGER: ('+' | '-')? ('0' | [1-9][0-9]*);
 FLOAT: ('+' | '-')? [0-9]+ '.' [0-9]+;
 SCIENTIFIC: ('+' | '-')? [0-9]+ ('.' [0-9]+)? ('e' | 'E') ('+' | '-')? [0-9]+;
@@ -214,5 +214,4 @@ DIRECTIVE_PERCENT: '~S';         // Format data with escaping (safe representati
 DIRECTIVE: '~' [a-zA-Z%~];  // Matches any general directive not explicitly defined.
 
 
-STREAM : [a-zA-Z_][a-zA-Z0-9_-]*;
 IDENTIFIER: [a-zA-Z_][a-zA-Z0-9_-]* ;

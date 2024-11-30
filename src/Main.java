@@ -10,17 +10,18 @@ public class Main {
     public static void main(String[] args) {
         parsing();
 
+        readTokens();
     }
 
     public static void parsing(){
-        String inputFileName = ".\\src\\input.txt";
+        String inputFileName = "./src/input.txt";
 
         try {
             CharStream input = CharStreams.fromStream(new FileInputStream(inputFileName));
             LispLexer lexer = new LispLexer(input);
             CommonTokenStream tokens = new CommonTokenStream(lexer);
             LispParser parser = new LispParser(tokens);
-            ParseTree tree = parser.list(); // Replace 'start' with your actual starting rule
+            ParseTree tree = parser.program(); // Replace 'start' with your actual starting rule
 
             System.out.println(tree.toStringTree(parser));
 
@@ -31,7 +32,7 @@ public class Main {
 
     public static void readTokens(){
         try {
-            String inputFilePath = "src/testLisp.lisp";
+            String inputFilePath = "src/input.txt";
 
             String input = new String(Files.readAllBytes(Paths.get(inputFilePath)));
             CharStream charStream = CharStreams.fromString(input);

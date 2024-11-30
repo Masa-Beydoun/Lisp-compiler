@@ -7,6 +7,16 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  */
 public interface LispParserListener extends ParseTreeListener {
 	/**
+	 * Enter a parse tree produced by {@link LispParser#program}.
+	 * @param ctx the parse tree
+	 */
+	void enterProgram(LispParser.ProgramContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LispParser#program}.
+	 * @param ctx the parse tree
+	 */
+	void exitProgram(LispParser.ProgramContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link LispParser#setq}.
 	 * @param ctx the parse tree
 	 */
