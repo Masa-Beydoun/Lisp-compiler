@@ -2,33 +2,35 @@ parser grammar LispParser;
 
 options { tokenVocab=LispLexer; }
 
-programs : ( OPEN_PAREN program CLOSE_PAREN)* | EOF;
+programs : (  program )* | EOF;
 
-program: setq | temporary_assigment  | let |
+program: OPEN_PAREN( setq | temporary_assigment  | let |
          sum  | minus | multiply |div | modulas |
          floor | ceiling | mod | sin | cos | tan |
          sqrt | exp |expt | cons | car | cdr | list |
-         push | pop | defining_function | calling_functions | temporary_list;
+         push | pop | defining_function | calling_functions ) CLOSE_PAREN;
+
+
 
 temporary_assigment :  IDENTIFIER NUMBER ;
-temporary_list : (IDENTIFIER| NUMBER)*;
-setq:   SETQ IDENTIFIER (NUMBER| NIL)  ;
-let:  LET IDENTIFIER (NUMBER| NIL) ;
+temporary_list : either*;
+setq:   SETQ IDENTIFIER either  ;
+let:  LET IDENTIFIER either ;
 
-sum :  PLUS (NUMBER | IDENTIFIER) (NUMBER | IDENTIFIER)+  ;
-minus :  MINUS (NUMBER | IDENTIFIER) (NUMBER | IDENTIFIER)+  ;
-multiply :  MULTIPLY (NUMBER | IDENTIFIER) (NUMBER | IDENTIFIER)+  ;
-div :  DIV (NUMBER | IDENTIFIER) (NUMBER | IDENTIFIER)+  ;
-modulas :  MODULUS (NUMBER | IDENTIFIER) (NUMBER | IDENTIFIER)+  ;
-floor :  FLOOR (NUMBER | IDENTIFIER) (NUMBER | IDENTIFIER)+  ;
-ceiling :  CEILING (NUMBER | IDENTIFIER) (NUMBER | IDENTIFIER)+  ;
-mod :  MOD (NUMBER | IDENTIFIER) (NUMBER | IDENTIFIER)+  ;
-sin :  SIN (NUMBER | IDENTIFIER) (NUMBER | IDENTIFIER)+  ;
-cos :  COS (NUMBER | IDENTIFIER) (NUMBER | IDENTIFIER)+  ;
-tan :  TAN (NUMBER | IDENTIFIER) (NUMBER | IDENTIFIER)+  ;
-sqrt :  SQRT (NUMBER | IDENTIFIER) (NUMBER | IDENTIFIER)+  ;
-exp :  EXP (NUMBER | IDENTIFIER)   ;
-expt :  EXPT (NUMBER | IDENTIFIER) (NUMBER | IDENTIFIER)  ;
+sum :  PLUS either either+  ;
+minus :  MINUS either either+  ;
+multiply :  MULTIPLY either either+  ;
+div :  DIV either either+  ;
+modulas :  MODULUS either either+  ;
+floor :  FLOOR either either+  ;
+ceiling :  CEILING either either+  ;
+mod :  MOD either either+  ;
+sin :  SIN either either+  ;
+cos :  COS either either+  ;
+tan :  TAN either either+  ;
+sqrt :  SQRT either either+  ;
+exp :  EXP either ;
+expt :  EXPT either either  ;
 cons:  (NUMBER | IDENTIFIER) (NUMBER | IDENTIFIER)  ;
 car:  (NUMBER | IDENTIFIER)  ;
 cdr:  (NUMBER | IDENTIFIER)  ;
@@ -44,3 +46,4 @@ calling_functions :  IDENTIFIER (COLON IDENTIFIER NUMBER)*  ;
 
 
 
+either :(program | IDENTIFIER | NUMBER);

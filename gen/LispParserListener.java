@@ -37,6 +37,16 @@ public interface LispParserListener extends ParseTreeListener {
 	 */
 	void exitTemporary_assigment(LispParser.Temporary_assigmentContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link LispParser#temporary_list}.
+	 * @param ctx the parse tree
+	 */
+	void enterTemporary_list(LispParser.Temporary_listContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LispParser#temporary_list}.
+	 * @param ctx the parse tree
+	 */
+	void exitTemporary_list(LispParser.Temporary_listContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link LispParser#setq}.
 	 * @param ctx the parse tree
 	 */
@@ -276,4 +286,14 @@ public interface LispParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitCalling_functions(LispParser.Calling_functionsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LispParser#either}.
+	 * @param ctx the parse tree
+	 */
+	void enterEither(LispParser.EitherContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LispParser#either}.
+	 * @param ctx the parse tree
+	 */
+	void exitEither(LispParser.EitherContext ctx);
 }

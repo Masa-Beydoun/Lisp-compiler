@@ -21,7 +21,7 @@ QUESTION_MARK: '?';
 HASH_TAG: '#';
 
 
-//NUMBER : INTEGER | FLOAT | SCIENTIFIC | COMPLEX | FLOAT;
+NUMBER : INTEGER | FLOAT | SCIENTIFIC | COMPLEX | FLOAT;
 INTEGER: ('+' | '-')? ('0' | [1-9][0-9]*);
 FLOAT: ('+' | '-')? [0-9]+ '.' [0-9]+;
 SCIENTIFIC: ('+' | '-')? [0-9]+ ('.' [0-9]+)? ('e' | 'E') ('+' | '-')? [0-9]+;

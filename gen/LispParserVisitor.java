@@ -28,6 +28,12 @@ public interface LispParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitTemporary_assigment(LispParser.Temporary_assigmentContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link LispParser#temporary_list}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTemporary_list(LispParser.Temporary_listContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link LispParser#setq}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -171,4 +177,10 @@ public interface LispParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitCalling_functions(LispParser.Calling_functionsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LispParser#either}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitEither(LispParser.EitherContext ctx);
 }
