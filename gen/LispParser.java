@@ -155,19 +155,11 @@ public class LispParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class ProgramsContext extends ParserRuleContext {
-		public List<TerminalNode> OPEN_PAREN() { return getTokens(LispParser.OPEN_PAREN); }
-		public TerminalNode OPEN_PAREN(int i) {
-			return getToken(LispParser.OPEN_PAREN, i);
-		}
 		public List<ProgramContext> program() {
 			return getRuleContexts(ProgramContext.class);
 		}
 		public ProgramContext program(int i) {
 			return getRuleContext(ProgramContext.class,i);
-		}
-		public List<TerminalNode> CLOSE_PAREN() { return getTokens(LispParser.CLOSE_PAREN); }
-		public TerminalNode CLOSE_PAREN(int i) {
-			return getToken(LispParser.CLOSE_PAREN, i);
 		}
 		public TerminalNode EOF() { return getToken(LispParser.EOF, 0); }
 		public ProgramsContext(ParserRuleContext parent, int invokingState) {
@@ -194,27 +186,23 @@ public class LispParser extends Parser {
 		enterRule(_localctx, 0, RULE_programs);
 		int _la;
 		try {
-			setState(68);
+			setState(65);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,1,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(64);
+				setState(61);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==OPEN_PAREN) {
 					{
 					{
 					setState(58);
-					match(OPEN_PAREN);
-					setState(59);
 					program();
-					setState(60);
-					match(CLOSE_PAREN);
 					}
 					}
-					setState(66);
+					setState(63);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
@@ -223,7 +211,7 @@ public class LispParser extends Parser {
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(67);
+				setState(64);
 				match(EOF);
 				}
 				break;
@@ -242,6 +230,8 @@ public class LispParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class ProgramContext extends ParserRuleContext {
+		public TerminalNode OPEN_PAREN() { return getToken(LispParser.OPEN_PAREN, 0); }
+		public TerminalNode CLOSE_PAREN() { return getToken(LispParser.CLOSE_PAREN, 0); }
 		public SetqContext setq() {
 			return getRuleContext(SetqContext.class,0);
 		}
@@ -340,184 +330,166 @@ public class LispParser extends Parser {
 		ProgramContext _localctx = new ProgramContext(_ctx, getState());
 		enterRule(_localctx, 2, RULE_program);
 		try {
-			setState(95);
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(67);
+			match(OPEN_PAREN);
+			setState(93);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,2,_ctx) ) {
 			case 1:
-				enterOuterAlt(_localctx, 1);
 				{
-				setState(70);
+				setState(68);
 				setq();
 				}
 				break;
 			case 2:
-				enterOuterAlt(_localctx, 2);
 				{
-				setState(71);
+				setState(69);
 				temporary_assigment();
 				}
 				break;
 			case 3:
-				enterOuterAlt(_localctx, 3);
 				{
-				setState(72);
+				setState(70);
 				let();
 				}
 				break;
 			case 4:
-				enterOuterAlt(_localctx, 4);
 				{
-				setState(73);
+				setState(71);
 				sum();
 				}
 				break;
 			case 5:
-				enterOuterAlt(_localctx, 5);
 				{
-				setState(74);
+				setState(72);
 				minus();
 				}
 				break;
 			case 6:
-				enterOuterAlt(_localctx, 6);
 				{
-				setState(75);
+				setState(73);
 				multiply();
 				}
 				break;
 			case 7:
-				enterOuterAlt(_localctx, 7);
 				{
-				setState(76);
+				setState(74);
 				div();
 				}
 				break;
 			case 8:
-				enterOuterAlt(_localctx, 8);
 				{
-				setState(77);
+				setState(75);
 				modulas();
 				}
 				break;
 			case 9:
-				enterOuterAlt(_localctx, 9);
 				{
-				setState(78);
+				setState(76);
 				floor();
 				}
 				break;
 			case 10:
-				enterOuterAlt(_localctx, 10);
 				{
-				setState(79);
+				setState(77);
 				ceiling();
 				}
 				break;
 			case 11:
-				enterOuterAlt(_localctx, 11);
 				{
-				setState(80);
+				setState(78);
 				mod();
 				}
 				break;
 			case 12:
-				enterOuterAlt(_localctx, 12);
 				{
-				setState(81);
+				setState(79);
 				sin();
 				}
 				break;
 			case 13:
-				enterOuterAlt(_localctx, 13);
 				{
-				setState(82);
+				setState(80);
 				cos();
 				}
 				break;
 			case 14:
-				enterOuterAlt(_localctx, 14);
 				{
-				setState(83);
+				setState(81);
 				tan();
 				}
 				break;
 			case 15:
-				enterOuterAlt(_localctx, 15);
 				{
-				setState(84);
+				setState(82);
 				sqrt();
 				}
 				break;
 			case 16:
-				enterOuterAlt(_localctx, 16);
 				{
-				setState(85);
+				setState(83);
 				exp();
 				}
 				break;
 			case 17:
-				enterOuterAlt(_localctx, 17);
 				{
-				setState(86);
+				setState(84);
 				expt();
 				}
 				break;
 			case 18:
-				enterOuterAlt(_localctx, 18);
 				{
-				setState(87);
+				setState(85);
 				cons();
 				}
 				break;
 			case 19:
-				enterOuterAlt(_localctx, 19);
 				{
-				setState(88);
+				setState(86);
 				car();
 				}
 				break;
 			case 20:
-				enterOuterAlt(_localctx, 20);
 				{
-				setState(89);
+				setState(87);
 				cdr();
 				}
 				break;
 			case 21:
-				enterOuterAlt(_localctx, 21);
 				{
-				setState(90);
+				setState(88);
 				list();
 				}
 				break;
 			case 22:
-				enterOuterAlt(_localctx, 22);
 				{
-				setState(91);
+				setState(89);
 				push();
 				}
 				break;
 			case 23:
-				enterOuterAlt(_localctx, 23);
 				{
-				setState(92);
+				setState(90);
 				pop();
 				}
 				break;
 			case 24:
-				enterOuterAlt(_localctx, 24);
 				{
-				setState(93);
+				setState(91);
 				defining_function();
 				}
 				break;
 			case 25:
-				enterOuterAlt(_localctx, 25);
 				{
-				setState(94);
+				setState(92);
 				calling_functions();
 				}
 				break;
+			}
+			setState(95);
+			match(CLOSE_PAREN);
 			}
 		}
 		catch (RecognitionException re) {
@@ -614,7 +586,7 @@ public class LispParser extends Parser {
 			setState(103);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 2305702271725342720L) != 0) || ((((_la - 68)) & ~0x3f) == 0 && ((1L << (_la - 68)) & 4611967493404100749L) != 0)) {
+			while (_la==NUMBER || _la==OPEN_PAREN || _la==IDENTIFIER) {
 				{
 				{
 				setState(100);
@@ -771,8 +743,8 @@ public class LispParser extends Parser {
 	public final SumContext sum() throws RecognitionException {
 		SumContext _localctx = new SumContext(_ctx, getState());
 		enterRule(_localctx, 12, RULE_sum);
+		int _la;
 		try {
-			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(114);
@@ -781,24 +753,18 @@ public class LispParser extends Parser {
 			either();
 			setState(117); 
 			_errHandler.sync(this);
-			_alt = 1;
+			_la = _input.LA(1);
 			do {
-				switch (_alt) {
-				case 1:
-					{
-					{
-					setState(116);
-					either();
-					}
-					}
-					break;
-				default:
-					throw new NoViableAltException(this);
+				{
+				{
+				setState(116);
+				either();
+				}
 				}
 				setState(119); 
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,4,_ctx);
-			} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
+				_la = _input.LA(1);
+			} while ( _la==NUMBER || _la==OPEN_PAREN || _la==IDENTIFIER );
 			}
 		}
 		catch (RecognitionException re) {
@@ -843,8 +809,8 @@ public class LispParser extends Parser {
 	public final MinusContext minus() throws RecognitionException {
 		MinusContext _localctx = new MinusContext(_ctx, getState());
 		enterRule(_localctx, 14, RULE_minus);
+		int _la;
 		try {
-			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(121);
@@ -853,24 +819,18 @@ public class LispParser extends Parser {
 			either();
 			setState(124); 
 			_errHandler.sync(this);
-			_alt = 1;
+			_la = _input.LA(1);
 			do {
-				switch (_alt) {
-				case 1:
-					{
-					{
-					setState(123);
-					either();
-					}
-					}
-					break;
-				default:
-					throw new NoViableAltException(this);
+				{
+				{
+				setState(123);
+				either();
+				}
 				}
 				setState(126); 
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,5,_ctx);
-			} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
+				_la = _input.LA(1);
+			} while ( _la==NUMBER || _la==OPEN_PAREN || _la==IDENTIFIER );
 			}
 		}
 		catch (RecognitionException re) {
@@ -915,8 +875,8 @@ public class LispParser extends Parser {
 	public final MultiplyContext multiply() throws RecognitionException {
 		MultiplyContext _localctx = new MultiplyContext(_ctx, getState());
 		enterRule(_localctx, 16, RULE_multiply);
+		int _la;
 		try {
-			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(128);
@@ -925,24 +885,18 @@ public class LispParser extends Parser {
 			either();
 			setState(131); 
 			_errHandler.sync(this);
-			_alt = 1;
+			_la = _input.LA(1);
 			do {
-				switch (_alt) {
-				case 1:
-					{
-					{
-					setState(130);
-					either();
-					}
-					}
-					break;
-				default:
-					throw new NoViableAltException(this);
+				{
+				{
+				setState(130);
+				either();
+				}
 				}
 				setState(133); 
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,6,_ctx);
-			} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
+				_la = _input.LA(1);
+			} while ( _la==NUMBER || _la==OPEN_PAREN || _la==IDENTIFIER );
 			}
 		}
 		catch (RecognitionException re) {
@@ -987,8 +941,8 @@ public class LispParser extends Parser {
 	public final DivContext div() throws RecognitionException {
 		DivContext _localctx = new DivContext(_ctx, getState());
 		enterRule(_localctx, 18, RULE_div);
+		int _la;
 		try {
-			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(135);
@@ -997,24 +951,18 @@ public class LispParser extends Parser {
 			either();
 			setState(138); 
 			_errHandler.sync(this);
-			_alt = 1;
+			_la = _input.LA(1);
 			do {
-				switch (_alt) {
-				case 1:
-					{
-					{
-					setState(137);
-					either();
-					}
-					}
-					break;
-				default:
-					throw new NoViableAltException(this);
+				{
+				{
+				setState(137);
+				either();
+				}
 				}
 				setState(140); 
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,7,_ctx);
-			} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
+				_la = _input.LA(1);
+			} while ( _la==NUMBER || _la==OPEN_PAREN || _la==IDENTIFIER );
 			}
 		}
 		catch (RecognitionException re) {
@@ -1059,8 +1007,8 @@ public class LispParser extends Parser {
 	public final ModulasContext modulas() throws RecognitionException {
 		ModulasContext _localctx = new ModulasContext(_ctx, getState());
 		enterRule(_localctx, 20, RULE_modulas);
+		int _la;
 		try {
-			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(142);
@@ -1069,24 +1017,18 @@ public class LispParser extends Parser {
 			either();
 			setState(145); 
 			_errHandler.sync(this);
-			_alt = 1;
+			_la = _input.LA(1);
 			do {
-				switch (_alt) {
-				case 1:
-					{
-					{
-					setState(144);
-					either();
-					}
-					}
-					break;
-				default:
-					throw new NoViableAltException(this);
+				{
+				{
+				setState(144);
+				either();
+				}
 				}
 				setState(147); 
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,8,_ctx);
-			} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
+				_la = _input.LA(1);
+			} while ( _la==NUMBER || _la==OPEN_PAREN || _la==IDENTIFIER );
 			}
 		}
 		catch (RecognitionException re) {
@@ -1131,8 +1073,8 @@ public class LispParser extends Parser {
 	public final FloorContext floor() throws RecognitionException {
 		FloorContext _localctx = new FloorContext(_ctx, getState());
 		enterRule(_localctx, 22, RULE_floor);
+		int _la;
 		try {
-			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(149);
@@ -1141,24 +1083,18 @@ public class LispParser extends Parser {
 			either();
 			setState(152); 
 			_errHandler.sync(this);
-			_alt = 1;
+			_la = _input.LA(1);
 			do {
-				switch (_alt) {
-				case 1:
-					{
-					{
-					setState(151);
-					either();
-					}
-					}
-					break;
-				default:
-					throw new NoViableAltException(this);
+				{
+				{
+				setState(151);
+				either();
+				}
 				}
 				setState(154); 
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,9,_ctx);
-			} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
+				_la = _input.LA(1);
+			} while ( _la==NUMBER || _la==OPEN_PAREN || _la==IDENTIFIER );
 			}
 		}
 		catch (RecognitionException re) {
@@ -1203,8 +1139,8 @@ public class LispParser extends Parser {
 	public final CeilingContext ceiling() throws RecognitionException {
 		CeilingContext _localctx = new CeilingContext(_ctx, getState());
 		enterRule(_localctx, 24, RULE_ceiling);
+		int _la;
 		try {
-			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(156);
@@ -1213,24 +1149,18 @@ public class LispParser extends Parser {
 			either();
 			setState(159); 
 			_errHandler.sync(this);
-			_alt = 1;
+			_la = _input.LA(1);
 			do {
-				switch (_alt) {
-				case 1:
-					{
-					{
-					setState(158);
-					either();
-					}
-					}
-					break;
-				default:
-					throw new NoViableAltException(this);
+				{
+				{
+				setState(158);
+				either();
+				}
 				}
 				setState(161); 
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,10,_ctx);
-			} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
+				_la = _input.LA(1);
+			} while ( _la==NUMBER || _la==OPEN_PAREN || _la==IDENTIFIER );
 			}
 		}
 		catch (RecognitionException re) {
@@ -1275,8 +1205,8 @@ public class LispParser extends Parser {
 	public final ModContext mod() throws RecognitionException {
 		ModContext _localctx = new ModContext(_ctx, getState());
 		enterRule(_localctx, 26, RULE_mod);
+		int _la;
 		try {
-			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(163);
@@ -1285,24 +1215,18 @@ public class LispParser extends Parser {
 			either();
 			setState(166); 
 			_errHandler.sync(this);
-			_alt = 1;
+			_la = _input.LA(1);
 			do {
-				switch (_alt) {
-				case 1:
-					{
-					{
-					setState(165);
-					either();
-					}
-					}
-					break;
-				default:
-					throw new NoViableAltException(this);
+				{
+				{
+				setState(165);
+				either();
+				}
 				}
 				setState(168); 
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,11,_ctx);
-			} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
+				_la = _input.LA(1);
+			} while ( _la==NUMBER || _la==OPEN_PAREN || _la==IDENTIFIER );
 			}
 		}
 		catch (RecognitionException re) {
@@ -1347,8 +1271,8 @@ public class LispParser extends Parser {
 	public final SinContext sin() throws RecognitionException {
 		SinContext _localctx = new SinContext(_ctx, getState());
 		enterRule(_localctx, 28, RULE_sin);
+		int _la;
 		try {
-			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(170);
@@ -1357,24 +1281,18 @@ public class LispParser extends Parser {
 			either();
 			setState(173); 
 			_errHandler.sync(this);
-			_alt = 1;
+			_la = _input.LA(1);
 			do {
-				switch (_alt) {
-				case 1:
-					{
-					{
-					setState(172);
-					either();
-					}
-					}
-					break;
-				default:
-					throw new NoViableAltException(this);
+				{
+				{
+				setState(172);
+				either();
+				}
 				}
 				setState(175); 
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,12,_ctx);
-			} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
+				_la = _input.LA(1);
+			} while ( _la==NUMBER || _la==OPEN_PAREN || _la==IDENTIFIER );
 			}
 		}
 		catch (RecognitionException re) {
@@ -1419,8 +1337,8 @@ public class LispParser extends Parser {
 	public final CosContext cos() throws RecognitionException {
 		CosContext _localctx = new CosContext(_ctx, getState());
 		enterRule(_localctx, 30, RULE_cos);
+		int _la;
 		try {
-			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(177);
@@ -1429,24 +1347,18 @@ public class LispParser extends Parser {
 			either();
 			setState(180); 
 			_errHandler.sync(this);
-			_alt = 1;
+			_la = _input.LA(1);
 			do {
-				switch (_alt) {
-				case 1:
-					{
-					{
-					setState(179);
-					either();
-					}
-					}
-					break;
-				default:
-					throw new NoViableAltException(this);
+				{
+				{
+				setState(179);
+				either();
+				}
 				}
 				setState(182); 
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,13,_ctx);
-			} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
+				_la = _input.LA(1);
+			} while ( _la==NUMBER || _la==OPEN_PAREN || _la==IDENTIFIER );
 			}
 		}
 		catch (RecognitionException re) {
@@ -1491,8 +1403,8 @@ public class LispParser extends Parser {
 	public final TanContext tan() throws RecognitionException {
 		TanContext _localctx = new TanContext(_ctx, getState());
 		enterRule(_localctx, 32, RULE_tan);
+		int _la;
 		try {
-			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(184);
@@ -1501,24 +1413,18 @@ public class LispParser extends Parser {
 			either();
 			setState(187); 
 			_errHandler.sync(this);
-			_alt = 1;
+			_la = _input.LA(1);
 			do {
-				switch (_alt) {
-				case 1:
-					{
-					{
-					setState(186);
-					either();
-					}
-					}
-					break;
-				default:
-					throw new NoViableAltException(this);
+				{
+				{
+				setState(186);
+				either();
+				}
 				}
 				setState(189); 
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,14,_ctx);
-			} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
+				_la = _input.LA(1);
+			} while ( _la==NUMBER || _la==OPEN_PAREN || _la==IDENTIFIER );
 			}
 		}
 		catch (RecognitionException re) {
@@ -1563,8 +1469,8 @@ public class LispParser extends Parser {
 	public final SqrtContext sqrt() throws RecognitionException {
 		SqrtContext _localctx = new SqrtContext(_ctx, getState());
 		enterRule(_localctx, 34, RULE_sqrt);
+		int _la;
 		try {
-			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(191);
@@ -1573,24 +1479,18 @@ public class LispParser extends Parser {
 			either();
 			setState(194); 
 			_errHandler.sync(this);
-			_alt = 1;
+			_la = _input.LA(1);
 			do {
-				switch (_alt) {
-				case 1:
-					{
-					{
-					setState(193);
-					either();
-					}
-					}
-					break;
-				default:
-					throw new NoViableAltException(this);
+				{
+				{
+				setState(193);
+				either();
+				}
 				}
 				setState(196); 
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,15,_ctx);
-			} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
+				_la = _input.LA(1);
+			} while ( _la==NUMBER || _la==OPEN_PAREN || _la==IDENTIFIER );
 			}
 		}
 		catch (RecognitionException re) {
@@ -1919,39 +1819,32 @@ public class LispParser extends Parser {
 		enterRule(_localctx, 46, RULE_list);
 		int _la;
 		try {
-			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(212);
 			match(LIST);
 			setState(214); 
 			_errHandler.sync(this);
-			_alt = 1;
+			_la = _input.LA(1);
 			do {
-				switch (_alt) {
-				case 1:
-					{
-					{
-					setState(213);
-					_la = _input.LA(1);
-					if ( !(_la==NUMBER || _la==NIL || _la==IDENTIFIER) ) {
-					_errHandler.recoverInline(this);
-					}
-					else {
-						if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-						_errHandler.reportMatch(this);
-						consume();
-					}
-					}
-					}
-					break;
-				default:
-					throw new NoViableAltException(this);
+				{
+				{
+				setState(213);
+				_la = _input.LA(1);
+				if ( !(_la==NUMBER || _la==NIL || _la==IDENTIFIER) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				}
 				}
 				setState(216); 
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,16,_ctx);
-			} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
+				_la = _input.LA(1);
+			} while ( _la==NUMBER || _la==NIL || _la==IDENTIFIER );
 			}
 		}
 		catch (RecognitionException re) {
@@ -2124,7 +2017,6 @@ public class LispParser extends Parser {
 		enterRule(_localctx, 52, RULE_defining_function);
 		int _la;
 		try {
-			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(230);
@@ -2133,37 +2025,35 @@ public class LispParser extends Parser {
 			match(IDENTIFIER);
 			setState(238);
 			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,20,_ctx);
-			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
-				if ( _alt==1 ) {
+			_la = _input.LA(1);
+			while (((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & 27021597764222977L) != 0) || _la==IDENTIFIER) {
+				{
+				{
+				setState(233);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+				if (((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & 27021597764222977L) != 0)) {
 					{
-					{
-					setState(233);
-					_errHandler.sync(this);
+					setState(232);
 					_la = _input.LA(1);
-					if (((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & 27021597764222977L) != 0)) {
-						{
-						setState(232);
-						_la = _input.LA(1);
-						if ( !(((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & 27021597764222977L) != 0)) ) {
-						_errHandler.recoverInline(this);
-						}
-						else {
-							if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-							_errHandler.reportMatch(this);
-							consume();
-						}
-						}
+					if ( !(((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & 27021597764222977L) != 0)) ) {
+					_errHandler.recoverInline(this);
 					}
+					else {
+						if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+						_errHandler.reportMatch(this);
+						consume();
+					}
+					}
+				}
 
-					setState(235);
-					match(IDENTIFIER);
-					}
-					} 
+				setState(235);
+				match(IDENTIFIER);
+				}
 				}
 				setState(240);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,20,_ctx);
+				_la = _input.LA(1);
 			}
 			}
 		}
@@ -2285,25 +2175,27 @@ public class LispParser extends Parser {
 			{
 			setState(253);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,22,_ctx) ) {
-			case 1:
+			switch (_input.LA(1)) {
+			case OPEN_PAREN:
 				{
 				setState(250);
 				program();
 				}
 				break;
-			case 2:
+			case IDENTIFIER:
 				{
 				setState(251);
 				match(IDENTIFIER);
 				}
 				break;
-			case 3:
+			case NUMBER:
 				{
 				setState(252);
 				match(NUMBER);
 				}
 				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 			}
 		}
@@ -2328,76 +2220,76 @@ public class LispParser extends Parser {
 		"\u0012\u0002\u0013\u0007\u0013\u0002\u0014\u0007\u0014\u0002\u0015\u0007"+
 		"\u0015\u0002\u0016\u0007\u0016\u0002\u0017\u0007\u0017\u0002\u0018\u0007"+
 		"\u0018\u0002\u0019\u0007\u0019\u0002\u001a\u0007\u001a\u0002\u001b\u0007"+
-		"\u001b\u0002\u001c\u0007\u001c\u0001\u0000\u0001\u0000\u0001\u0000\u0001"+
-		"\u0000\u0005\u0000?\b\u0000\n\u0000\f\u0000B\t\u0000\u0001\u0000\u0003"+
-		"\u0000E\b\u0000\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001"+
+		"\u001b\u0002\u001c\u0007\u001c\u0001\u0000\u0005\u0000<\b\u0000\n\u0000"+
+		"\f\u0000?\t\u0000\u0001\u0000\u0003\u0000B\b\u0000\u0001\u0001\u0001\u0001"+
 		"\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001"+
 		"\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001"+
 		"\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001"+
-		"\u0001\u0001\u0001\u0001\u0001\u0003\u0001`\b\u0001\u0001\u0002\u0001"+
-		"\u0002\u0001\u0002\u0001\u0003\u0005\u0003f\b\u0003\n\u0003\f\u0003i\t"+
-		"\u0003\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0005\u0001"+
-		"\u0005\u0001\u0005\u0001\u0005\u0001\u0006\u0001\u0006\u0001\u0006\u0004"+
-		"\u0006v\b\u0006\u000b\u0006\f\u0006w\u0001\u0007\u0001\u0007\u0001\u0007"+
-		"\u0004\u0007}\b\u0007\u000b\u0007\f\u0007~\u0001\b\u0001\b\u0001\b\u0004"+
-		"\b\u0084\b\b\u000b\b\f\b\u0085\u0001\t\u0001\t\u0001\t\u0004\t\u008b\b"+
-		"\t\u000b\t\f\t\u008c\u0001\n\u0001\n\u0001\n\u0004\n\u0092\b\n\u000b\n"+
-		"\f\n\u0093\u0001\u000b\u0001\u000b\u0001\u000b\u0004\u000b\u0099\b\u000b"+
-		"\u000b\u000b\f\u000b\u009a\u0001\f\u0001\f\u0001\f\u0004\f\u00a0\b\f\u000b"+
-		"\f\f\f\u00a1\u0001\r\u0001\r\u0001\r\u0004\r\u00a7\b\r\u000b\r\f\r\u00a8"+
-		"\u0001\u000e\u0001\u000e\u0001\u000e\u0004\u000e\u00ae\b\u000e\u000b\u000e"+
-		"\f\u000e\u00af\u0001\u000f\u0001\u000f\u0001\u000f\u0004\u000f\u00b5\b"+
-		"\u000f\u000b\u000f\f\u000f\u00b6\u0001\u0010\u0001\u0010\u0001\u0010\u0004"+
-		"\u0010\u00bc\b\u0010\u000b\u0010\f\u0010\u00bd\u0001\u0011\u0001\u0011"+
-		"\u0001\u0011\u0004\u0011\u00c3\b\u0011\u000b\u0011\f\u0011\u00c4\u0001"+
-		"\u0012\u0001\u0012\u0001\u0012\u0001\u0013\u0001\u0013\u0001\u0013\u0001"+
-		"\u0013\u0001\u0014\u0001\u0014\u0001\u0014\u0001\u0015\u0001\u0015\u0001"+
-		"\u0016\u0001\u0016\u0001\u0017\u0001\u0017\u0004\u0017\u00d7\b\u0017\u000b"+
-		"\u0017\f\u0017\u00d8\u0001\u0018\u0001\u0018\u0003\u0018\u00dd\b\u0018"+
-		"\u0001\u0018\u0001\u0018\u0001\u0019\u0001\u0019\u0003\u0019\u00e3\b\u0019"+
-		"\u0001\u0019\u0001\u0019\u0001\u001a\u0001\u001a\u0001\u001a\u0003\u001a"+
-		"\u00ea\b\u001a\u0001\u001a\u0005\u001a\u00ed\b\u001a\n\u001a\f\u001a\u00f0"+
-		"\t\u001a\u0001\u001b\u0001\u001b\u0001\u001b\u0001\u001b\u0005\u001b\u00f6"+
-		"\b\u001b\n\u001b\f\u001b\u00f9\t\u001b\u0001\u001c\u0001\u001c\u0001\u001c"+
-		"\u0003\u001c\u00fe\b\u001c\u0001\u001c\u0000\u0000\u001d\u0000\u0002\u0004"+
-		"\u0006\b\n\f\u000e\u0010\u0012\u0014\u0016\u0018\u001a\u001c\u001e \""+
-		"$&(*,.02468\u0000\u0003\u0002\u0000\f\f\u0082\u0082\u0003\u0000\f\fVV"+
-		"\u0082\u0082\u0002\u0000@@uv\u0111\u0000D\u0001\u0000\u0000\u0000\u0002"+
-		"_\u0001\u0000\u0000\u0000\u0004a\u0001\u0000\u0000\u0000\u0006g\u0001"+
-		"\u0000\u0000\u0000\bj\u0001\u0000\u0000\u0000\nn\u0001\u0000\u0000\u0000"+
-		"\fr\u0001\u0000\u0000\u0000\u000ey\u0001\u0000\u0000\u0000\u0010\u0080"+
-		"\u0001\u0000\u0000\u0000\u0012\u0087\u0001\u0000\u0000\u0000\u0014\u008e"+
-		"\u0001\u0000\u0000\u0000\u0016\u0095\u0001\u0000\u0000\u0000\u0018\u009c"+
-		"\u0001\u0000\u0000\u0000\u001a\u00a3\u0001\u0000\u0000\u0000\u001c\u00aa"+
-		"\u0001\u0000\u0000\u0000\u001e\u00b1\u0001\u0000\u0000\u0000 \u00b8\u0001"+
-		"\u0000\u0000\u0000\"\u00bf\u0001\u0000\u0000\u0000$\u00c6\u0001\u0000"+
-		"\u0000\u0000&\u00c9\u0001\u0000\u0000\u0000(\u00cd\u0001\u0000\u0000\u0000"+
-		"*\u00d0\u0001\u0000\u0000\u0000,\u00d2\u0001\u0000\u0000\u0000.\u00d4"+
-		"\u0001\u0000\u0000\u00000\u00da\u0001\u0000\u0000\u00002\u00e0\u0001\u0000"+
-		"\u0000\u00004\u00e6\u0001\u0000\u0000\u00006\u00f1\u0001\u0000\u0000\u0000"+
-		"8\u00fd\u0001\u0000\u0000\u0000:;\u0005 \u0000\u0000;<\u0003\u0002\u0001"+
-		"\u0000<=\u0005!\u0000\u0000=?\u0001\u0000\u0000\u0000>:\u0001\u0000\u0000"+
-		"\u0000?B\u0001\u0000\u0000\u0000@>\u0001\u0000\u0000\u0000@A\u0001\u0000"+
-		"\u0000\u0000AE\u0001\u0000\u0000\u0000B@\u0001\u0000\u0000\u0000CE\u0005"+
-		"\u0000\u0000\u0001D@\u0001\u0000\u0000\u0000DC\u0001\u0000\u0000\u0000"+
-		"E\u0001\u0001\u0000\u0000\u0000F`\u0003\b\u0004\u0000G`\u0003\u0004\u0002"+
-		"\u0000H`\u0003\n\u0005\u0000I`\u0003\f\u0006\u0000J`\u0003\u000e\u0007"+
-		"\u0000K`\u0003\u0010\b\u0000L`\u0003\u0012\t\u0000M`\u0003\u0014\n\u0000"+
-		"N`\u0003\u0016\u000b\u0000O`\u0003\u0018\f\u0000P`\u0003\u001a\r\u0000"+
-		"Q`\u0003\u001c\u000e\u0000R`\u0003\u001e\u000f\u0000S`\u0003 \u0010\u0000"+
-		"T`\u0003\"\u0011\u0000U`\u0003$\u0012\u0000V`\u0003&\u0013\u0000W`\u0003"+
-		"(\u0014\u0000X`\u0003*\u0015\u0000Y`\u0003,\u0016\u0000Z`\u0003.\u0017"+
-		"\u0000[`\u00030\u0018\u0000\\`\u00032\u0019\u0000]`\u00034\u001a\u0000"+
-		"^`\u00036\u001b\u0000_F\u0001\u0000\u0000\u0000_G\u0001\u0000\u0000\u0000"+
-		"_H\u0001\u0000\u0000\u0000_I\u0001\u0000\u0000\u0000_J\u0001\u0000\u0000"+
-		"\u0000_K\u0001\u0000\u0000\u0000_L\u0001\u0000\u0000\u0000_M\u0001\u0000"+
-		"\u0000\u0000_N\u0001\u0000\u0000\u0000_O\u0001\u0000\u0000\u0000_P\u0001"+
-		"\u0000\u0000\u0000_Q\u0001\u0000\u0000\u0000_R\u0001\u0000\u0000\u0000"+
-		"_S\u0001\u0000\u0000\u0000_T\u0001\u0000\u0000\u0000_U\u0001\u0000\u0000"+
-		"\u0000_V\u0001\u0000\u0000\u0000_W\u0001\u0000\u0000\u0000_X\u0001\u0000"+
-		"\u0000\u0000_Y\u0001\u0000\u0000\u0000_Z\u0001\u0000\u0000\u0000_[\u0001"+
-		"\u0000\u0000\u0000_\\\u0001\u0000\u0000\u0000_]\u0001\u0000\u0000\u0000"+
-		"_^\u0001\u0000\u0000\u0000`\u0003\u0001\u0000\u0000\u0000ab\u0005\u0082"+
+		"\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001"+
+		"\u0003\u0001^\b\u0001\u0001\u0001\u0001\u0001\u0001\u0002\u0001\u0002"+
+		"\u0001\u0002\u0001\u0003\u0005\u0003f\b\u0003\n\u0003\f\u0003i\t\u0003"+
+		"\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0005\u0001\u0005"+
+		"\u0001\u0005\u0001\u0005\u0001\u0006\u0001\u0006\u0001\u0006\u0004\u0006"+
+		"v\b\u0006\u000b\u0006\f\u0006w\u0001\u0007\u0001\u0007\u0001\u0007\u0004"+
+		"\u0007}\b\u0007\u000b\u0007\f\u0007~\u0001\b\u0001\b\u0001\b\u0004\b\u0084"+
+		"\b\b\u000b\b\f\b\u0085\u0001\t\u0001\t\u0001\t\u0004\t\u008b\b\t\u000b"+
+		"\t\f\t\u008c\u0001\n\u0001\n\u0001\n\u0004\n\u0092\b\n\u000b\n\f\n\u0093"+
+		"\u0001\u000b\u0001\u000b\u0001\u000b\u0004\u000b\u0099\b\u000b\u000b\u000b"+
+		"\f\u000b\u009a\u0001\f\u0001\f\u0001\f\u0004\f\u00a0\b\f\u000b\f\f\f\u00a1"+
+		"\u0001\r\u0001\r\u0001\r\u0004\r\u00a7\b\r\u000b\r\f\r\u00a8\u0001\u000e"+
+		"\u0001\u000e\u0001\u000e\u0004\u000e\u00ae\b\u000e\u000b\u000e\f\u000e"+
+		"\u00af\u0001\u000f\u0001\u000f\u0001\u000f\u0004\u000f\u00b5\b\u000f\u000b"+
+		"\u000f\f\u000f\u00b6\u0001\u0010\u0001\u0010\u0001\u0010\u0004\u0010\u00bc"+
+		"\b\u0010\u000b\u0010\f\u0010\u00bd\u0001\u0011\u0001\u0011\u0001\u0011"+
+		"\u0004\u0011\u00c3\b\u0011\u000b\u0011\f\u0011\u00c4\u0001\u0012\u0001"+
+		"\u0012\u0001\u0012\u0001\u0013\u0001\u0013\u0001\u0013\u0001\u0013\u0001"+
+		"\u0014\u0001\u0014\u0001\u0014\u0001\u0015\u0001\u0015\u0001\u0016\u0001"+
+		"\u0016\u0001\u0017\u0001\u0017\u0004\u0017\u00d7\b\u0017\u000b\u0017\f"+
+		"\u0017\u00d8\u0001\u0018\u0001\u0018\u0003\u0018\u00dd\b\u0018\u0001\u0018"+
+		"\u0001\u0018\u0001\u0019\u0001\u0019\u0003\u0019\u00e3\b\u0019\u0001\u0019"+
+		"\u0001\u0019\u0001\u001a\u0001\u001a\u0001\u001a\u0003\u001a\u00ea\b\u001a"+
+		"\u0001\u001a\u0005\u001a\u00ed\b\u001a\n\u001a\f\u001a\u00f0\t\u001a\u0001"+
+		"\u001b\u0001\u001b\u0001\u001b\u0001\u001b\u0005\u001b\u00f6\b\u001b\n"+
+		"\u001b\f\u001b\u00f9\t\u001b\u0001\u001c\u0001\u001c\u0001\u001c\u0003"+
+		"\u001c\u00fe\b\u001c\u0001\u001c\u0000\u0000\u001d\u0000\u0002\u0004\u0006"+
+		"\b\n\f\u000e\u0010\u0012\u0014\u0016\u0018\u001a\u001c\u001e \"$&(*,."+
+		"02468\u0000\u0003\u0002\u0000\f\f\u0082\u0082\u0003\u0000\f\fVV\u0082"+
+		"\u0082\u0002\u0000@@uv\u0111\u0000A\u0001\u0000\u0000\u0000\u0002C\u0001"+
+		"\u0000\u0000\u0000\u0004a\u0001\u0000\u0000\u0000\u0006g\u0001\u0000\u0000"+
+		"\u0000\bj\u0001\u0000\u0000\u0000\nn\u0001\u0000\u0000\u0000\fr\u0001"+
+		"\u0000\u0000\u0000\u000ey\u0001\u0000\u0000\u0000\u0010\u0080\u0001\u0000"+
+		"\u0000\u0000\u0012\u0087\u0001\u0000\u0000\u0000\u0014\u008e\u0001\u0000"+
+		"\u0000\u0000\u0016\u0095\u0001\u0000\u0000\u0000\u0018\u009c\u0001\u0000"+
+		"\u0000\u0000\u001a\u00a3\u0001\u0000\u0000\u0000\u001c\u00aa\u0001\u0000"+
+		"\u0000\u0000\u001e\u00b1\u0001\u0000\u0000\u0000 \u00b8\u0001\u0000\u0000"+
+		"\u0000\"\u00bf\u0001\u0000\u0000\u0000$\u00c6\u0001\u0000\u0000\u0000"+
+		"&\u00c9\u0001\u0000\u0000\u0000(\u00cd\u0001\u0000\u0000\u0000*\u00d0"+
+		"\u0001\u0000\u0000\u0000,\u00d2\u0001\u0000\u0000\u0000.\u00d4\u0001\u0000"+
+		"\u0000\u00000\u00da\u0001\u0000\u0000\u00002\u00e0\u0001\u0000\u0000\u0000"+
+		"4\u00e6\u0001\u0000\u0000\u00006\u00f1\u0001\u0000\u0000\u00008\u00fd"+
+		"\u0001\u0000\u0000\u0000:<\u0003\u0002\u0001\u0000;:\u0001\u0000\u0000"+
+		"\u0000<?\u0001\u0000\u0000\u0000=;\u0001\u0000\u0000\u0000=>\u0001\u0000"+
+		"\u0000\u0000>B\u0001\u0000\u0000\u0000?=\u0001\u0000\u0000\u0000@B\u0005"+
+		"\u0000\u0000\u0001A=\u0001\u0000\u0000\u0000A@\u0001\u0000\u0000\u0000"+
+		"B\u0001\u0001\u0000\u0000\u0000C]\u0005 \u0000\u0000D^\u0003\b\u0004\u0000"+
+		"E^\u0003\u0004\u0002\u0000F^\u0003\n\u0005\u0000G^\u0003\f\u0006\u0000"+
+		"H^\u0003\u000e\u0007\u0000I^\u0003\u0010\b\u0000J^\u0003\u0012\t\u0000"+
+		"K^\u0003\u0014\n\u0000L^\u0003\u0016\u000b\u0000M^\u0003\u0018\f\u0000"+
+		"N^\u0003\u001a\r\u0000O^\u0003\u001c\u000e\u0000P^\u0003\u001e\u000f\u0000"+
+		"Q^\u0003 \u0010\u0000R^\u0003\"\u0011\u0000S^\u0003$\u0012\u0000T^\u0003"+
+		"&\u0013\u0000U^\u0003(\u0014\u0000V^\u0003*\u0015\u0000W^\u0003,\u0016"+
+		"\u0000X^\u0003.\u0017\u0000Y^\u00030\u0018\u0000Z^\u00032\u0019\u0000"+
+		"[^\u00034\u001a\u0000\\^\u00036\u001b\u0000]D\u0001\u0000\u0000\u0000"+
+		"]E\u0001\u0000\u0000\u0000]F\u0001\u0000\u0000\u0000]G\u0001\u0000\u0000"+
+		"\u0000]H\u0001\u0000\u0000\u0000]I\u0001\u0000\u0000\u0000]J\u0001\u0000"+
+		"\u0000\u0000]K\u0001\u0000\u0000\u0000]L\u0001\u0000\u0000\u0000]M\u0001"+
+		"\u0000\u0000\u0000]N\u0001\u0000\u0000\u0000]O\u0001\u0000\u0000\u0000"+
+		"]P\u0001\u0000\u0000\u0000]Q\u0001\u0000\u0000\u0000]R\u0001\u0000\u0000"+
+		"\u0000]S\u0001\u0000\u0000\u0000]T\u0001\u0000\u0000\u0000]U\u0001\u0000"+
+		"\u0000\u0000]V\u0001\u0000\u0000\u0000]W\u0001\u0000\u0000\u0000]X\u0001"+
+		"\u0000\u0000\u0000]Y\u0001\u0000\u0000\u0000]Z\u0001\u0000\u0000\u0000"+
+		"][\u0001\u0000\u0000\u0000]\\\u0001\u0000\u0000\u0000^_\u0001\u0000\u0000"+
+		"\u0000_`\u0005!\u0000\u0000`\u0003\u0001\u0000\u0000\u0000ab\u0005\u0082"+
 		"\u0000\u0000bc\u0005\f\u0000\u0000c\u0005\u0001\u0000\u0000\u0000df\u0003"+
 		"8\u001c\u0000ed\u0001\u0000\u0000\u0000fi\u0001\u0000\u0000\u0000ge\u0001"+
 		"\u0000\u0000\u0000gh\u0001\u0000\u0000\u0000h\u0007\u0001\u0000\u0000"+
@@ -2478,7 +2370,7 @@ public class LispParser extends Parser {
 		"\u0000\u00fb\u00fe\u0005\u0082\u0000\u0000\u00fc\u00fe\u0005\f\u0000\u0000"+
 		"\u00fd\u00fa\u0001\u0000\u0000\u0000\u00fd\u00fb\u0001\u0000\u0000\u0000"+
 		"\u00fd\u00fc\u0001\u0000\u0000\u0000\u00fe9\u0001\u0000\u0000\u0000\u0017"+
-		"@D_gw~\u0085\u008c\u0093\u009a\u00a1\u00a8\u00af\u00b6\u00bd\u00c4\u00d8"+
+		"=A]gw~\u0085\u008c\u0093\u009a\u00a1\u00a8\u00af\u00b6\u00bd\u00c4\u00d8"+
 		"\u00dc\u00e2\u00e9\u00ee\u00f7\u00fd";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
