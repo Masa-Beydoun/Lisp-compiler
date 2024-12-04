@@ -8,7 +8,7 @@ program: setq | temporary_assigment  | let |
          sum  | minus | multiply |div | modulas |
          floor | ceiling | mod | sin | cos | tan |
          sqrt | exp |expt | cons | car | cdr | list |
-         push | pop | defining_function | calling_functions ;
+         push | pop | defining_function | calling_functions | temporary_list;
 
 temporary_assigment :  IDENTIFIER NUMBER ;
 temporary_list : (IDENTIFIER| NUMBER)*;
