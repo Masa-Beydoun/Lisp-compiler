@@ -81,10 +81,11 @@ TAN:'tan';
 SQRT:'sqrt';
 EXP: 'exp';
 EXPT: 'expt';
+
 CONS: 'cons';
 CAR: 'car';
 CDR: 'cdr';
-
+OPTIONAL:'&optional';
 // Logical Operators
 BIT_AND: '&';
 BIT_XOR: '^';
