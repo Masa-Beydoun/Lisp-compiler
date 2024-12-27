@@ -2,48 +2,52 @@ parser grammar LispParser;
 
 options { tokenVocab=LispLexer; }
 
-programs : (  program )* | EOF;
+program : function | identifier ;
 
-program: OPEN_PAREN( setq | temporary_assigment  | let |
-         sum  | minus | multiply |div | modulas |
-         floor | ceiling | mod | sin | cos | tan |
-         sqrt | exp |expt | cons | car | cdr | list |
-         push | pop | defining_function | calling_functions ) CLOSE_PAREN;
+identifier : STARS
+    | NUMBER
+    | quote
+    | function_form
+    | SPECIAL_VARIABLE ;
+
+function : OPEN_PAREN (print | setq | let | expression) CLOSE_PAREN | EOF ;
+
+setq: SETQ (IDENTIFIER | SPECIAL_VARIABLE) expression ;
+
+let: LET bindings body ;
+
+bindings: (binding | simple_binding | special_binding)+ ;
+
+special_binding: OPEN_PAREN SPECIAL_VARIABLE expression CLOSE_PAREN ;
+
+binding: OPEN_PAREN IDENTIFIER expression CLOSE_PAREN ;
+
+simple_binding: IDENTIFIER expression ;
+
+body: expression* ;
+
+print: PRINT expression ;
+
+quote: SINGLE_QUOTE atom | QUOTE atom ;
+
+function_form: HASH_QUOTE atom | FUNCTION atom ;
+
+atom: NUMBER
+    | STRING
+    | IDENTIFIER
+    | SPECIAL_VARIABLE ;
+
+expression:
+    NUMBER
+    | IDENTIFIER
+    | STRING
+    | SPECIAL_VARIABLE
+    | OPEN_PAREN operator expression+ CLOSE_PAREN
+    | OPEN_PAREN IDENTIFIER (KEYWORD expression)* CLOSE_PAREN
+    | expression expression ;
 
 
+operator: PLUS | MINUS | MULTIPLY | DIV | MODULUS | SIN | COS | TAN | SQRT | EXP | EXPT ;
 
-temporary_assigment :  IDENTIFIER NUMBER ;
-temporary_list : either*;
-setq:   SETQ IDENTIFIER either  ;
-let:  LET IDENTIFIER either ;
-
-sum :  PLUS either either+  ;
-minus :  MINUS either either+  ;
-multiply :  MULTIPLY either either+  ;
-div :  DIV either either+  ;
-modulas :  MODULUS either either+  ;
-floor :  FLOOR either either+  ;
-ceiling :  CEILING either either+  ;
-mod :  MOD either either+  ;
-sin :  SIN either either+  ;
-cos :  COS either either+  ;
-tan :  TAN either either+  ;
-sqrt :  SQRT either either+  ;
-exp :  EXP either ;
-expt :  EXPT either either  ;
-cons:  (NUMBER | IDENTIFIER) (NUMBER | IDENTIFIER)  ;
-car:  (NUMBER | IDENTIFIER)  ;
-cdr:  (NUMBER | IDENTIFIER)  ;
-list :  LIST (NUMBER | IDENTIFIER | NIL )+  ;
-push:  PUSH (NUMBER)? IDENTIFIER;
-pop:  POP (NUMBER)? IDENTIFIER;
-
-defining_function :  DEFUN IDENTIFIER  ((OPTIONAL|KEY|REST)? IDENTIFIER)*;
-calling_functions :  IDENTIFIER (COLON IDENTIFIER NUMBER)*  ;
-
-
-
-
-
-
-either :(program | IDENTIFIER | NUMBER);
+defstruct: DEFSTRUCT IDENTIFIER field* ;
+field: IDENTIFIER ;

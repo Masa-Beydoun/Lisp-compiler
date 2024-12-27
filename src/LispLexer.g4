@@ -1,8 +1,5 @@
 lexer grammar LispLexer;
 
-
-
-
 // WhiteSpace
 WS: [ \t\r\n]+ -> skip;
 
@@ -11,8 +8,23 @@ COMMENT: ';' .*? '\n' -> skip;
 BLOCK_COMMENT: ';;' .*? '\n' -> skip;
 MULTI_LINE_COMMENT: '#|' .*? '|#' -> skip;
 
-SPECIAL_VARIABLE: '*' IDENTIFIER '*';
+SPECIAL_VARIABLE: '*' [a-zA-Z_][a-zA-Z0-9_-]* '*' ;
+IDENTIFIER: [a-zA-Z_][a-zA-Z0-9_-]*
+           | '*' [a-zA-Z_][a-zA-Z0-9_-]* '*' ;
 
+///////////////////////////////////////
+//hiba
+CHAR_LITERAL: HASH_TAG BACKSLASH ( [a-zA-Z0-9] | 'newline' | 'space' | 'tab' );
+CHAR : 'char';
+STRING_WORD : 'string';
+LIST: 'list';
+CONCATENATE : 'concatenate';
+VECTOR: 'vector';
+BACKSLASH : '\\';
+MAKE_FOO : 'make-foo';
+KEYWORD : ':' IDENTIFIER;
+
+//////////////////////////////////////////
 COMMA : ',' ;
 SEMI_COLON:';';
 COLON: ':';
@@ -59,15 +71,19 @@ DO_STAR: 'do*';
 WHILE: 'while';
 
 // Keywords
-CONST: 'const';
 VAR: 'var';
 IMPORT: 'import';
+CONST: 'const';
 EXPORT: 'export';
 
 
 PRINT : 'print';
 FORMAT: 'format';
 
+//yara
+STARS:  '**' | '***' ;
+SINGLE_QUOTE: '\'';
+HASH_QUOTE: '#\'';
 
 // Arithmatic Operators
 PLUS : '+';
@@ -84,11 +100,10 @@ TAN:'tan';
 SQRT:'sqrt';
 EXP: 'exp';
 EXPT: 'expt';
-
 CONS: 'cons';
 CAR: 'car';
 CDR: 'cdr';
-OPTIONAL:'&optional';
+
 // Logical Operators
 BIT_AND: '&';
 BIT_XOR: '^';
@@ -158,7 +173,6 @@ UNION: 'union';
 SETDIFFERENCE: 'set-difference';
 
 //List
-LIST : 'list' ;
 REST: '&rest';
 KEY: '&key';
 
@@ -214,8 +228,6 @@ DIRECTIVE_FLOAT: '~F';           // Format floating-point numbers.
 DIRECTIVE_EXPONENT: '~E';        // Format numbers in scientific notation.
 DIRECTIVE_PERCENT: '~S';         // Format data with escaping (safe representation).
 
-// General Directive Fallback
 DIRECTIVE: '~' [a-zA-Z%~];  // Matches any general directive not explicitly defined.
 
 
-IDENTIFIER: [a-zA-Z_][a-zA-Z0-9_-]* ;
