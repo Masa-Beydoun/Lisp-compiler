@@ -1,5 +1,10 @@
 lexer grammar LispLexer;
 
+DEFSTRUCT: 'defstruct';
+MAKE: 'make-';
+KEYWORD: ':' IDENTIFIER;
+
+
 // WhiteSpace
 WS: [ \t\r\n]+ -> skip;
 
@@ -22,7 +27,7 @@ CONCATENATE : 'concatenate';
 VECTOR: 'vector';
 BACKSLASH : '\\';
 MAKE_FOO : 'make-foo';
-KEYWORD : ':' IDENTIFIER;
+//KEYWORD : ':' IDENTIFIER;
 
 //////////////////////////////////////////
 COMMA : ',' ;
@@ -31,6 +36,8 @@ COLON: ':';
 DOT: '.';
 QUESTION_MARK: '?';
 HASH_TAG: '#';
+SINGLE_QUOTE : '\'';
+BACKSLASH : '\\';
 
 
 NUMBER : INTEGER | FLOAT | SCIENTIFIC | COMPLEX | FLOAT;
@@ -71,9 +78,9 @@ DO_STAR: 'do*';
 WHILE: 'while';
 
 // Keywords
+CONST: 'const';
 VAR: 'var';
 IMPORT: 'import';
-CONST: 'const';
 EXPORT: 'export';
 
 
@@ -82,7 +89,7 @@ FORMAT: 'format';
 
 //yara
 STARS:  '**' | '***' ;
-SINGLE_QUOTE: '\'';
+//SINGLE_QUOTE: '\'';
 HASH_QUOTE: '#\'';
 
 // Arithmatic Operators
@@ -120,19 +127,21 @@ DEFPARAMETER: 'defparameter';
 DEFCONSTANT: 'defconstant';
 DEFUN: 'defun';
 DEFMARCO: 'defmarco';
-DEFSTRUCT: 'defstruct';
-MAKE: 'make-';
+//DEFSTRUCT: 'defstruct';
+//MAKE: 'make';
 //Binding
 LET: 'let';
 LET_STAR: 'let*';
 LETR: 'letrec';
 //Quotion
 QUOTE: 'quote';
-SINGLE_QUOTE: '\'';
+//SINGLE_QUOTE: '\'';
+EVENP : 'evenp';
 
 //array
 MAKE_ARRAY: 'make-array';
 AREF: 'aref';
+INCF : 'incf';
 
 //Boolean literals
 T: 't';
@@ -147,6 +156,7 @@ CASE: 'case';
 AND: 'and' | '&&';
 OR: 'or' | '||';
 NOT: 'not' | '!';
+PROGN : 'progn' ;
 
 //Non-local exits
 RETURN: 'return';
@@ -173,10 +183,15 @@ SUBSETP: 'subsetp';
 INTERSECTION: 'intersection';
 UNION: 'union';
 SETDIFFERENCE: 'set-difference';
+//CONCATENATE :'concatenate';
 
 //List
 REST: '&rest';
 KEY: '&key';
+
+//CHAR : 'char';
+//STRING_WORD : 'string';
+//VECTOR : 'vector';
 
 STRING
     : '"' (ESC | ~["\\])* '"' {
@@ -211,7 +226,7 @@ FORMAT_STRING
             .replace("\\n", "\n")                // Unescape newlines
             .replace("\\t", "\t")                // Unescape tabs
             .replace("\\r", "\r")                // Unescape carriage returns
-            .replace("~%", "\n")                 // Handle newline directive
+            .replac("~%", "\n")                 // Handle newline directive
             .replace("~~", "~"));                // Handle literal tilde
     }
     | '"' (FORMAT_ESC | DIRECTIVE | ~["\\])* EOF {
@@ -233,3 +248,7 @@ DIRECTIVE_PERCENT: '~S';         // Format data with escaping (safe representati
 DIRECTIVE: '~' [a-zA-Z%~];  // Matches any general directive not explicitly defined.
 
 
+
+//IDENTIFIER: [a-zA-Z_][a-zA-Z0-9_-]* ;
+//CHAR_LITERAL: [a-zA-Z];
+SYMBOL: [a-zA-Z_][a-zA-Z0-9]* ;
