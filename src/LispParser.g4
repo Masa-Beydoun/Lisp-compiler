@@ -13,8 +13,27 @@ program: OPEN_PAREN( setq | temporary_assigment  | let |
          return | return_from | block | error |
          do | dotimes | dolist | loop |
          funcall | apply | mapcar | lambda_expression |
-         sort | stable_sort) CLOSE_PAREN;
+         sort | stable_sort
+         |function | identifier //yara
+         ) CLOSE_PAREN;
 
+      identifier : STARS
+          | NUMBER
+          | quote
+          | function_form
+          | SPECIAL_VARIABLE ;
+
+function : OPEN_PAREN (print | setq | let | expression) CLOSE_PAREN | EOF ;
+
+setq: SETQ (IDENTIFIER | SPECIAL_VARIABLE) expression ;
+
+let: LET bindings body ;
+
+bindings: (binding | simple_binding | special_binding)+ ;
+
+special_binding: OPEN_PAREN SPECIAL_VARIABLE expression CLOSE_PAREN ;
+
+binding: OPEN_PAREN IDENTIFIER expression CLOSE_PAREN ;
 
 
 temporary_assigment :  IDENTIFIER NUMBER ;
@@ -54,24 +73,29 @@ loop : LOOP (program)* ;
 do : DO OPEN_PAREN iteration_specs* CLOSE_PAREN OPEN_PAREN (termination_condition (program)* ) CLOSE_PAREN ;
 iteration_specs : OPEN_PAREN IDENTIFIER NUMBER NUMBER? (program)* CLOSE_PAREN+ ;
 termination_condition : OPEN_PAREN condition IDENTIFIER? CLOSE_PAREN ;
+simple_binding: IDENTIFIER expression ;
 
 //Non-local Exits
 return : RETURN either? ;
 return_from : RETURN_FROM IDENTIFIER either? ;
 block : BLOCK (IDENTIFIER | T | NIL) (program)* ;
 error : ERROR STRING (either)* ;
+body: expression* ;
 
 //Funcall, Apply, and Mapcar
 funcall : FUNCALL function either+ ;
 apply : APPLY function either* OPEN_PAREN list CLOSE_PAREN ;
 mapcar : MAPCAR function OPEN_PAREN list CLOSE_PAREN ;
+print: PRINT expression ;
 
 //Lambda
 lambda_expression : HASH_TAG SINGLE_QUOTE? OPEN_PAREN LAMBDA OPEN_PAREN parameter_list CLOSE_PAREN program* CLOSE_PAREN ;
 parameter_list : IDENTIFIER+ ;
+quote: SINGLE_QUOTE atom | QUOTE atom ;
 
 function_reference : HASH_TAG (OPEN_PAREN (either)* CLOSE_PAREN )? ;
 function : function_reference | lambda_expression | defining_function;
+function_form: HASH_QUOTE atom | FUNCTION atom ;
 
 //Sorting
 sort : SORT SINGLE_QUOTE? OPEN_PAREN list_elements CLOSE_PAREN comparison_function ;
@@ -92,3 +116,22 @@ print : PRINT (either | STRING | list)* ;
 
 
 either :(program | IDENTIFIER | NUMBER | SINGLE_QUOTE);
+atom: NUMBER
+    | STRING
+    | IDENTIFIER
+    | SPECIAL_VARIABLE ;
+
+expression:
+    NUMBER
+    | IDENTIFIER
+    | STRING
+    | SPECIAL_VARIABLE
+    | OPEN_PAREN operator expression+ CLOSE_PAREN
+    | OPEN_PAREN IDENTIFIER (KEYWORD expression)* CLOSE_PAREN
+    | expression expression ;
+
+
+operator: PLUS | MINUS | MULTIPLY | DIV | MODULUS | SIN | COS | TAN | SQRT | EXP | EXPT ;
+
+defstruct: DEFSTRUCT IDENTIFIER field* ;
+field: IDENTIFIER ;
