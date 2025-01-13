@@ -1,4 +1,4 @@
-// Generated from C:/My projects/Compiler/Lisp-compiler/src/LispLexer.g4 by ANTLR 4.13.2
+// Generated from C:/Users/Masa/Downloads/spring-security-test/compiler/src/LispLexer.g4 by ANTLR 4.13.2
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;
@@ -206,7 +206,6 @@ public class LispLexer extends Lexer {
 
 			        throw new RuntimeException("Unclosed string literal at line " + getLine() + ", column " + getCharPositionInLine());
 			    
-			break;
 		}
 	}
 	private void FORMAT_STRING_action(RuleContext _localctx, int actionIndex) {
@@ -228,7 +227,6 @@ public class LispLexer extends Lexer {
 
 			        throw new RuntimeException("Unclosed format string literal at line " + getLine() + ", column " + getCharPositionInLine());
 			    
-			break;
 		}
 	}
 

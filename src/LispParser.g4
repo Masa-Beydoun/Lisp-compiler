@@ -22,8 +22,27 @@ temporary_list : either*;
 setq:   SETQ IDENTIFIER either  ;
 let:  LET IDENTIFIER either ;
 
-sum :  PLUS either either+  ;
-minus :  MINUS either either+  ;
+sum returns [int sumResult]
+    : PLUS x=NUMBER y+=NUMBER+ {
+        $sumResult = Integer.parseInt($x.text);
+                for (Token num : $y) {
+            $sumResult += Integer.parseInt(num.getText());
+        }
+        System.out.println("Sum is: " + $sumResult);
+    };
+
+minus returns [int minusResult]
+    : MINUS x=NUMBER y+=NUMBER+ {
+        $minusResult = Integer.parseInt($x.text);
+        for (Token num : $y) {
+            $minusResult -= Integer.parseInt(num.getText());
+        }
+        System.out.println("minus is: " + $minusResult);
+    };
+
+minus2 :  MINUS either either+  ;
+
+
 multiply :  MULTIPLY either either+  ;
 div :  DIV either either+  ;
 modulas :  MODULUS either either+  ;

@@ -24,8 +24,8 @@ public class Main {
             CommonTokenStream tokens = new CommonTokenStream(lexer);
             LispParser parser = new LispParser(tokens);
 
-            ParseTree tree = parser.program();
-            System.out.println(tree.toStringTree(parser));
+            ParseTree tree = parser.programs();
+//            System.out.println(tree.toStringTree(parser));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
