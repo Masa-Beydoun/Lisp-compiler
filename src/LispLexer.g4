@@ -113,6 +113,7 @@ LET_STAR: 'let*';
 LETR: 'letrec';
 //Quotion
 QUOTE: 'quote';
+SINGLE_QUOTE: '\'';
 
 //array
 MAKE_ARRAY: 'make-array';
@@ -145,6 +146,7 @@ FUNCALL: 'funcall';
 MAPCAR: 'mapcar';
 LAMBDA: 'lambda';
 SORT: 'sort';
+STABLE_SORT: 'stable-sort';
 EQ: 'eq';
 EQUAL: 'equal';
 EQL: 'eql';
