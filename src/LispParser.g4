@@ -16,7 +16,7 @@ program: OPEN_PAREN( setq | temporary_assigment  | let |
          sort | stable_sort
          |function | identifier //yara
          true |evenp | condition |
-         |array |string | structure| assignment | if_statement | cond | ) CLOSE_PAREN;
+         array |string | structure| assignment | if_statement | cond ) CLOSE_PAREN;
 
       identifier : STARS
           | NUMBER
@@ -92,10 +92,6 @@ do : DO OPEN_PAREN iteration_specs* CLOSE_PAREN OPEN_PAREN (termination_conditio
 iteration_specs : OPEN_PAREN IDENTIFIER NUMBER NUMBER? (program)* CLOSE_PAREN+ ;
 termination_condition : OPEN_PAREN condition IDENTIFIER? CLOSE_PAREN ;
 simple_binding: IDENTIFIER expression ;
-array
-     : array_definition
-     | array_elements_access
-     | array_elements_operations ;
 
 //Non-local Exits
 return : RETURN either? ;
@@ -103,9 +99,6 @@ return_from : RETURN_FROM IDENTIFIER either? ;
 block : BLOCK (IDENTIFIER | T | NIL) (program)* ;
 error : ERROR STRING (either)* ;
 body: expression* ;
-array_definition
-                : twoDArray
-                | oneDArray  ;
 
 //Funcall, Apply, and Mapcar
 funcall : FUNCALL function either+ ;
@@ -117,13 +110,9 @@ print: PRINT expression ;
 lambda_expression : HASH_TAG SINGLE_QUOTE? OPEN_PAREN LAMBDA OPEN_PAREN parameter_list CLOSE_PAREN program* CLOSE_PAREN ;
 parameter_list : IDENTIFIER+ ;
 quote: SINGLE_QUOTE atom | QUOTE atom ;
-twoDArray :  MAKE_ARRAY SINGLE_QUOTE OPEN_PAREN NUMBER NUMBER ;
-oneDArray :  MAKE_ARRAY either ;
-
 function_reference : HASH_TAG (OPEN_PAREN (either)* CLOSE_PAREN )? ;
 //function : function_reference | lambda_expression | defining_function;
 function_form: HASH_QUOTE atom | FUNCTION atom ;
-array_elements_access : AREF (multiply | IDENTIFIER either ) ;
 
 //Sorting
 sort : SORT SINGLE_QUOTE? OPEN_PAREN list_elements CLOSE_PAREN comparison_function ;
@@ -143,7 +132,6 @@ condition : OPEN_PAREN (comparsion | IDENTIFIER | NUMBER)+ CLOSE_PAREN ;
 //print : PRINT (either | STRING | list)* ;
 
 
-//either :(program | IDENTIFIER | NUMBER | SINGLE_QUOTE);
 atom: NUMBER
     | STRING
     | IDENTIFIER
@@ -163,6 +151,25 @@ operator: PLUS | MINUS | MULTIPLY | DIV | MODULUS | SIN | COS | TAN | SQRT | EXP
 
 defstruct: DEFSTRUCT IDENTIFIER field* ;
 field: IDENTIFIER ;
+
+
+///////////////////////////////////////////////////////////
+//array :
+array
+     : array_definition
+     | array_elements_access
+     | array_elements_operations ;
+
+
+array_definition
+                : twoDArray
+                | oneDArray  ;
+
+twoDArray :  MAKE_ARRAY SINGLE_QUOTE OPEN_PAREN NUMBER NUMBER ;
+oneDArray :  MAKE_ARRAY either ;
+
+array_elements_access : AREF (multiply | IDENTIFIER either ) ;
+
 array_elements_operations : operation_type OPEN_PAREN array_elements_access CLOSE_PAREN;
 operation_type
               : PUSH either

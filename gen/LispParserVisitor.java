@@ -22,29 +22,17 @@ public interface LispParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitProgram(LispParser.ProgramContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link LispParser#atom}.
+	 * Visit a parse tree produced by {@link LispParser#identifier}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAtom(LispParser.AtomContext ctx);
+	T visitIdentifier(LispParser.IdentifierContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link LispParser#value}.
+	 * Visit a parse tree produced by {@link LispParser#function}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitValue(LispParser.ValueContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link LispParser#temporary_assigment}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitTemporary_assigment(LispParser.Temporary_assigmentContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link LispParser#temporary_list}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitTemporary_list(LispParser.Temporary_listContext ctx);
+	T visitFunction(LispParser.FunctionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link LispParser#setq}.
 	 * @param ctx the parse tree
@@ -57,6 +45,60 @@ public interface LispParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitLet(LispParser.LetContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LispParser#value}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitValue(LispParser.ValueContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LispParser#bindings}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBindings(LispParser.BindingsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LispParser#special_binding}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSpecial_binding(LispParser.Special_bindingContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LispParser#binding}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBinding(LispParser.BindingContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LispParser#evenp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitEvenp(LispParser.EvenpContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LispParser#true}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTrue(LispParser.TrueContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LispParser#either}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitEither(LispParser.EitherContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LispParser#temporary_assigment}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTemporary_assigment(LispParser.Temporary_assigmentContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LispParser#temporary_list}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTemporary_list(LispParser.Temporary_listContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link LispParser#sum}.
 	 * @param ctx the parse tree
@@ -178,18 +220,6 @@ public interface LispParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPop(LispParser.PopContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link LispParser#evenp}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitEvenp(LispParser.EvenpContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link LispParser#true}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitTrue(LispParser.TrueContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link LispParser#defining_function}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -238,6 +268,12 @@ public interface LispParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitTermination_condition(LispParser.Termination_conditionContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link LispParser#simple_binding}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSimple_binding(LispParser.Simple_bindingContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link LispParser#return}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -262,6 +298,12 @@ public interface LispParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitError(LispParser.ErrorContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link LispParser#body}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBody(LispParser.BodyContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link LispParser#funcall}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -280,6 +322,12 @@ public interface LispParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitMapcar(LispParser.MapcarContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link LispParser#print}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPrint(LispParser.PrintContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link LispParser#lambda_expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -292,17 +340,23 @@ public interface LispParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitParameter_list(LispParser.Parameter_listContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link LispParser#quote}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitQuote(LispParser.QuoteContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link LispParser#function_reference}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitFunction_reference(LispParser.Function_referenceContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link LispParser#function}.
+	 * Visit a parse tree produced by {@link LispParser#function_form}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFunction(LispParser.FunctionContext ctx);
+	T visitFunction_form(LispParser.Function_formContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link LispParser#sort}.
 	 * @param ctx the parse tree
@@ -376,17 +430,35 @@ public interface LispParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCondition(LispParser.ConditionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link LispParser#print}.
+	 * Visit a parse tree produced by {@link LispParser#atom}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitPrint(LispParser.PrintContext ctx);
+	T visitAtom(LispParser.AtomContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link LispParser#either}.
+	 * Visit a parse tree produced by {@link LispParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitEither(LispParser.EitherContext ctx);
+	T visitExpression(LispParser.ExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LispParser#operator}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOperator(LispParser.OperatorContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LispParser#defstruct}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDefstruct(LispParser.DefstructContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LispParser#field}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitField(LispParser.FieldContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link LispParser#array}.
 	 * @param ctx the parse tree
