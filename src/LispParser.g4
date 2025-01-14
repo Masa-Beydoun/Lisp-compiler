@@ -2,7 +2,7 @@ parser grammar LispParser;
 
 options { tokenVocab=LispLexer; }
 
-programs : (program | quote | forms)* | EOF;
+programs : (program | quote_form | forms)* | EOF;
 
 program: OPEN_PAREN(
         setq | let |let_star |  minus | sum  | multiply  | div  | modulas  | floor  | ceiling  | sin  | cos  | tan  | sqrt  | exp  | expt
@@ -107,7 +107,7 @@ expt returns [double result]
              System.out.println("power is: " + $result);
          }
          |EXPT possible_number_helper possible_number_helper;
-setq: SETQ (IDENTIFIER value_helper)+ ;
+setq: SETQ (IDENTIFIER (value_helper | quote_form))+ ;
 let: LET OPEN_PAREN (binding | variable_binding | nil_binding)+ CLOSE_PAREN programs ;
 let_star: LET_STAR OPEN_PAREN (binding | variable_binding | nil_binding)+ CLOSE_PAREN programs ; //TODO check if i can give it a variable
 cons: CONS (possible_number_helper | NIL ) (possible_number_helper | NIL)  ;
@@ -122,15 +122,21 @@ evenp returns [int result]:
 list :  LIST (atom_helper|NIL)+;
 pop:  POP variables;
 push:  PUSH atom_helper variables;
+forms : (STARS |MULTIPLY) | quote_form | function_form | possible_number_helper ;
+print : PRINT (either | STRING | list | NIL) ;
 //<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>
 variables: IDENTIFIER | SPECIAL_VARIABLE;
 possible_number_helper: NUMBER |variables | program;
 atom_helper: possible_number_helper | STRING ;
 expression_helper: atom_helper | variables (KEYWORD expression_helper)* ;
 value_helper: NUMBER | STRING | program;
-function_form: HASH_QUOTE atom_helper | FUNCTION atom_helper ; //TODO
 value_helper2: CHAR_LITERAL| atom_helper OPEN_PAREN value_helper2+ CLOSE_PAREN| NIL ;
 either : possible_number_helper | SINGLE_QUOTE;
+function_form: HASH_QUOTE atom_helper | FUNCTION atom_helper ;
+quote_form: SINGLE_QUOTE (atom_helper | (OPEN_PAREN atom_helper+ CLOSE_PAREN)) |  QUOTE OPEN_PAREN (atom_helper)* CLOSE_PAREN;  //TODO
+defining_function :  DEFUN IDENTIFIER OPEN_PAREN IDENTIFIER* (KEY (binding | IDENTIFIER)*)? (REST (binding | IDENTIFIER)*)? (OPTIONAL (binding | IDENTIFIER)*)? CLOSE_PAREN (program)+;
+calling_functions :  IDENTIFIER ((KEYWORD)? NUMBER)* ;
+
 //<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>
 binding: OPEN_PAREN variables value_helper CLOSE_PAREN ;
 variable_binding: OPEN_PAREN variables variables CLOSE_PAREN ;
@@ -140,16 +146,12 @@ nil_binding : OPEN_PAREN variables NIL CLOSE_PAREN ;
 //simple_binding: IDENTIFIER value_helper ;
 //special_binding:  SPECIAL_VARIABLE value_helper;
 //<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>
-quote: SINGLE_QUOTE atom_helper | OPEN_PAREN QUOTE atom_helper CLOSE_PAREN;  //TODO
-forms : (STARS |MULTIPLY) | quote | function_form | possible_number_helper ;
-print : PRINT (either | STRING | list | NIL) ;
+
 //true : T either ;
 //temporary_list : either*;
-defining_function :  DEFUN IDENTIFIER OPEN_PAREN IDENTIFIER* (KEY (binding | IDENTIFIER)*)? (REST (binding | IDENTIFIER)*)? (OPTIONAL (binding | IDENTIFIER)*)? CLOSE_PAREN (program)+;
-calling_functions :  IDENTIFIER ((KEYWORD)? NUMBER)* ;
 
 //TODO format
-//
+
 ////Iteration
 //dotimes : DOTIMES OPEN_PAREN IDENTIFIER NUMBER (program)* CLOSE_PAREN ;
 //dolist : DOLIST OPEN_PAREN IDENTIFIER IDENTIFIER? (program)* CLOSE_PAREN ;
