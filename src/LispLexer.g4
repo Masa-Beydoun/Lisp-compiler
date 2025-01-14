@@ -1,6 +1,8 @@
 lexer grammar LispLexer;
 
-
+DEFSTRUCT: 'defstruct';
+MAKE: 'make-';
+KEYWORD: ':' IDENTIFIER;
 
 
 // WhiteSpace
@@ -11,14 +13,30 @@ COMMENT: ';' .*? '\n' -> skip;
 BLOCK_COMMENT: ';;' .*? '\n' -> skip;
 MULTI_LINE_COMMENT: '#|' .*? '|#' -> skip;
 
-SPECIAL_VARIABLE: '*' IDENTIFIER '*';
+SPECIAL_VARIABLE: '*' [a-zA-Z_][a-zA-Z0-9_-]* '*' ;
+IDENTIFIER: [a-zA-Z_][a-zA-Z0-9_-]*
+           | '*' [a-zA-Z_][a-zA-Z0-9_-]* '*' ;
 
+///////////////////////////////////////
+//hiba
+CHAR_LITERAL: HASH_TAG BACKSLASH ( [a-zA-Z0-9] | 'newline' | 'space' | 'tab' );
+CHAR : 'char';
+STRING_WORD : 'string';
+LIST: 'list';
+CONCATENATE : 'concatenate';
+VECTOR: 'vector';
+BACKSLASH : '\\';
+MAKE_FOO : 'make-foo';
+//KEYWORD : ':' IDENTIFIER;
+
+//////////////////////////////////////////
 COMMA : ',' ;
 SEMI_COLON:';';
 COLON: ':';
 DOT: '.';
 QUESTION_MARK: '?';
 HASH_TAG: '#';
+SINGLE_QUOTE : '\'';
 
 
 NUMBER : INTEGER | FLOAT | SCIENTIFIC | COMPLEX | FLOAT;
@@ -71,6 +89,10 @@ EXPORT: 'export';
 PRINT : 'print';
 FORMAT: 'format';
 
+//yara
+STARS:  '**' | '***' ;
+//SINGLE_QUOTE: '\'';
+HASH_QUOTE: '#\'';
 
 // Arithmatic Operators
 PLUS : '+';
@@ -87,11 +109,10 @@ TAN:'tan';
 SQRT:'sqrt';
 EXP: 'exp';
 EXPT: 'expt';
-
 CONS: 'cons';
 CAR: 'car';
 CDR: 'cdr';
-OPTIONAL:'&optional';
+
 // Logical Operators
 BIT_AND: '&';
 BIT_XOR: '^';
@@ -108,19 +129,21 @@ DEFPARAMETER: 'defparameter';
 DEFCONSTANT: 'defconstant';
 DEFUN: 'defun';
 DEFMARCO: 'defmarco';
-DEFSTRUCT: 'defstruct';
-MAKE: 'make-';
+//DEFSTRUCT: 'defstruct';
+//MAKE: 'make';
 //Binding
 LET: 'let';
 LET_STAR: 'let*';
 LETR: 'letrec';
 //Quotion
 QUOTE: 'quote';
-SINGLE_QUOTE: '\'';
+//SINGLE_QUOTE: '\'';
+EVENP : 'evenp';
 
 //array
 MAKE_ARRAY: 'make-array';
 AREF: 'aref';
+INCF : 'incf';
 
 //Boolean literals
 T: 't';
@@ -135,6 +158,7 @@ CASE: 'case';
 AND: 'and' | '&&';
 OR: 'or' | '||';
 NOT: 'not' | '!';
+PROGN : 'progn' ;
 
 //Non-local exits
 RETURN: 'return';
@@ -161,11 +185,15 @@ SUBSETP: 'subsetp';
 INTERSECTION: 'intersection';
 UNION: 'union';
 SETDIFFERENCE: 'set-difference';
+//CONCATENATE :'concatenate';
 
 //List
-LIST : 'list' ;
 REST: '&rest';
 KEY: '&key';
+
+//CHAR : 'char';
+//STRING_WORD : 'string';
+//VECTOR : 'vector';
 
 STRING
     : '"' (ESC | ~["\\])* '"' {
@@ -200,7 +228,7 @@ FORMAT_STRING
             .replace("\\n", "\n")                // Unescape newlines
             .replace("\\t", "\t")                // Unescape tabs
             .replace("\\r", "\r")                // Unescape carriage returns
-            .replace("~%", "\n")                 // Handle newline directive
+            .replac("~%", "\n")                 // Handle newline directive
             .replace("~~", "~"));                // Handle literal tilde
     }
     | '"' (FORMAT_ESC | DIRECTIVE | ~["\\])* EOF {
@@ -219,8 +247,10 @@ DIRECTIVE_FLOAT: '~F';           // Format floating-point numbers.
 DIRECTIVE_EXPONENT: '~E';        // Format numbers in scientific notation.
 DIRECTIVE_PERCENT: '~S';         // Format data with escaping (safe representation).
 
-// General Directive Fallback
 DIRECTIVE: '~' [a-zA-Z%~];  // Matches any general directive not explicitly defined.
 
 
-IDENTIFIER: [a-zA-Z_][a-zA-Z0-9_-]* ;
+
+//IDENTIFIER: [a-zA-Z_][a-zA-Z0-9_-]* ;
+//CHAR_LITERAL: [a-zA-Z];
+SYMBOL: [a-zA-Z_][a-zA-Z0-9]* ;

@@ -8,7 +8,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library" exported="">
+    <orderEntry type="module-library">
       <library>
         <CLASSES>
           <root url="file://C:/masa/antlr4/antlr-intellij-plugin-v4/lib" />
@@ -18,7 +18,7 @@
         <jarDirectory url="file://C:/masa/antlr4/antlr-intellij-plugin-v4/lib" recursive="false" />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" exported="">
+    <orderEntry type="module-library">
       <library>
         <ANNOTATIONS>
           <root url="jar://$MODULE_DIR$/../../antlr-intellij-plugin-v4-1.24.zip!/" />
@@ -38,6 +38,8 @@
           <root url="jar://$MODULE_DIR$/../../antlr-intellij-plugin-v4-1.24.zip!/" />
         </SOURCES>
         <jarDirectory url="jar://$MODULE_DIR$/../../antlr-intellij-plugin-v4-1.24.zip!/" recursive="false" />
+        <jarDirectory url="jar://$MODULE_DIR$/../../antlr-intellij-plugin-v4-1.24.zip!/" recursive="false" />
+        <jarDirectory url="jar://$MODULE_DIR$/../../antlr-intellij-plugin-v4-1.24.zip!/" recursive="false" type="SOURCES" />
         <jarDirectory url="jar://$MODULE_DIR$/../../antlr-intellij-plugin-v4-1.24.zip!/" recursive="false" type="SOURCES" />
       </library>
     </orderEntry>
