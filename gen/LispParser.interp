@@ -319,7 +319,6 @@ div
 modulas
 floor
 ceiling
-mod
 sin
 cos
 tan
@@ -345,6 +344,7 @@ return
 return_from
 block
 error
+
 body
 funcall
 apply
@@ -367,6 +367,7 @@ greater_than_equals
 less_than_equals
 comparsion
 condition
+
 atom
 expression
 operator

@@ -1,4 +1,4 @@
-// Generated from C:/Users/DELL/Desktop/New folder/Lisp-compiler/src/LispLexer.g4 by ANTLR 4.13.2
+
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;
@@ -189,17 +189,21 @@ public class LispLexer extends Lexer {
 	@Override
 	public void action(RuleContext _localctx, int ruleIndex, int actionIndex) {
 		switch (ruleIndex) {
-		case 133:
-			STRING_action((RuleContext)_localctx, actionIndex);
+
+	}
+	private void CONSTANT_action(RuleContext _localctx, int actionIndex) {
+		switch (actionIndex) {
+		case 0:
+			 setText(Double.toString(Math.PI)); 
 			break;
-		case 137:
-			FORMAT_STRING_action((RuleContext)_localctx, actionIndex);
+		case 1:
+			 setText(Double.toString(Math.E)); 
 			break;
 		}
 	}
 	private void STRING_action(RuleContext _localctx, int actionIndex) {
 		switch (actionIndex) {
-		case 0:
+		case 2:
 
 			        // Unescape the string content
 			        setText(getText()
@@ -211,7 +215,7 @@ public class LispLexer extends Lexer {
 			            .replace("\\r", "\r"));              // Unescape carriage returns
 			    
 			break;
-		case 1:
+		case 3:
 
 			        throw new RuntimeException("Unclosed string literal at line " + getLine() + ", column " + getCharPositionInLine());
 			    
@@ -220,7 +224,7 @@ public class LispLexer extends Lexer {
 	}
 	private void FORMAT_STRING_action(RuleContext _localctx, int actionIndex) {
 		switch (actionIndex) {
-		case 2:
+		case 4:
 
 			        setText(getText()
 			            .substring(1, getText().length() - 1) // Remove surrounding quotes
@@ -233,7 +237,7 @@ public class LispLexer extends Lexer {
 			            .replace("~~", "~"));                // Handle literal tilde
 			    
 			break;
-		case 3:
+		case 5:
 
 			        throw new RuntimeException("Unclosed format string literal at line " + getLine() + ", column " + getCharPositionInLine());
 			    
@@ -242,7 +246,9 @@ public class LispLexer extends Lexer {
 	}
 
 	public static final String _serializedATN =
+
 		"\u0004\u0000\u0091\u04a3\u0006\uffff\uffff\u0002\u0000\u0007\u0000\u0002"+
+
 		"\u0001\u0007\u0001\u0002\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002"+
 		"\u0004\u0007\u0004\u0002\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0002"+
 		"\u0007\u0007\u0007\u0002\b\u0007\b\u0002\t\u0007\t\u0002\n\u0007\n\u0002"+
@@ -282,6 +288,7 @@ public class LispLexer extends Lexer {
 		"\u0001\u0000\u0001\u0000\u0001\u0000\u0001\u0000\u0001\u0000\u0001\u0000"+
 		"\u0001\u0000\u0001\u0000\u0001\u0000\u0001\u0000\u0001\u0001\u0001\u0001"+
 		"\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0002\u0001\u0002"+
+
 		"\u0001\u0002\u0001\u0003\u0004\u0003\u0140\b\u0003\u000b\u0003\f\u0003"+
 		"\u0141\u0001\u0003\u0001\u0003\u0001\u0004\u0001\u0004\u0005\u0004\u0148"+
 		"\b\u0004\n\u0004\f\u0004\u014b\t\u0004\u0001\u0004\u0001\u0004\u0001\u0004"+
@@ -392,6 +399,7 @@ public class LispLexer extends Lexer {
 		"\u0091\u0001\u0091\u0001\u0092\u0001\u0092\u0001\u0092\u0001\u0093\u0001"+
 		"\u0093\u0001\u0093\u0001\u0094\u0001\u0094\u0005\u0094\u049f\b\u0094\n"+
 		"\u0094\f\u0094\u04a2\t\u0094\u0003\u0149\u0156\u0163\u0000\u0095\u0001"+
+
 		"\u0001\u0003\u0002\u0005\u0003\u0007\u0004\t\u0005\u000b\u0006\r\u0007"+
 		"\u000f\b\u0011\t\u0013\n\u0015\u000b\u0017\f\u0019\r\u001b\u000e\u001d"+
 		"\u000f\u001f\u0010!\u0011#\u0012%\u0013\'\u0014)\u0015+\u0016-\u0017/"+
@@ -974,7 +982,7 @@ public class LispLexer extends Lexer {
 		"\u0199\u01dd\u01e0\u01e7\u01ea\u01ed\u01f2\u01f8\u01fb\u0200\u0206\u0208"+
 		"\u020c\u0211\u021e\u0296\u037b\u0381\u0387\u0444\u0446\u044e\u0450\u0455"+
 		"\u045a\u0468\u046a\u0473\u0475\u047a\u047f\u04a0\u0005\u0006\u0000\u0000"+
-		"\u0001\u0085\u0000\u0001\u0085\u0001\u0001\u0089\u0002\u0001\u0089\u0003";
+
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
