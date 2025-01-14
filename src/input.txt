@@ -1,3 +1,4 @@
 (+ 3 9.1 1.4)
 (+ 3 f 5 6)
-(expt 2 3)
+(expt 2 3) ; this is a comment
+(cons 4 (cons 5 (cons 6 nil)))

@@ -13,12 +13,8 @@ COMMENT: ';' .*? '\n' -> skip;
 BLOCK_COMMENT: ';;' .*? '\n' -> skip;
 MULTI_LINE_COMMENT: '#|' .*? '|#' -> skip;
 
-SPECIAL_VARIABLE: '*' [a-zA-Z_][a-zA-Z0-9_-]* '*' ;
-IDENTIFIER: [a-zA-Z_][a-zA-Z0-9_-]*
-           | '*' [a-zA-Z_][a-zA-Z0-9_-]* '*' ;
 
 ///////////////////////////////////////
-//hiba
 CHAR_LITERAL: HASH_TAG BACKSLASH ( [a-zA-Z0-9] | 'newline' | 'space' | 'tab' );
 CHAR : 'char';
 STRING_WORD : 'string';
@@ -27,7 +23,6 @@ CONCATENATE : 'concatenate';
 VECTOR: 'vector';
 BACKSLASH : '\\';
 MAKE_FOO : 'make-foo';
-//KEYWORD : ':' IDENTIFIER;
 
 //////////////////////////////////////////
 COMMA : ',' ;
@@ -36,7 +31,6 @@ COLON: ':';
 DOT: '.';
 QUESTION_MARK: '?';
 HASH_TAG: '#';
-SINGLE_QUOTE : '\'';
 
 
 NUMBER : INTEGER | FLOAT | SCIENTIFIC | COMPLEX | FLOAT;
@@ -48,9 +42,6 @@ CONSTANT
     : 'pi' { setText(Double.toString(Math.PI)); }
     | 'e' { setText(Double.toString(Math.E)); }
     ;
-
-// Null Literal
-NULL: NIL;
 
 EQUALS: '==';
 ASSING: '=';
@@ -112,6 +103,7 @@ EXPT: 'expt';
 CONS: 'cons';
 CAR: 'car';
 CDR: 'cdr';
+OPTIONAL:'&optional';
 
 // Logical Operators
 BIT_AND: '&';
@@ -137,7 +129,7 @@ LET_STAR: 'let*';
 LETR: 'letrec';
 //Quotion
 QUOTE: 'quote';
-//SINGLE_QUOTE: '\'';
+SINGLE_QUOTE: '\'';
 EVENP : 'evenp';
 
 //array
@@ -195,6 +187,10 @@ KEY: '&key';
 //STRING_WORD : 'string';
 //VECTOR : 'vector';
 
+SPECIAL_VARIABLE: '*' [a-zA-Z_][a-zA-Z0-9_-]* '*' ;
+
+IDENTIFIER: [a-zA-Z_][a-zA-Z0-9_-]*;
+
 STRING
     : '"' (ESC | ~["\\])* '"' {
         // Unescape the string content
@@ -228,7 +224,7 @@ FORMAT_STRING
             .replace("\\n", "\n")                // Unescape newlines
             .replace("\\t", "\t")                // Unescape tabs
             .replace("\\r", "\r")                // Unescape carriage returns
-            .replac("~%", "\n")                 // Handle newline directive
+            .replace("~%", "\n")                 // Handle newline directive
             .replace("~~", "~"));                // Handle literal tilde
     }
     | '"' (FORMAT_ESC | DIRECTIVE | ~["\\])* EOF {
@@ -248,8 +244,6 @@ DIRECTIVE_EXPONENT: '~E';        // Format numbers in scientific notation.
 DIRECTIVE_PERCENT: '~S';         // Format data with escaping (safe representation).
 
 DIRECTIVE: '~' [a-zA-Z%~];  // Matches any general directive not explicitly defined.
-
-
 
 //IDENTIFIER: [a-zA-Z_][a-zA-Z0-9_-]* ;
 //CHAR_LITERAL: [a-zA-Z];

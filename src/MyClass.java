@@ -7,4 +7,8 @@ public class MyClass {
             return Integer.parseInt(text); // Handle integer
         }
     }
+
+    public static boolean isEven(int number){
+        return number % 2 == 0;
+    }
 }
