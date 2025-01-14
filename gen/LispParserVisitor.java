@@ -160,6 +160,18 @@ public interface LispParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPush(LispParser.PushContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link LispParser#forms}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitForms(LispParser.FormsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LispParser#print}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPrint(LispParser.PrintContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link LispParser#variables}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -190,12 +202,6 @@ public interface LispParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitValue_helper(LispParser.Value_helperContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link LispParser#function_form}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitFunction_form(LispParser.Function_formContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link LispParser#value_helper2}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -207,6 +213,30 @@ public interface LispParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitEither(LispParser.EitherContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LispParser#function_form}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunction_form(LispParser.Function_formContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LispParser#quote_form}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitQuote_form(LispParser.Quote_formContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LispParser#defining_function}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDefining_function(LispParser.Defining_functionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LispParser#calling_functions}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCalling_functions(LispParser.Calling_functionsContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link LispParser#binding}.
 	 * @param ctx the parse tree
@@ -225,34 +255,4 @@ public interface LispParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitNil_binding(LispParser.Nil_bindingContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link LispParser#quote}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitQuote(LispParser.QuoteContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link LispParser#forms}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitForms(LispParser.FormsContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link LispParser#print}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitPrint(LispParser.PrintContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link LispParser#defining_function}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDefining_function(LispParser.Defining_functionContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link LispParser#calling_functions}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitCalling_functions(LispParser.Calling_functionsContext ctx);
 }
