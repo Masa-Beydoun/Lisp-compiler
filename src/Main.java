@@ -10,7 +10,12 @@ import java.nio.file.Paths;
 public class Main {
     public static void main(String[] args) {
 
+
         parsing();
+
+//        Math.c
+//        Integer.parseInt()
+
 
 //        readTokens();
     }
@@ -25,7 +30,7 @@ public class Main {
             LispParser parser = new LispParser(tokens);
 
             ParseTree tree = parser.programs();
-//            System.out.println(tree.toStringTree(parser));
+            System.out.println(tree.toStringTree(parser));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {

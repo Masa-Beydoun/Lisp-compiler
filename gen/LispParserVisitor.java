@@ -58,12 +58,6 @@ public interface LispParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitMinus(LispParser.MinusContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link LispParser#minus2}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitMinus2(LispParser.Minus2Context ctx);
-	/**
 	 * Visit a parse tree produced by {@link LispParser#multiply}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -93,12 +87,6 @@ public interface LispParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitCeiling(LispParser.CeilingContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link LispParser#mod}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitMod(LispParser.ModContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link LispParser#sin}.
 	 * @param ctx the parse tree

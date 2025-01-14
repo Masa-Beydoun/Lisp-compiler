@@ -87,16 +87,6 @@ public interface LispParserListener extends ParseTreeListener {
 	 */
 	void exitMinus(LispParser.MinusContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link LispParser#minus2}.
-	 * @param ctx the parse tree
-	 */
-	void enterMinus2(LispParser.Minus2Context ctx);
-	/**
-	 * Exit a parse tree produced by {@link LispParser#minus2}.
-	 * @param ctx the parse tree
-	 */
-	void exitMinus2(LispParser.Minus2Context ctx);
-	/**
 	 * Enter a parse tree produced by {@link LispParser#multiply}.
 	 * @param ctx the parse tree
 	 */
@@ -146,16 +136,6 @@ public interface LispParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitCeiling(LispParser.CeilingContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link LispParser#mod}.
-	 * @param ctx the parse tree
-	 */
-	void enterMod(LispParser.ModContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link LispParser#mod}.
-	 * @param ctx the parse tree
-	 */
-	void exitMod(LispParser.ModContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link LispParser#sin}.
 	 * @param ctx the parse tree

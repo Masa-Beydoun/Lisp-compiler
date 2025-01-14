@@ -5,9 +5,11 @@ options { tokenVocab=LispLexer; }
 programs : (  program )* | EOF;
 
 program: OPEN_PAREN( setq | temporary_assigment  | let |
-         sum  | minus | multiply |div | modulas |
-         floor | ceiling | mod | sin | cos | tan |
-         sqrt | exp |expt | cons | car | cdr | list |
+         minus | sum  | multiply  | div  | modulas  |
+         floor  | ceiling  | sin  | cos  | tan  | sqrt  |
+         exp  | expt  |
+
+         cons | car | cdr | list |
          push | pop | defining_function | calling_functions |
          when | comparsion | print |
          return | return_from | block | error |
@@ -22,39 +24,101 @@ temporary_list : either*;
 setq:   SETQ IDENTIFIER either  ;
 let:  LET IDENTIFIER either ;
 
-sum returns [int sumResult]
+sum returns [double result]
     : PLUS x=NUMBER y+=NUMBER+ {
-        $sumResult = Integer.parseInt($x.text);
+        $result = MyClass.parseNumber($x.text);
                 for (Token num : $y) {
-            $sumResult += Integer.parseInt(num.getText());
+            $result += MyClass.parseNumber(num.getText());
         }
-        System.out.println("Sum is: " + $sumResult);
-    };
-
-minus returns [int minusResult]
+        System.out.println("Sum is: " + $result);
+    }
+    |
+     PLUS either either+;
+minus returns [double result]
     : MINUS x=NUMBER y+=NUMBER+ {
-        $minusResult = Integer.parseInt($x.text);
+        $result = MyClass.parseNumber($x.text);
         for (Token num : $y) {
-            $minusResult -= Integer.parseInt(num.getText());
+            $result -= MyClass.parseNumber(num.getText());
         }
-        System.out.println("minus is: " + $minusResult);
-    };
+        System.out.println("minus is: " + $result);
+    }
+    | MINUS either either+;
+multiply returns [double result]
+    : MULTIPLY x=NUMBER y+=NUMBER+ {
+        $result = MyClass.parseNumber($x.text);
+        for (Token num : $y) {
+            $result *= MyClass.parseNumber(num.getText());
+        }
+        System.out.println("multiply is: " + $result);
+    }
+    |MULTIPLY either either+;
+div returns [double result]
+    : DIV x=NUMBER y+=NUMBER+ {
+        $result = MyClass.parseNumber($x.text);
+        for (Token num : $y) {
+            $result /= MyClass.parseNumber(num.getText());
+        }
+        System.out.println("div is: " + $result);
+    }
+    |DIV either either+;
+modulas returns [int result]
+    : (MODULUS | MOD) x=NUMBER y=NUMBER {
+        $result = Integer.parseInt($x.text);
+        $result %= Integer.parseInt($y.text);
+        System.out.println("modulas is: " + $result);
+    }
+    |(MODULUS | MOD) either either;
+floor returns [int result]
+         : FLOOR x=NUMBER  {
+             $result = (int)Math.floor(Double.parseDouble($x.text));
+             System.out.println("floor is: " + $result);
+         }
+         |FLOOR either;
+ceiling returns [int result]
+         :CEILING  x=NUMBER  {
+             $result = (int)Math.ceil(Double.parseDouble($x.text));
+             System.out.println("ceil is: " + $result);
+         }
+         |CEILING either;
+sin returns [double result]
+         : SIN x=NUMBER  {
+             $result = Math.sin(MyClass.parseNumber($x.text));
+             System.out.println("sin is: " + $result);
+         }
+         |SIN either;
+cos returns [double result]
+         : COS x=NUMBER  {
+             $result = Math.cos(MyClass.parseNumber($x.text));
+             System.out.println("cos is: " + $result);
+         }
+         |COS either;
+tan returns [double result]
+         : TAN x=NUMBER  {
+             $result = Math.tan(MyClass.parseNumber($x.text));
+             System.out.println("tan is: " + $result);
+         }
+         |TAN either;
+sqrt returns [double result]
+         : SQRT x=NUMBER  {
+             $result = Math.sqrt(MyClass.parseNumber($x.text));
+             System.out.println("sqrt is: " + $result);
+         }
+         |SQRT either;
+exp returns [double result]
+         : EXP x=NUMBER  {
+             $result = Math.exp(MyClass.parseNumber($x.text));
+             System.out.println("exp is: " + $result);
+         }
+         |EXP either;
+expt returns [double result]
+         : EXPT x=NUMBER  y=NUMBER{
+             System.out.println("in expt");
+             $result = Math.pow(MyClass.parseNumber($x.text),MyClass.parseNumber($y.text));
+             System.out.println("power is: " + $result);
+         }
+         |EXPT either either;
 
-minus2 :  MINUS either either+  ;
 
-
-multiply :  MULTIPLY either either+  ;
-div :  DIV either either+  ;
-modulas :  MODULUS either either+  ;
-floor :  FLOOR either either+  ;
-ceiling :  CEILING either either+  ;
-mod :  MOD either either+  ;
-sin :  SIN either either+  ;
-cos :  COS either either+  ;
-tan :  TAN either either+  ;
-sqrt :  SQRT either either+  ;
-exp :  EXP either ;
-expt :  EXPT either either  ;
 cons:  (NUMBER | IDENTIFIER) (NUMBER | IDENTIFIER)  ;
 car:  (NUMBER | IDENTIFIER)  ;
 cdr:  (NUMBER | IDENTIFIER)  ;
@@ -111,3 +175,4 @@ print : PRINT (either | STRING | list)* ;
 
 
 either :(program | IDENTIFIER | NUMBER | SINGLE_QUOTE);
+

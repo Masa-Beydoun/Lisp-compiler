@@ -26,7 +26,10 @@ INTEGER: ('+' | '-')? ('0' | [1-9][0-9]*);
 FLOAT: ('+' | '-')? [0-9]+ '.' [0-9]+;
 SCIENTIFIC: ('+' | '-')? [0-9]+ ('.' [0-9]+)? ('e' | 'E') ('+' | '-')? [0-9]+;
 COMPLEX: '#c(' NUMBER NUMBER ')';
-CONSTANT : 'pi' | 'e';
+CONSTANT
+    : 'pi' { setText(Double.toString(Math.PI)); }
+    | 'e' { setText(Double.toString(Math.E)); }
+    ;
 
 // Null Literal
 NULL: NIL;
