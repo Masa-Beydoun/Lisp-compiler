@@ -2,3 +2,8 @@
 (+ 3 f 5 6)
 (expt 2 3) ; this is a comment
 (cons 4 (cons 5 (cons 6 nil)))
+(defvar *special* 5)
+(let ((regular 6)) (check-regular))
+(defun check-regular () regular)
+(defun check-special () *special*)
+(let ((*special* 6)) (check-special))

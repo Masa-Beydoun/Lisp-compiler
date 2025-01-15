@@ -228,6 +228,7 @@ public class LispLexer extends Lexer {
 
 			        throw new RuntimeException("Unclosed string literal at line " + getLine() + ", column " + getCharPositionInLine());
 			    
+			break;
 		}
 	}
 	private void FORMAT_STRING_action(RuleContext _localctx, int actionIndex) {
@@ -249,6 +250,7 @@ public class LispLexer extends Lexer {
 
 			        throw new RuntimeException("Unclosed format string literal at line " + getLine() + ", column " + getCharPositionInLine());
 			    
+			break;
 		}
 	}
 
