@@ -507,13 +507,6 @@ public class LispParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitParameter_list(LispParser.Parameter_listContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
 	@Override public T visitFunction_reference(LispParser.Function_referenceContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}

@@ -195,8 +195,8 @@ apply : APPLY program either* OPEN_PAREN list CLOSE_PAREN ;
 mapcar : MAPCAR program OPEN_PAREN list CLOSE_PAREN ;
 //
 ////Lambda
-lambda_expression : HASH_TAG SINGLE_QUOTE? OPEN_PAREN LAMBDA OPEN_PAREN parameter_list CLOSE_PAREN program* CLOSE_PAREN ;
-parameter_list : IDENTIFIER+ ;
+lambda_expression : HASH_TAG SINGLE_QUOTE? OPEN_PAREN LAMBDA OPEN_PAREN IDENTIFIER+ CLOSE_PAREN program* CLOSE_PAREN ;
+//parameter_list : IDENTIFIER+ ;
 //
 function_reference : HASH_TAG (OPEN_PAREN (either)* CLOSE_PAREN )? ;
 function : function_reference | lambda_expression | defining_function;
@@ -292,7 +292,7 @@ eq : EQ  quote_form quote_form;
 append : APPEND quote_form quote_form ;
 reverse : REVERSE quote_form ;
 member : MEMBER quote_form quote_form ;
-find : FIND quote_form quote_form | FIND quote_form list;
+find : FIND quote_form (quote_form | list);
 subsetp : SUBSETP quote_form quote_form ;
 intersection : INTERSECTION quote_form quote_form ;
 union :UNION quote_form quote_form;

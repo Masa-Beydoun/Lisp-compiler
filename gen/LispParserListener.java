@@ -707,16 +707,6 @@ public interface LispParserListener extends ParseTreeListener {
 	 */
 	void exitLambda_expression(LispParser.Lambda_expressionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link LispParser#parameter_list}.
-	 * @param ctx the parse tree
-	 */
-	void enterParameter_list(LispParser.Parameter_listContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link LispParser#parameter_list}.
-	 * @param ctx the parse tree
-	 */
-	void exitParameter_list(LispParser.Parameter_listContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link LispParser#function_reference}.
 	 * @param ctx the parse tree
 	 */

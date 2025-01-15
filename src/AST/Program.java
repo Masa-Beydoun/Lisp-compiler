@@ -15,7 +15,7 @@ public class Program extends NodeAST {
     IfStatement ifStatement;
     Comparsion comparsion;
     Condition condition;
-    Eq eq ;
+    Eq eq;
     Reverse reverse;
     Member member;
     Subsetp subsetp;
@@ -23,6 +23,79 @@ public class Program extends NodeAST {
     Cons cons;
     Union union;
     Find find;
+    Return areturn;
+    ReturnForm returnForm;
+    DefStruct defStruct;
+    When when;
+    Lambda lambda;
+    Function function;
+    Cdr cdr;
+    Car car;
+
+
+    public Cdr getCdr() {
+        return cdr;
+    }
+
+    public void setCdr(Cdr cdr) {
+        this.cdr = cdr;
+    }
+
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
+    }
+
+    public Return getAreturn() {
+        return areturn;
+    }
+
+    public void setAreturn(Return areturn) {
+        this.areturn = areturn;
+    }
+
+    public ReturnForm getReturnForm() {
+        return returnForm;
+    }
+
+    public void setReturnForm(ReturnForm returnForm) {
+        this.returnForm = returnForm;
+    }
+
+    public DefStruct getDefStruct() {
+        return defStruct;
+    }
+
+    public void setDefStruct(DefStruct defStruct) {
+        this.defStruct = defStruct;
+    }
+
+    public When getWhen() {
+        return when;
+    }
+
+    public void setWhen(When when) {
+        this.when = when;
+    }
+
+    public Lambda getLambda() {
+        return lambda;
+    }
+
+    public void setLambda(Lambda lambda) {
+        this.lambda = lambda;
+    }
+
+    public Function getFunction() {
+        return function;
+    }
+
+    public void setFunction(Function function) {
+        this.function = function;
+    }
 
     public Find getFind() {
         return find;

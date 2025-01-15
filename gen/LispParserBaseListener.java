@@ -856,18 +856,6 @@ public class LispParserBaseListener implements LispParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterParameter_list(LispParser.Parameter_listContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitParameter_list(LispParser.Parameter_listContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterFunction_reference(LispParser.Function_referenceContext ctx) { }
 	/**
 	 * {@inheritDoc}

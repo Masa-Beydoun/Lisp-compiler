@@ -968,6 +968,61 @@ public class VisitorClass extends LispParserBaseVisitor<Object> {
         }
         return lessThan;
     }
+    @Override
+    public Return visitReturn(LispParser.ReturnContext ctx) {
+        Return areturn = new Return();
+        areturn.setEither(visitEither(ctx.either()));
+        return areturn;
+    }
+
+    @Override
+    public ReturnForm visitReturn_from(LispParser.Return_fromContext ctx) {
+        ReturnForm returnForm = new ReturnForm();
+        returnForm.setEither(visitEither(ctx.either()));
+        returnForm.setIDENTIFIER(ctx.IDENTIFIER().getText());
+        return returnForm;
+    }
+
+    @Override
+    public Field visitField(LispParser.FieldContext ctx) {
+        Field field = new Field();
+        field.setIdentifier(ctx.IDENTIFIER().getText());
+        return field;
+    }
+
+    @Override
+    public DefStruct visitDefstruct(LispParser.DefstructContext ctx) {
+        DefStruct defStruct = new DefStruct();
+        defStruct.setIdentifier(ctx.IDENTIFIER().getText());
+        for(LispParser.FieldContext field : ctx.field()){
+            defStruct.getFields().add(visitField(field));
+        }
+        return defStruct;
+    }
+
+    @Override
+    public When visitWhen(LispParser.WhenContext ctx) {
+        When when = new When();
+        when.setCondition(visitCondition(ctx.condition()));
+        for(LispParser.ProgramContext programContext : ctx.program()){
+            when.getPrograms().add(visitProgram(programContext));
+        }
+        return when;
+    }
+
+    @Override
+    public Lambda visitLambda_expression(LispParser.Lambda_expressionContext ctx) {
+        Lambda lambda = new Lambda();
+        for(TerminalNode p : ctx.IDENTIFIER()){
+            lambda.getIdentifier().add(p.getText());
+        }
+        for(LispParser.ProgramContext programContext : ctx.program()){
+            lambda.getPrograms().add(visitProgram(programContext));
+        }
+        return  lambda;
+    }
+
+
 
     @Override
     public LessThan visitLess_than(LispParser.Less_thanContext ctx) {
@@ -1068,6 +1123,18 @@ public class VisitorClass extends LispParserBaseVisitor<Object> {
         }
         return eq;
     }
+    @Override
+    public Cdr visitCdr(LispParser.CdrContext ctx) {
+        Cdr cdr = new Cdr();
+        cdr.setPossibleNumberHelper(visitPossible_number_helper(ctx.possible_number_helper()));
+        return cdr;
+    }
+
+    public Car visitCar(LispParser.CarContext ctx) {
+        Car car = new Car();
+        car.setPossibleNumberHelper(visitPossible_number_helper(ctx.possible_number_helper()));
+        return car;
+    }
 
 
     @Override
@@ -1100,24 +1167,31 @@ public class VisitorClass extends LispParserBaseVisitor<Object> {
             program.setCondition(visitCondition(ctx.condition()));
         }else if (ctx.eq() != null){
             program.setEq(visitEq(ctx.eq()));
-        }
-        else  if (ctx.reverse() != null){
+        } else  if (ctx.reverse() != null){
             program.setReverse(visitReverse(ctx.reverse()));
-        }
-        else if (ctx.member() != null){
+        } else if (ctx.member() != null){
             program.setMember(visitMember(ctx.member()));
-        }
-        else if (ctx.subsetp() != null){
+        } else if (ctx.subsetp() != null){
             program.setSubsetp(visitSubsetp(ctx.subsetp()));
-        }
-        else if (ctx.intersection() != null){
+        } else if (ctx.intersection() != null){
             program.setIntersection(visitIntersection(ctx.intersection()));
-        }
-        else if (ctx.union() != null){
+        } else if (ctx.union() != null){
             program.setUnion(visitUnion(ctx.union()));
-        }
-        else if (ctx.find() != null){
+        } else if (ctx.find() != null){
             program.setFind(visitFind(ctx.find()));
+        }else if (ctx.return_() != null) {
+            program.setAreturn(visitReturn(ctx.return_()));
+        } else if (ctx.return_from() != null){
+            program.setReturnForm(visitReturn_from(ctx.return_from()));
+        } else if (ctx.defstruct() != null){
+            program.setDefStruct(visitDefstruct(ctx.defstruct()));
+        }
+        else if (ctx.lambda_expression() != null){
+            program.setLambda(visitLambda_expression(ctx.lambda_expression()));
+        }else if(ctx.cdr()!=null){
+            program.setCdr(visitCdr(ctx.cdr()));
+        }else if(ctx.car()!= null){
+            program.setCar(visitCar(ctx.car()));
         }
 
         return program;

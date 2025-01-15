@@ -430,12 +430,6 @@ public interface LispParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitLambda_expression(LispParser.Lambda_expressionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link LispParser#parameter_list}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitParameter_list(LispParser.Parameter_listContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link LispParser#function_reference}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
