@@ -28,7 +28,7 @@ public class Lambda {
         boolean firstField = true;
 
         if (identifier != null) {
-            result.append("identifier='").append(identifier).append('\'');
+            result.append("identifier=").append(identifier);
             firstField = false;
         }
         if (programs != null) {
