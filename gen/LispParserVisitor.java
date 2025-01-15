@@ -22,6 +22,12 @@ public interface LispParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitProgram(LispParser.ProgramContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link LispParser#format}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFormat(LispParser.FormatContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link LispParser#math_operation}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -675,6 +681,24 @@ public interface LispParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitIf_statement(LispParser.If_statementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LispParser#if_statement1}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIf_statement1(LispParser.If_statement1Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link LispParser#if_statement2}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIf_statement2(LispParser.If_statement2Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link LispParser#if_statement3}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIf_statement3(LispParser.If_statement3Context ctx);
 	/**
 	 * Visit a parse tree produced by {@link LispParser#comparison_type}.
 	 * @param ctx the parse tree

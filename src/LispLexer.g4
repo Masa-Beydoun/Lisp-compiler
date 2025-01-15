@@ -23,6 +23,7 @@ CONCATENATE : 'concatenate';
 VECTOR: 'vector';
 BACKSLASH : '\\';
 MAKE_FOO : 'make-foo';
+FORMAT: 'format' -> pushMode(FORMAT_MODE);
 
 //////////////////////////////////////////
 COMMA : ',' ;
@@ -78,7 +79,6 @@ EXPORT: 'export';
 
 
 PRINT : 'print';
-FORMAT: 'format';
 
 //yara
 STARS:  '**' | '***' ;
@@ -215,8 +215,20 @@ fragment HEX
     : [0-9a-fA-F];
 
 
+//IDENTIFIER: [a-zA-Z_][a-zA-Z0-9_-]* ;
+//CHAR_LITERAL: [a-zA-Z];
+SYMBOL: [a-zA-Z_][a-zA-Z0-9]* ;
+
+
+
+
+mode FORMAT_MODE;
+WS2: [ \t\r\n]+ -> skip;
+T2:'t';
+NIL2:'nil';
+
 FORMAT_STRING
-    : '"' (FORMAT_ESC | DIRECTIVE | ~["\\])* '"' {
+    : '"' (FORMAT_ESC | DIRECTIVE | ~["\\~])* {
         setText(getText()
             .substring(1, getText().length() - 1) // Remove surrounding quotes
             .replace("\\\"", "\"")               // Unescape double quotes
@@ -225,26 +237,17 @@ FORMAT_STRING
             .replace("\\t", "\t")                // Unescape tabs
             .replace("\\r", "\r")                // Unescape carriage returns
             .replace("~%", "\n")                 // Handle newline directive
-            .replace("~~", "~"));                // Handle literal tilde
-    }
-    | '"' (FORMAT_ESC | DIRECTIVE | ~["\\])* EOF {
-        throw new RuntimeException("Unclosed format string literal at line " + getLine() + ", column " + getCharPositionInLine());
-    }
+            .replace("~T", "\t")                 // Handle tab directive
+            .replace("~~", "~")                  // Handle literal tilde directive
+            .replace("~D", "<decimal>")          // Placeholder for decimals
+            .replace("~A", "<string-like>")      // Placeholder for strings
+            .replace("~F", "<float>")            // Placeholder for floats
+            .replace("~E", "<scientific>")       // Placeholder for scientific notation
+            .replace("~S", "<escaped-data>"));   // Placeholder for escaped data
+    } '"' -> popMode
     ;
 
+DIRECTIVE: '~' [a-zA-Z%~];
+
 fragment FORMAT_ESC: '\\' (['"\\nrt] | UNICODE_ESCAPE);
-// Specific Format Directives
-DIRECTIVE_NEWLINE: '~%';         // Represents a newline.
-DIRECTIVE_TAB: '~T';             // Represents a tab.
-DIRECTIVE_LITERAL: '~~';         // Represents a literal tilde (~).
-DIRECTIVE_DECIMAL: '~D';         // Format decimal numbers.
-DIRECTIVE_STRING: '~A';          // Format string-like data.
-DIRECTIVE_FLOAT: '~F';           // Format floating-point numbers.
-DIRECTIVE_EXPONENT: '~E';        // Format numbers in scientific notation.
-DIRECTIVE_PERCENT: '~S';         // Format data with escaping (safe representation).
 
-DIRECTIVE: '~' [a-zA-Z%~];  // Matches any general directive not explicitly defined.
-
-//IDENTIFIER: [a-zA-Z_][a-zA-Z0-9_-]* ;
-//CHAR_LITERAL: [a-zA-Z];
-SYMBOL: [a-zA-Z_][a-zA-Z0-9]* ;

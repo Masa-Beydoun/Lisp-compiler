@@ -2,17 +2,17 @@ package AST;
 
 import java.util.ArrayList;
 
-public class Programs extends  NodeAST{
+public class Programs extends NodeAST {
 
     ArrayList<Program> programs;
 
-    public Programs(){
-    programs = new ArrayList<>();
-}
+    public Programs() {
+        programs = new ArrayList<>();
+    }
 
-public void addProgram(Program program){
-    programs.add(program);
-}
+    public void addProgram(Program program) {
+        programs.add(program);
+    }
 
     public ArrayList<Program> getPrograms() {
         return programs;

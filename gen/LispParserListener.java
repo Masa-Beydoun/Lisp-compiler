@@ -27,6 +27,16 @@ public interface LispParserListener extends ParseTreeListener {
 	 */
 	void exitProgram(LispParser.ProgramContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link LispParser#format}.
+	 * @param ctx the parse tree
+	 */
+	void enterFormat(LispParser.FormatContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LispParser#format}.
+	 * @param ctx the parse tree
+	 */
+	void exitFormat(LispParser.FormatContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link LispParser#math_operation}.
 	 * @param ctx the parse tree
 	 */
@@ -1116,6 +1126,36 @@ public interface LispParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitIf_statement(LispParser.If_statementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LispParser#if_statement1}.
+	 * @param ctx the parse tree
+	 */
+	void enterIf_statement1(LispParser.If_statement1Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link LispParser#if_statement1}.
+	 * @param ctx the parse tree
+	 */
+	void exitIf_statement1(LispParser.If_statement1Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link LispParser#if_statement2}.
+	 * @param ctx the parse tree
+	 */
+	void enterIf_statement2(LispParser.If_statement2Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link LispParser#if_statement2}.
+	 * @param ctx the parse tree
+	 */
+	void exitIf_statement2(LispParser.If_statement2Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link LispParser#if_statement3}.
+	 * @param ctx the parse tree
+	 */
+	void enterIf_statement3(LispParser.If_statement3Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link LispParser#if_statement3}.
+	 * @param ctx the parse tree
+	 */
+	void exitIf_statement3(LispParser.If_statement3Context ctx);
 	/**
 	 * Enter a parse tree produced by {@link LispParser#comparison_type}.
 	 * @param ctx the parse tree

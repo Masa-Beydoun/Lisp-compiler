@@ -40,6 +40,18 @@ public class LispParserBaseListener implements LispParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterFormat(LispParser.FormatContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFormat(LispParser.FormatContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterMath_operation(LispParser.Math_operationContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -1343,6 +1355,42 @@ public class LispParserBaseListener implements LispParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitIf_statement(LispParser.If_statementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterIf_statement1(LispParser.If_statement1Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitIf_statement1(LispParser.If_statement1Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterIf_statement2(LispParser.If_statement2Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitIf_statement2(LispParser.If_statement2Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterIf_statement3(LispParser.If_statement3Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitIf_statement3(LispParser.If_statement3Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

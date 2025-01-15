@@ -7,21 +7,29 @@ programs : (program | quote_form | forms)* | EOF;
 program: OPEN_PAREN(
         setq | let | let_star | function_operation |math_operation |list_operation | print |eq | append | reverse | member | find  | subsetp | intersection | union | set_difference |
         | if_statement | condition | comparsion | cons | car | cdr
-
+        | defvar | array
 
         | error | do |  funcall | apply | mapcar | lambda_expression | iteration_operation
 
 
-        | defvar | array| string  // masa
+        | string  // masa
         | when  | function | defstruct  | return | return_from  // rahaf
         | temporary_list | true | cond | case  |sort_operation| block | assignment | structure// yara
+        | format
          ) CLOSE_PAREN;
+
+format : FORMAT (T2|NIL2) FORMAT_STRING (possible_number_helper)*;
+
+
+
+
+
 
 math_operation: minus | sum  | multiply  | div  | modulas  | floor  | ceiling  | sin  | cos  | tan  | sqrt  | exp  | expt|evenp ;
 list_operation:list | push | pop;
 function_operation: defining_function  | calling_functions;
 sort_operation: sort | stable_sort ;
-iteration_operation : dotimes |dolist |loop ;
+iteration_operation : dotimes | dolist |loop ;
 
 sum returns [double result]
     : PLUS x=NUMBER y+=NUMBER+ {
@@ -258,10 +266,13 @@ setf_assignment : SETF SINGLE_QUOTE* either either ;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Booleans and Conditionals :
 //  ???CLOSE PAREND ISSUE???
-if_statement
-    : IF condition_helper condition_helper condition_helper
-    | IF comparison_type (expression_sequence)+
-    | (WHEN | UNLESS) comparison_type2 (expression_sequence)*;
+
+if_statement : if_statement1 | if_statement2 | if_statement3;
+if_statement1 : IF condition_helper condition_helper condition_helper;
+if_statement2 :  IF comparison_type (expression_sequence)+;
+if_statement3 :(WHEN | UNLESS) comparison_type2 (expression_sequence)*;
+
+
 comparison_type : OPEN_PAREN condition CLOSE_PAREN ;
 comparison_type2 : T | NIL condition_helper ;
 //
