@@ -45,11 +45,30 @@ public class Sum {
 
     @Override
     public String toString() {
-        return "Sum{" +
-                "number1='" + number1 + '\'' +
-                ", number2=" + number2 +
-                ", possibleNumberHelper=" + possibleNumberHelper +
-                ", possibleNumbers2=" + possibleNumbers2 +
-                '}';
+        StringBuilder result = new StringBuilder("Sum{");
+        boolean firstField = true;
+
+        if (number1 != null) {
+            result.append("number1='").append(number1).append('\'');
+            firstField = false;
+        }
+        if (number2 != null) {
+            if (!firstField) result.append(", ");
+            result.append("number2=").append(number2);
+            firstField = false;
+        }
+        if (possibleNumberHelper != null) {
+            if (!firstField) result.append(", ");
+            result.append("possibleNumberHelper=").append(possibleNumberHelper);
+            firstField = false;
+        }
+        if (possibleNumbers2 != null) {
+            if (!firstField) result.append(", ");
+            result.append("possibleNumbers2=").append(possibleNumbers2);
+        }
+
+        result.append('}');
+        return result.toString();
     }
+
 }

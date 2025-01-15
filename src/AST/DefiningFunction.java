@@ -58,4 +58,43 @@ public class DefiningFunction {
     public void setRestFunctions(List<RestFunction> restFunctions) {
         this.restFunctions = restFunctions;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder("DefiningFunction{");
+        boolean firstField = true;
+
+        if (functionName != null) {
+            result.append("functionName='").append(functionName).append('\'');
+            firstField = false;
+        }
+        if (parameters != null) {
+            if (!firstField) result.append(", ");
+            result.append("parameters=").append(parameters);
+            firstField = false;
+        }
+        if (keyFunctions != null) {
+            if (!firstField) result.append(", ");
+            result.append("keyFunctions=").append(keyFunctions);
+            firstField = false;
+        }
+        if (optionFunctions != null) {
+            if (!firstField) result.append(", ");
+            result.append("optionFunctions=").append(optionFunctions);
+            firstField = false;
+        }
+        if (restFunctions != null) {
+            if (!firstField) result.append(", ");
+            result.append("restFunctions=").append(restFunctions);
+            firstField = false;
+        }
+        if (atomHelpers != null) {
+            if (!firstField) result.append(", ");
+            result.append("atomHelpers=").append(atomHelpers);
+        }
+
+        result.append('}');
+        return result.toString();
+    }
+
 }

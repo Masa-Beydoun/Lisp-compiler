@@ -40,11 +40,30 @@ String singleQuote;
 
     @Override
     public String toString() {
-        return "Eather{" +
-                "number='" + number + '\'' +
-                ", identifier='" + identifier + '\'' +
-                ", singleQuote='" + singleQuote + '\'' +
-                ", program=" + program +
-                '}';
+        StringBuilder result = new StringBuilder("Eather{");
+        boolean firstField = true;
+
+        if (number != null) {
+            result.append("number='").append(number).append('\'');
+            firstField = false;
+        }
+        if (identifier != null) {
+            if (!firstField) result.append(", ");
+            result.append("identifier='").append(identifier).append('\'');
+            firstField = false;
+        }
+        if (singleQuote != null) {
+            if (!firstField) result.append(", ");
+            result.append("singleQuote='").append(singleQuote).append('\'');
+            firstField = false;
+        }
+        if (program != null) {
+            if (!firstField) result.append(", ");
+            result.append("program=").append(program);
+        }
+
+        result.append('}');
+        return result.toString();
     }
+
 }

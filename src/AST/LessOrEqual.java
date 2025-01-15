@@ -6,11 +6,22 @@ public class LessOrEqual{
 
     @Override
     public String toString() {
-        return "LessOrEqual{" +
-                "either1=" + either1 +
-                ", either2=" + either2 +
-                '}';
+        StringBuilder result = new StringBuilder("LessOrEqual{");
+        boolean firstField = true;
+
+        if (either1 != null) {
+            result.append("either1=").append(either1);
+            firstField = false;
+        }
+        if (either2 != null) {
+            if (!firstField) result.append(", ");
+            result.append("either2=").append(either2);
+        }
+
+        result.append('}');
+        return result.toString();
     }
+
 
     public Either getEither1() {
         return either1;

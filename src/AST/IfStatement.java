@@ -9,15 +9,6 @@ public class IfStatement {
         return ifStatement1;
     }
 
-    @Override
-    public String toString() {
-        return "IfStatement{" +
-                "ifStatement1=" + ifStatement1 +
-                ", ifStatement2=" + ifStatement2 +
-                ", ifStatement3=" + ifStatement3 +
-                '}';
-    }
-
     public void setIfStatement1(IfStatement1 ifStatement1) {
         this.ifStatement1 = ifStatement1;
     }
@@ -37,4 +28,28 @@ public class IfStatement {
     public void setIfStatement3(IfStatement3 ifStatement3) {
         this.ifStatement3 = ifStatement3;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder("IfStatement{");
+        boolean firstField = true;
+
+        if (ifStatement1 != null) {
+            result.append("ifStatement1=").append(ifStatement1);
+            firstField = false;
+        }
+        if (ifStatement2 != null) {
+            if (!firstField) result.append(", ");
+            result.append("ifStatement2=").append(ifStatement2);
+            firstField = false;
+        }
+        if (ifStatement3 != null) {
+            if (!firstField) result.append(", ");
+            result.append("ifStatement3=").append(ifStatement3);
+        }
+
+        result.append('}');
+        return result.toString();
+    }
+
 }

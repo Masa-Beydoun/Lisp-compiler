@@ -1,8 +1,8 @@
 package AST;
 
 public class Eq {
-  QuoteForm quoteForm1 ;
-  QuoteForm quoteForm2 ;
+    QuoteForm quoteForm1;
+    QuoteForm quoteForm2;
 
     public QuoteForm getQuoteForm1() {
         return quoteForm1;
@@ -12,19 +12,30 @@ public class Eq {
         this.quoteForm1 = quoteForm1;
     }
 
-    public QuoteForm getQouteForm2() {
+    public QuoteForm getQuoteForm2() {
         return quoteForm2;
     }
 
-    public void setQouteForm2(QuoteForm qouteForm2) {
-        this.quoteForm2 = qouteForm2;
+    public void setQuoteForm2(QuoteForm quoteForm2) {
+        this.quoteForm2 = quoteForm2;
     }
 
     @Override
     public String toString() {
-        return "Eq{" +
-                "quoteForm1=" + quoteForm1 +
-                ", qouteForm2=" + quoteForm2 +
-                '}';
+        StringBuilder result = new StringBuilder("Eq{");
+        boolean firstField = true;
+
+        if (quoteForm1 != null) {
+            result.append("quoteForm1=").append(quoteForm1);
+            firstField = false;
+        }
+        if (quoteForm2 != null) {
+            if (!firstField) result.append(", ");
+            result.append("quoteForm2=").append(quoteForm2);
+        }
+
+        result.append('}');
+        return result.toString();
     }
+
 }

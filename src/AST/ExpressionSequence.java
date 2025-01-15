@@ -8,14 +8,6 @@ public class ExpressionSequence {
         return program;
     }
 
-    @Override
-    public String toString() {
-        return "ExpressionSequence{" +
-                "program=" + program +
-                ", expression=" + expression +
-                '}';
-    }
-
     public void setProgram(Program program) {
         this.program = program;
     }
@@ -27,4 +19,25 @@ public class ExpressionSequence {
     public void setExpression(MultipleExpression expression) {
         this.expression = expression;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder("ExpressionSequence{");
+        boolean firstField = true;
+
+        if (program != null) {
+            result.append("program=").append(program);
+            firstField = false;
+        }
+        if (expression != null) {
+            if (!firstField) result.append(", ");
+            result.append("expression=").append(expression);
+        }
+
+        result.append('}');
+        return result.toString();
+    }
+
+
+
 }

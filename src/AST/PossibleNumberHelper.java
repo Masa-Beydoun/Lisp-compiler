@@ -32,10 +32,25 @@ public class PossibleNumberHelper {
 
     @Override
     public String toString() {
-        return "PossibleNumberHelper{" +
-                "number=" + number +
-                ", variable=" + variable +
-                ", program=" + program +
-                '}';
+        StringBuilder result = new StringBuilder("PossibleNumberHelper{");
+        boolean firstField = true;
+
+        if (number != null) {
+            result.append("number=").append(number);
+            firstField = false;
+        }
+        if (variable != null) {
+            if (!firstField) result.append(", ");
+            result.append("variable=").append(variable);
+            firstField = false;
+        }
+        if (program != null) {
+            if (!firstField) result.append(", ");
+            result.append("program=").append(program);
+        }
+
+        result.append('}');
+        return result.toString();
     }
+
 }

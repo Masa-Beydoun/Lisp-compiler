@@ -7,14 +7,6 @@ public class Condition {
     ArrayList<String>  identifier = new ArrayList<String>();
     ArrayList<String>  number = new ArrayList<String>();
 
-    @Override
-    public String toString() {
-        return "Condition{" +
-                "comparsion=" + comparsion +
-                ", identifier=" + identifier +
-                ", number=" + number +
-                '}';
-    }
 
     public ArrayList<String> getIdentifier() {
         return identifier;
@@ -39,4 +31,29 @@ public class Condition {
     public void setNumber(ArrayList<String> number) {
         this.number = number;
     }
+
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder("Condition{");
+        boolean firstField = true;
+
+        if (comparsion != null) {
+            result.append("comparsion=").append(comparsion);
+            firstField = false;
+        }
+        if (identifier != null) {
+            if (!firstField) result.append(", ");
+            result.append("identifier=").append(identifier);
+            firstField = false;
+        }
+        if (number != null) {
+            if (!firstField) result.append(", ");
+            result.append("number=").append(number);
+        }
+
+        result.append('}');
+        return result.toString();
+    }
+
 }

@@ -1,9 +1,9 @@
 package AST;
 
 public class Find {
- QuoteForm quoteForm1 ;
- QuoteForm quoteForm2 ;
- ListClass listClass;
+    QuoteForm quoteForm1;
+    QuoteForm quoteForm2;
+    ListClass listClass;
 
     public QuoteForm getQuoteForm1() {
         return quoteForm1;
@@ -31,10 +31,25 @@ public class Find {
 
     @Override
     public String toString() {
-        return "Find{" +
-                "quoteForm1=" + quoteForm1 +
-                ", quoteForm2=" + quoteForm2 +
-                ", listClass=" + listClass +
-                '}';
+        StringBuilder result = new StringBuilder("Find{");
+        boolean firstField = true;
+
+        if (quoteForm1 != null) {
+            result.append("quoteForm1=").append(quoteForm1);
+            firstField = false;
+        }
+        if (quoteForm2 != null) {
+            if (!firstField) result.append(", ");
+            result.append("quoteForm2=").append(quoteForm2);
+            firstField = false;
+        }
+        if (listClass != null) {
+            if (!firstField) result.append(", ");
+            result.append("listClass=").append(listClass);
+        }
+
+        result.append('}');
+        return result.toString();
     }
+
 }

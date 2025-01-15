@@ -6,16 +6,6 @@ public class Comparsion {
     LessThan lessThan ;
     LessOrEqual lessOrEqual ;
 
-    @Override
-    public String toString() {
-        return "Comparsion{" +
-                "greaterThan=" + greaterThan +
-                ", greaterOrEqual=" + greaterOrEqual +
-                ", lessThan=" + lessThan +
-                ", lessOrEqual=" + lessOrEqual +
-                '}';
-    }
-
     public GreaterThan getGreaterThan() {
         return greaterThan;
     }
@@ -47,4 +37,33 @@ public class Comparsion {
     public void setLessOrEqual(LessOrEqual lessOrEqual) {
         this.lessOrEqual = lessOrEqual;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder("Comparsion{");
+        boolean firstField = true;
+
+        if (greaterThan != null) {
+            result.append("greaterThan=").append(greaterThan);
+            firstField = false;
+        }
+        if (greaterOrEqual != null) {
+            if (!firstField) result.append(", ");
+            result.append("greaterOrEqual=").append(greaterOrEqual);
+            firstField = false;
+        }
+        if (lessThan != null) {
+            if (!firstField) result.append(", ");
+            result.append("lessThan=").append(lessThan);
+            firstField = false;
+        }
+        if (lessOrEqual != null) {
+            if (!firstField) result.append(", ");
+            result.append("lessOrEqual=").append(lessOrEqual);
+        }
+
+        result.append('}');
+        return result.toString();
+    }
+
 }

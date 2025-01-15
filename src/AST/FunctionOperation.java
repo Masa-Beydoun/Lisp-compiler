@@ -25,9 +25,20 @@ public class FunctionOperation {
 
     @Override
     public String toString() {
-        return "FunctionOperation{" +
-                "definingFunction=" + definingFunction +
-                ", callingFinction=" + callingFunction +
-                '}';
+        StringBuilder result = new StringBuilder("FunctionOperation{");
+        boolean firstField = true;
+
+        if (definingFunction != null) {
+            result.append("definingFunction=").append(definingFunction);
+            firstField = false;
+        }
+        if (callingFunction != null) {
+            if (!firstField) result.append(", ");
+            result.append("callingFunction=").append(callingFunction);
+        }
+
+        result.append('}');
+        return result.toString();
     }
+
 }

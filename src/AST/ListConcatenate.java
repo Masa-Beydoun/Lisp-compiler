@@ -14,4 +14,12 @@ public class ListConcatenate {
     public void setStringList(List<String> stringList) {
         this.stringList = stringList;
     }
+
+
+    @Override
+    public String toString() {
+        return "ListConcatenate{" +
+                "stringList=" + stringList +
+                '}';
+    }
 }

@@ -130,24 +130,82 @@ public class MathOperation {
     public void setEvenp(Evenp evenp) {
         this.evenp = evenp;
     }
-
     @Override
     public String toString() {
-        return "MathOperation{" +
-                "minus=" + minus +
-                ", sum=" + sum +
-                ", multiply=" + multiply +
-                ", div=" + div +
-                ", modulas=" + modulas +
-                ", floor=" + floor +
-                ", ceiling=" + ceiling +
-                ", sin=" + sin +
-                ", cos=" + cos +
-                ", tan=" + tan +
-                ", sqrt=" + sqrt +
-                ", exp=" + exp +
-                ", expt=" + expt +
-                ", evenp=" + evenp +
-                '}';
+        StringBuilder result = new StringBuilder("MathOperation{");
+        boolean firstField = true;
+
+        if (minus != null) {
+            result.append("minus=").append(minus);
+            firstField = false;
+        }
+        if (sum != null) {
+            if (!firstField) result.append(", ");
+            result.append("sum=").append(sum);
+            firstField = false;
+        }
+        if (multiply != null) {
+            if (!firstField) result.append(", ");
+            result.append("multiply=").append(multiply);
+            firstField = false;
+        }
+        if (div != null) {
+            if (!firstField) result.append(", ");
+            result.append("div=").append(div);
+            firstField = false;
+        }
+        if (modulas != null) {
+            if (!firstField) result.append(", ");
+            result.append("modulas=").append(modulas);
+            firstField = false;
+        }
+        if (floor != null) {
+            if (!firstField) result.append(", ");
+            result.append("floor=").append(floor);
+            firstField = false;
+        }
+        if (ceiling != null) {
+            if (!firstField) result.append(", ");
+            result.append("ceiling=").append(ceiling);
+            firstField = false;
+        }
+        if (sin != null) {
+            if (!firstField) result.append(", ");
+            result.append("sin=").append(sin);
+            firstField = false;
+        }
+        if (cos != null) {
+            if (!firstField) result.append(", ");
+            result.append("cos=").append(cos);
+            firstField = false;
+        }
+        if (tan != null) {
+            if (!firstField) result.append(", ");
+            result.append("tan=").append(tan);
+            firstField = false;
+        }
+        if (sqrt != null) {
+            if (!firstField) result.append(", ");
+            result.append("sqrt=").append(sqrt);
+            firstField = false;
+        }
+        if (exp != null) {
+            if (!firstField) result.append(", ");
+            result.append("exp=").append(exp);
+            firstField = false;
+        }
+        if (expt != null) {
+            if (!firstField) result.append(", ");
+            result.append("expt=").append(expt);
+            firstField = false;
+        }
+        if (evenp != null) {
+            if (!firstField) result.append(", ");
+            result.append("evenp=").append(evenp);
+        }
+
+        result.append('}');
+        return result.toString();
     }
+
 }

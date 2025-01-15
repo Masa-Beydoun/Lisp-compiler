@@ -20,4 +20,22 @@ public class OptionFunction {
     public void setIdentifier(String identifier) {
         this.identifier = identifier;
     }
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder("OptionFunction{");
+        boolean firstField = true;
+
+        if (binding != null) {
+            result.append("binding=").append(binding);
+            firstField = false;
+        }
+        if (identifier != null) {
+            if (!firstField) result.append(", ");
+            result.append("identifier='").append(identifier).append('\'');
+        }
+
+        result.append('}');
+        return result.toString();
+    }
+
 }

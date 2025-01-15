@@ -29,4 +29,29 @@ public class ArrayElementsAccess {
     public void setEither(Either either) {
         this.either = either;
     }
+
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder("ArrayElementsAccess{");
+        boolean firstField = true;
+
+        if (multiply != null) {
+            result.append("multiply=").append(multiply);
+            firstField = false;
+        }
+        if (identifier != null) {
+            if (!firstField) result.append(", ");
+            result.append("identifier='").append(identifier).append('\'');
+            firstField = false;
+        }
+        if (either != null) {
+            if (!firstField) result.append(", ");
+            result.append("either=").append(either);
+        }
+
+        result.append('}');
+        return result.toString();
+    }
+
 }

@@ -12,4 +12,11 @@ public class VectorElement {
     public void setNumbers(ArrayList<String> numbers) {
         this.numbers = numbers;
     }
+
+    @Override
+    public String toString() {
+        return "VectorElement{" +
+                "numbers=" + numbers +
+                '}';
+    }
 }

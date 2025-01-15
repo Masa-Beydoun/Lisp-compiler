@@ -34,10 +34,25 @@ public class Let {
 
     @Override
     public String toString() {
-        return "Let{" +
-                "binding=" + binding +
-                ", variableBinding=" + variableBinding +
-                ", nilBinding=" + nilBinding +
-                '}';
+        StringBuilder result = new StringBuilder("Let{");
+        boolean firstField = true;
+
+        if (binding != null) {
+            result.append("binding=").append(binding);
+            firstField = false;
+        }
+        if (variableBinding != null) {
+            if (!firstField) result.append(", ");
+            result.append("variableBinding=").append(variableBinding);
+            firstField = false;
+        }
+        if (nilBinding != null) {
+            if (!firstField) result.append(", ");
+            result.append("nilBinding=").append(nilBinding);
+        }
+
+        result.append('}');
+        return result.toString();
     }
+
 }

@@ -15,4 +15,10 @@ public class VectorConcatenate {
         this.vectorElementList = vectorElementList;
     }
 
+    @Override
+    public String toString() {
+        return "VectorConcatenate{" +
+                "vectorElementList=" + vectorElementList +
+                '}';
+    }
 }

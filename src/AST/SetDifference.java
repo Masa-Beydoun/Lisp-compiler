@@ -22,9 +22,20 @@ public class SetDifference {
 
     @Override
     public String toString() {
-        return "SetDifference{" +
-                "quoteForm1=" + quoteForm1 +
-                ", quoteForm2=" + quoteForm2 +
-                '}';
+        StringBuilder result = new StringBuilder("SetDifference{");
+        boolean firstField = true;
+
+        if (quoteForm1 != null) {
+            result.append("quoteForm1=").append(quoteForm1);
+            firstField = false;
+        }
+        if (quoteForm2 != null) {
+            if (!firstField) result.append(", ");
+            result.append("quoteForm2=").append(quoteForm2);
+        }
+
+        result.append('}');
+        return result.toString();
     }
+
 }

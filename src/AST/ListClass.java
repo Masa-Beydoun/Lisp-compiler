@@ -26,9 +26,20 @@ public class ListClass {
 
     @Override
     public String toString() {
-        return "ListClass{" +
-                "atomHelper=" + atomHelper +
-                ", nil=" + nil +
-                '}';
+        StringBuilder result = new StringBuilder("ListClass{");
+        boolean firstField = true;
+
+        if (atomHelper != null) {
+            result.append("atomHelper=").append(atomHelper);
+            firstField = false;
+        }
+        if (nil != null) {
+            if (!firstField) result.append(", ");
+            result.append("nil=").append(nil);
+        }
+
+        result.append('}');
+        return result.toString();
     }
+
 }

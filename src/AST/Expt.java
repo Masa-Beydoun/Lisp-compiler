@@ -41,11 +41,30 @@ public class Expt {
 
     @Override
     public String toString() {
-        return "Expt{" +
-                "number1='" + number1 + '\'' +
-                ", number2='" + number2 + '\'' +
-                ", possibleNumberHelper1=" + possibleNumberHelper1 +
-                ", possibleNumberHelper2=" + possibleNumberHelper2 +
-                '}';
+        StringBuilder result = new StringBuilder("Expt{");
+        boolean firstField = true;
+
+        if (number1 != null) {
+            result.append("number1='").append(number1).append('\'');
+            firstField = false;
+        }
+        if (number2 != null) {
+            if (!firstField) result.append(", ");
+            result.append("number2='").append(number2).append('\'');
+            firstField = false;
+        }
+        if (possibleNumberHelper1 != null) {
+            if (!firstField) result.append(", ");
+            result.append("possibleNumberHelper1=").append(possibleNumberHelper1);
+            firstField = false;
+        }
+        if (possibleNumberHelper2 != null) {
+            if (!firstField) result.append(", ");
+            result.append("possibleNumberHelper2=").append(possibleNumberHelper2);
+        }
+
+        result.append('}');
+        return result.toString();
     }
+
 }

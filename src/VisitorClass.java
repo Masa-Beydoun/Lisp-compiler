@@ -1064,7 +1064,7 @@ public class VisitorClass extends LispParserBaseVisitor<Object> {
             eq.setQuoteForm1(visitQuote_form(ctx.quote_form().get(0)));
         }
         if (ctx.quote_form().get(1)!= null) {
-            eq.setQouteForm2(visitQuote_form(ctx.quote_form().get(1)));
+            eq.setQuoteForm2(visitQuote_form(ctx.quote_form().get(1)));
         }
         return eq;
     }

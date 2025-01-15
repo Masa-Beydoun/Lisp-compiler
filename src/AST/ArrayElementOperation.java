@@ -20,4 +20,25 @@ public class ArrayElementOperation {
     public void setArrayElementsAccess(ArrayElementsAccess arrayElementsAccess) {
         this.arrayElementsAccess = arrayElementsAccess;
     }
+
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder("ArrayElementOperation{");
+        boolean firstField = true;
+
+        if (operationType != null) {
+            result.append("operationType=").append(operationType);
+            firstField = false;
+        }
+        if (arrayElementsAccess != null) {
+            if (!firstField) result.append(", ");
+            result.append("arrayElementsAccess=").append(arrayElementsAccess);
+        }
+
+        result.append('}');
+        return result.toString();
+    }
+
+
 }

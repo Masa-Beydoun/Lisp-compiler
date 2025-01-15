@@ -6,15 +6,15 @@ public class ComparisonType {
     public Condition getCondition() {
         return condition;
     }
+    public void setCondition(Condition condition) {
+        this.condition = condition;
+    }
+
 
     @Override
     public String toString() {
         return "ComparisonType{" +
                 "condition=" + condition +
                 '}';
-    }
-
-    public void setCondition(Condition condition) {
-        this.condition = condition;
     }
 }

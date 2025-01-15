@@ -22,4 +22,23 @@ public class StringConcatenate {
     public void setEitherLists(List<EitherList> eitherLists) {
         this.eitherLists = eitherLists;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder("StringConcatenate{");
+        boolean firstField = true;
+
+        if (stringList != null) {
+            result.append("stringList=").append(stringList);
+            firstField = false;
+        }
+        if (eitherLists != null) {
+            if (!firstField) result.append(", ");
+            result.append("eitherLists=").append(eitherLists);
+        }
+
+        result.append('}');
+        return result.toString();
+    }
+
 }

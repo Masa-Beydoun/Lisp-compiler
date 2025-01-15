@@ -23,9 +23,20 @@ public class Variable {
 
     @Override
     public String toString() {
-        return "Variable{" +
-                "identifier='" + identifier + '\'' +
-                ", specialVariable='" + specialVariable + '\'' +
-                '}';
+        StringBuilder result = new StringBuilder("Variable{");
+        boolean firstField = true;
+
+        if (identifier != null) {
+            result.append("identifier='").append(identifier).append('\'');
+            firstField = false;
+        }
+        if (specialVariable != null) {
+            if (!firstField) result.append(", ");
+            result.append("specialVariable='").append(specialVariable).append('\'');
+        }
+
+        result.append('}');
+        return result.toString();
     }
+
 }

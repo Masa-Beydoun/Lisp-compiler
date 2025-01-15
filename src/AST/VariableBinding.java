@@ -22,9 +22,20 @@ public class VariableBinding {
 
     @Override
     public String toString() {
-        return "VariableBinding{" +
-                "variable1=" + variable1 +
-                ", variable2=" + variable2 +
-                '}';
+        StringBuilder result = new StringBuilder("VariableBinding{");
+        boolean firstField = true;
+
+        if (variable1 != null) {
+            result.append("variable1=").append(variable1);
+            firstField = false;
+        }
+        if (variable2 != null) {
+            if (!firstField) result.append(", ");
+            result.append("variable2=").append(variable2);
+        }
+
+        result.append('}');
+        return result.toString();
     }
+
 }

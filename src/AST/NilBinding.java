@@ -10,4 +10,11 @@ public class NilBinding {
     public void setVariable(Variable variable) {
         this.variable = variable;
     }
+
+    @Override
+    public String toString() {
+        return "NilBinding{" +
+                "variable=" + variable +
+                '}';
+    }
 }

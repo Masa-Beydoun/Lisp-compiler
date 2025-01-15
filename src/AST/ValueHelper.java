@@ -31,10 +31,24 @@ public class ValueHelper {
 
     @Override
     public String toString() {
-        return "ValueHelper{" +
-                "number='" + number + '\'' +
-                ", string='" + string + '\'' +
-                ", program=" + program +
-                '}';
+        StringBuilder result = new StringBuilder("ValueHelper{");
+        boolean firstField = true;
+
+        if (number != null) {
+            result.append("number='").append(number).append('\'');
+            firstField = false;
+        }
+        if (string != null) {
+            if (!firstField) result.append(", ");
+            result.append("string='").append(string).append('\'');
+        }
+        if (program != null) {
+            if (!firstField) result.append(", ");
+            result.append("program=").append(program);
+        }
+
+        result.append('}');
+        return result.toString();
     }
+
 }

@@ -11,4 +11,12 @@ public class ConcatenateDefinition {
     public void setConcatenateType(ConcatenateType concatenateType) {
         this.concatenateType = concatenateType;
     }
+
+
+    @Override
+    public String toString() {
+        return "ConcatenateDefinition{" +
+                "concatenateType=" + concatenateType +
+                '}';
+    }
 }

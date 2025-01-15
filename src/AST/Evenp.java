@@ -23,9 +23,20 @@ public class Evenp {
 
     @Override
     public String toString() {
-        return "Evenp{" +
-                "number='" + number + '\'' +
-                ", identifier='" + identifier + '\'' +
-                '}';
+        StringBuilder result = new StringBuilder("Evenp{");
+        boolean firstField = true;
+
+        if (number != null) {
+            result.append("number='").append(number).append('\'');
+            firstField = false;
+        }
+        if (identifier != null) {
+            if (!firstField) result.append(", ");
+            result.append("identifier='").append(identifier).append('\'');
+        }
+
+        result.append('}');
+        return result.toString();
     }
+
 }

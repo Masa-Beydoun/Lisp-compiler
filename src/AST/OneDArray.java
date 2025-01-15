@@ -10,4 +10,11 @@ public class OneDArray {
     public void setEither(Either either) {
         this.either = either;
     }
+
+    @Override
+    public String toString() {
+        return "OneDArray{" +
+                "either=" + either +
+                '}';
+    }
 }

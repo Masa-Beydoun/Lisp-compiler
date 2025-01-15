@@ -25,9 +25,20 @@ public class Multiply {
 
     @Override
     public String toString() {
-        return "Multiply{" +
-                "parameters=" + parameters +
-                ", possibleNumbers=" + possibleNumbers +
-                '}';
+        StringBuilder result = new StringBuilder("Multiply{");
+        boolean firstField = true;
+
+        if (parameters != null) {
+            result.append("parameters=").append(parameters);
+            firstField = false;
+        }
+        if (possibleNumbers != null) {
+            if (!firstField) result.append(", ");
+            result.append("possibleNumbers=").append(possibleNumbers);
+        }
+
+        result.append('}');
+        return result.toString();
     }
+
 }

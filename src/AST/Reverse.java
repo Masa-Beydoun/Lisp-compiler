@@ -1,7 +1,7 @@
 package AST;
 
 public class Reverse {
-  QuoteForm quoteForm;
+    QuoteForm quoteForm;
 
     public QuoteForm getQuoteForm() {
         return quoteForm;
@@ -13,8 +13,6 @@ public class Reverse {
 
     @Override
     public String toString() {
-        return "Reverse{" +
-                "quoteForm=" + quoteForm +
-                '}';
+        return "Reverse{" + "quoteForm=" + quoteForm + '}';
     }
 }

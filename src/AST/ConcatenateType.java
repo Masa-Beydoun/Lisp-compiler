@@ -30,4 +30,32 @@ public class ConcatenateType {
     public void setListConcatenate(ListConcatenate listConcatenate) {
         this.listConcatenate = listConcatenate;
     }
+
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder("ConcatenateType{");
+        boolean firstField = true;
+
+        if (stringConcatenate != null) {
+            result.append("stringConcatenate=").append(stringConcatenate);
+            firstField = false;
+        }
+        if (vectorConcatenate != null) {
+            if (!firstField) result.append(", ");
+            result.append("vectorConcatenate=").append(vectorConcatenate);
+            firstField = false;
+        }
+        if (listConcatenate != null) {
+            if (!firstField) result.append(", ");
+            result.append("listConcatenate=").append(listConcatenate);
+        }
+
+        result.append('}');
+        return result.toString();
+    }
+
+
+
+
 }

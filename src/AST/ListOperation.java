@@ -31,10 +31,25 @@ public class ListOperation {
 
     @Override
     public String toString() {
-        return "ListOperation{" +
-                "list=" + listClass +
-                ", push=" + push +
-                ", pop=" + pop +
-                '}';
+        StringBuilder result = new StringBuilder("ListOperation{");
+        boolean firstField = true;
+
+        if (listClass != null) {
+            result.append("list=").append(listClass);
+            firstField = false;
+        }
+        if (push != null) {
+            if (!firstField) result.append(", ");
+            result.append("push=").append(push);
+            firstField = false;
+        }
+        if (pop != null) {
+            if (!firstField) result.append(", ");
+            result.append("pop=").append(pop);
+        }
+
+        result.append('}');
+        return result.toString();
     }
+
 }

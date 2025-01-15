@@ -31,10 +31,25 @@ public class ConditionHelper {
 
     @Override
     public String toString() {
-        return "ConditionHelper{" +
-                "t='" + t + '\'' +
-                ", Nil='" + Nil + '\'' +
-                ", possibleNumberHelper=" + possibleNumberHelper +
-                '}';
+        StringBuilder result = new StringBuilder("ConditionHelper{");
+        boolean firstField = true;
+
+        if (t != null) {
+            result.append("t='").append(t).append('\'');
+            firstField = false;
+        }
+        if (Nil != null) {
+            if (!firstField) result.append(", ");
+            result.append("Nil='").append(Nil).append('\'');
+            firstField = false;
+        }
+        if (possibleNumberHelper != null) {
+            if (!firstField) result.append(", ");
+            result.append("possibleNumberHelper=").append(possibleNumberHelper);
+        }
+
+        result.append('}');
+        return result.toString();
     }
+
 }

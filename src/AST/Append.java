@@ -22,9 +22,20 @@ public class Append {
 
     @Override
     public String toString() {
-        return "Append{" +
-                "quoteForm1=" + quoteForm1 +
-                ", quoteForm2=" + quoteForm2 +
-                '}';
+        StringBuilder result = new StringBuilder("Append{");
+        boolean firstField = true;
+
+        if (quoteForm1 != null) {
+            result.append("quoteForm1=").append(quoteForm1);
+            firstField = false;
+        }
+        if (quoteForm2 != null) {
+            if (!firstField) result.append(", ");
+            result.append("quoteForm2=").append(quoteForm2);
+        }
+
+        result.append('}');
+        return result.toString();
     }
+
 }

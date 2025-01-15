@@ -33,10 +33,25 @@ public class LetStar {
 
     @Override
     public String toString() {
-        return "LetStar{" +
-                "binding=" + binding +
-                ", variableBinding=" + variableBinding +
-                ", nilBinding=" + nilBinding +
-                '}';
+        StringBuilder result = new StringBuilder("LetStar{");
+        boolean firstField = true;
+
+        if (binding != null) {
+            result.append("binding=").append(binding);
+            firstField = false;
+        }
+        if (variableBinding != null) {
+            if (!firstField) result.append(", ");
+            result.append("variableBinding=").append(variableBinding);
+            firstField = false;
+        }
+        if (nilBinding != null) {
+            if (!firstField) result.append(", ");
+            result.append("nilBinding=").append(nilBinding);
+        }
+
+        result.append('}');
+        return result.toString();
     }
+
 }

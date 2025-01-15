@@ -23,9 +23,20 @@ public class Defvar {
 
     @Override
     public String toString() {
-        return "Defvar{" +
-                "name='" + name + '\'' +
-                ", possibleNumberHelper=" + possibleNumberHelper +
-                '}';
+        StringBuilder result = new StringBuilder("Defvar{");
+        boolean firstField = true;
+
+        if (name != null) {
+            result.append("name='").append(name).append('\'');
+            firstField = false;
+        }
+        if (possibleNumberHelper != null) {
+            if (!firstField) result.append(", ");
+            result.append("possibleNumberHelper=").append(possibleNumberHelper);
+        }
+
+        result.append('}');
+        return result.toString();
     }
+
 }

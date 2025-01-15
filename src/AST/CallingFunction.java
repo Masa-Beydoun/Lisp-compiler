@@ -22,4 +22,24 @@ public class CallingFunction {
     public void setKeywordNumberHelperList(List<KeywordNumberHelper> keywordNumberHelperList) {
         this.keywordNumberHelperList = keywordNumberHelperList;
     }
+
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder("CallingFunction{");
+        boolean firstField = true;
+
+        if (name != null) {
+            result.append("name='").append(name).append('\'');
+            firstField = false;
+        }
+        if (keywordNumberHelperList != null) {
+            if (!firstField) result.append(", ");
+            result.append("keywordNumberHelperList=").append(keywordNumberHelperList);
+        }
+
+        result.append('}');
+        return result.toString();
+    }
+
 }

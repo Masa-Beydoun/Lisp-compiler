@@ -26,18 +26,6 @@ public class Cons {
         this.null2 = null2;
     }
 
-    @Override
-    public String toString() {
-        return "Cons{" +
-                "possibleNumberHelper1=" + possibleNumberHelper1 +
-                ", possibleNumberHelper2=" + possibleNumberHelper2 +
-                ", null1=" + null1 +
-                ", null2=" + null2 +
-                '}';
-    }
-
-
-
     public void setPossibleNumberHelper1(PossibleNumberHelper possibleNumberHelper1) {
         this.possibleNumberHelper1 = possibleNumberHelper1;
     }
@@ -51,6 +39,33 @@ public class Cons {
     }
 
 
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder("Cons{");
+        boolean firstField = true;
+
+        if (possibleNumberHelper1 != null) {
+            result.append("possibleNumberHelper1=").append(possibleNumberHelper1);
+            firstField = false;
+        }
+        if (possibleNumberHelper2 != null) {
+            if (!firstField) result.append(", ");
+            result.append("possibleNumberHelper2=").append(possibleNumberHelper2);
+            firstField = false;
+        }
+        if (null1 != null) {
+            if (!firstField) result.append(", ");
+            result.append("null1=").append(null1);
+            firstField = false;
+        }
+        if (null2 != null) {
+            if (!firstField) result.append(", ");
+            result.append("null2=").append(null2);
+        }
+
+        result.append('}');
+        return result.toString();
+    }
 
 
 }

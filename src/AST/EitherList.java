@@ -13,4 +13,12 @@ public class EitherList {
     public void setChars(List<String> chars) {
         this.chars = chars;
     }
+
+
+    @Override
+    public String toString() {
+        return "EitherList{" +
+                "chars=" + chars +
+                '}';
+    }
 }

@@ -31,10 +31,25 @@ public class IdentifierValueQuotePair {
 
     @Override
     public String toString() {
-        return "IdentifierValueAtomPair{" +
-                "identifier='" + identifier + '\'' +
-                ", valueHelper=" + valueHelper +
-                ", quoteForm=" + quoteForm +
-                '}';
+        StringBuilder result = new StringBuilder("IdentifierValueAtomPair{");
+        boolean firstField = true;
+
+        if (identifier != null) {
+            result.append("identifier='").append(identifier).append('\'');
+            firstField = false;
+        }
+        if (valueHelper != null) {
+            if (!firstField) result.append(", ");
+            result.append("valueHelper=").append(valueHelper);
+            firstField = false;
+        }
+        if (quoteForm != null) {
+            if (!firstField) result.append(", ");
+            result.append("quoteForm=").append(quoteForm);
+        }
+
+        result.append('}');
+        return result.toString();
     }
+
 }

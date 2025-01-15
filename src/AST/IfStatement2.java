@@ -6,13 +6,6 @@ public class IfStatement2 {
     ComparisonType comparisonType;
     ArrayList<ExpressionSequence> expressionSequences = new ArrayList<>();
 
-    @Override
-    public String toString() {
-        return "IfStatement2{" +
-                "comparisonType=" + comparisonType +
-                ", expressionSequences=" + expressionSequences +
-                '}';
-    }
 
     public ComparisonType getComparisonType() {
         return comparisonType;
@@ -29,4 +22,23 @@ public class IfStatement2 {
     public void setExpressionSequences(ArrayList<ExpressionSequence> expressionSequences) {
         this.expressionSequences = expressionSequences;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder("IfStatement2{");
+        boolean firstField = true;
+
+        if (comparisonType != null) {
+            result.append("comparisonType=").append(comparisonType);
+            firstField = false;
+        }
+        if (expressionSequences != null) {
+            if (!firstField) result.append(", ");
+            result.append("expressionSequences=").append(expressionSequences);
+        }
+
+        result.append('}');
+        return result.toString();
+    }
+
 }

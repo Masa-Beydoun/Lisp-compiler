@@ -23,9 +23,20 @@ public class Sin {
 
     @Override
     public String toString() {
-        return "Sin{" +
-                "number='" + number + '\'' +
-                ", possibleNumberHelper=" + possibleNumberHelper +
-                '}';
+        StringBuilder result = new StringBuilder("Sin{");
+        boolean firstField = true;
+
+        if (number != null) {
+            result.append("number='").append(number).append('\'');
+            firstField = false;
+        }
+        if (possibleNumberHelper != null) {
+            if (!firstField) result.append(", ");
+            result.append("possibleNumberHelper=").append(possibleNumberHelper);
+        }
+
+        result.append('}');
+        return result.toString();
     }
+
 }

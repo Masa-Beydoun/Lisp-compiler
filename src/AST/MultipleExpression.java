@@ -9,14 +9,20 @@ public class MultipleExpression {
         return program;
     }
 
-    @Override
-    public String toString() {
-        return "MultipleExpression{" +
-                "program=" + program +
-                '}';
-    }
-
     public void setProgram(ArrayList<Program> program) {
         this.program = program;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder("MultipleExpression{");
+        boolean firstField = true;
+
+        if (program != null) {
+            result.append("program=").append(program);
+        }
+
+        result.append('}');
+        return result.toString();
     }
 }

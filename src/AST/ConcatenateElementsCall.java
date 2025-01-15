@@ -28,4 +28,28 @@ public class ConcatenateElementsCall {
     public void setEither(Either either) {
         this.either = either;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder("ConcatenateElementsCall{");
+        boolean firstField = true;
+
+        if (elementAccess != null) {
+            result.append("elementAccess=").append(elementAccess);
+            firstField = false;
+        }
+        if (string != null) {
+            if (!firstField) result.append(", ");
+            result.append("string='").append(string).append('\'');
+            firstField = false;
+        }
+        if (either != null) {
+            if (!firstField) result.append(", ");
+            result.append("either=").append(either);
+        }
+
+        result.append('}');
+        return result.toString();
+    }
+
 }
