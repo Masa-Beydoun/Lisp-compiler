@@ -1,3 +1,5 @@
+package visitor;
+
 public class MyClass {
 
     public static double parseNumber(String text) {

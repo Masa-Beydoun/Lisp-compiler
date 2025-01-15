@@ -5,21 +5,24 @@ options { tokenVocab=LispLexer; }
 programs : (program | quote_form | forms)* | EOF;
 
 program: OPEN_PAREN(
-        setq | let |let_star |  minus | sum  | multiply  | div  | modulas  | floor  | ceiling  | sin  | cos  | tan  | sqrt  | exp  | expt
-         | cons | car | cdr | list | push | pop | evenp | defining_function | calling_functions | print | defvar | array_definition | array
-         | string | structure| assignment | if_statement | condition
-         | when | comparsion | function | defstruct
-         return | return_from | block | error | do | dotimes | dolist | loop |  funcall | apply | mapcar | lambda_expression |
-         sort | stable_sort | temporary_list
-         true | cond
+        setq | let |let_star |  cons | car | cdr | print | defvar | array| string | structure| assignment
+        | if_statement | condition | when | comparsion | function | defstruct  | return | return_from | block
+        | error | do |  funcall | apply | mapcar | lambda_expression | temporary_list | true | cond | case
+        | iteration_operation | function_operation | math_operation |list_operation | sort_operation
+        | eq | append | reverse | member | find  | subsetp | intersection | union | set_difference
          ) CLOSE_PAREN;
 
+math_operation: minus | sum  | multiply  | div  | modulas  | floor  | ceiling  | sin  | cos  | tan  | sqrt  | exp  | expt|evenp ;
+list_operation:list | push | pop;
+function_operation: defining_function  | calling_functions;
+sort_operation: sort | stable_sort ;
+iteration_operation : dotimes |dolist |loop ;
 
 sum returns [double result]
     : PLUS x=NUMBER y+=NUMBER+ {
-        $result = MyClass.parseNumber($x.text);
+        $result = visitor.MyClass.parseNumber($x.text);
                 for (Token num : $y) {
-            $result += MyClass.parseNumber(num.getText());
+            $result += visitor.MyClass.parseNumber(num.getText());
         }
         System.out.println("Sum is: " + $result);
     }
@@ -27,27 +30,27 @@ sum returns [double result]
      PLUS possible_number_helper possible_number_helper+;
 minus returns [double result]
     : MINUS x=NUMBER y+=NUMBER+ {
-        $result = MyClass.parseNumber($x.text);
+        $result = visitor.MyClass.parseNumber($x.text);
         for (Token num : $y) {
-            $result -= MyClass.parseNumber(num.getText());
+            $result -= visitor.MyClass.parseNumber(num.getText());
         }
         System.out.println("minus is: " + $result);
     }
     | MINUS possible_number_helper possible_number_helper+;
 multiply returns [double result]
     : MULTIPLY x=NUMBER y+=NUMBER+ {
-        $result = MyClass.parseNumber($x.text);
+        $result = visitor.MyClass.parseNumber($x.text);
         for (Token num : $y) {
-            $result *= MyClass.parseNumber(num.getText());
+            $result *= visitor.MyClass.parseNumber(num.getText());
         }
         System.out.println("multiply is: " + $result);
     }
     |MULTIPLY possible_number_helper possible_number_helper+;
 div returns [double result]
     : DIV x=NUMBER y+=NUMBER+ {
-        $result = MyClass.parseNumber($x.text);
+        $result = visitor.MyClass.parseNumber($x.text);
         for (Token num : $y) {
-            $result /= MyClass.parseNumber(num.getText());
+            $result /= visitor.MyClass.parseNumber(num.getText());
         }
         System.out.println("div is: " + $result);
     }
@@ -73,38 +76,38 @@ ceiling returns [int result]
          |CEILING possible_number_helper;
 sin returns [double result]
          : SIN x=NUMBER  {
-             $result = Math.sin(MyClass.parseNumber($x.text));
+             $result = Math.sin(visitor.MyClass.parseNumber($x.text));
              System.out.println("sin is: " + $result);
          }
          |SIN possible_number_helper;
 cos returns [double result]
          : COS x=NUMBER  {
-             $result = Math.cos(MyClass.parseNumber($x.text));
+             $result = Math.cos(visitor.MyClass.parseNumber($x.text));
              System.out.println("cos is: " + $result);
          }
          |COS possible_number_helper;
 tan returns [double result]
          : TAN x=NUMBER  {
-             $result = Math.tan(MyClass.parseNumber($x.text));
+             $result = Math.tan(visitor.MyClass.parseNumber($x.text));
              System.out.println("tan is: " + $result);
          }
          |TAN possible_number_helper;
 sqrt returns [double result]
          : SQRT x=NUMBER  {
-             $result = Math.sqrt(MyClass.parseNumber($x.text));
+             $result = Math.sqrt(visitor.MyClass.parseNumber($x.text));
              System.out.println("sqrt is: " + $result);
          }
          |SQRT possible_number_helper;
 exp returns [double result]
          : EXP x=NUMBER  {
-             $result = Math.exp(MyClass.parseNumber($x.text));
+             $result = Math.exp(visitor.MyClass.parseNumber($x.text));
              System.out.println("exp is: " + $result);
          }
          |EXP possible_number_helper;
 expt returns [double result]
          : EXPT x=NUMBER  y=NUMBER{
              System.out.println("in expt");
-             $result = Math.pow(MyClass.parseNumber($x.text),MyClass.parseNumber($y.text));
+             $result = Math.pow(visitor.MyClass.parseNumber($x.text),visitor.MyClass.parseNumber($y.text));
              System.out.println("power is: " + $result);
          }
          |EXPT possible_number_helper possible_number_helper;
@@ -116,7 +119,7 @@ car: CAR possible_number_helper ;
 cdr: CDR possible_number_helper ;
 evenp returns [int result]:
         EVENP x=NUMBER {
-            $result = (MyClass.isEven(Integer.parseInt($x.text))) ? T : NIL;
+            $result = (visitor.MyClass.isEven(Integer.parseInt($x.text))) ? T : NIL;
             System.out.println("Is the number even? " + ($result == T ? "True" : "False"));
         }
         |EVENP IDENTIFIER;
@@ -135,20 +138,16 @@ value_helper2: CHAR_LITERAL| atom_helper OPEN_PAREN value_helper2+ CLOSE_PAREN| 
 either : possible_number_helper | SINGLE_QUOTE;
 function_form: HASH_QUOTE atom_helper | FUNCTION atom_helper ;
 quote_form: SINGLE_QUOTE (atom_helper | (OPEN_PAREN atom_helper+ CLOSE_PAREN)) |  QUOTE OPEN_PAREN (atom_helper)* CLOSE_PAREN;  //TODO
-defining_function :  DEFUN IDENTIFIER OPEN_PAREN IDENTIFIER* (KEY (binding | IDENTIFIER)*)? (REST (binding | IDENTIFIER)*)? (OPTIONAL (binding | IDENTIFIER)*)? CLOSE_PAREN (atom_helper)+;
-calling_functions :  IDENTIFIER ((KEYWORD)? NUMBER)* ;
-defvar: DEFVAR SPECIAL_VARIABLE possible_number_helper;
-condition_helper:possible_number_helper | T | NIL;
+
 //<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>
 binding: OPEN_PAREN variables value_helper CLOSE_PAREN ;
 variable_binding: OPEN_PAREN variables variables CLOSE_PAREN ;
 nil_binding : OPEN_PAREN variables NIL CLOSE_PAREN ;
-//bindings_helper: (binding_helper | simple_binding | special_binding)+ ;
-//binding_helper: OPEN_PAREN IDENTIFIER value_helper CLOSE_PAREN ;
-//simple_binding: IDENTIFIER value_helper ;
-//special_binding:  SPECIAL_VARIABLE value_helper;
 //<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>
+defining_function :  DEFUN IDENTIFIER OPEN_PAREN IDENTIFIER* (KEY (binding | IDENTIFIER)*)? (REST (binding | IDENTIFIER)*)? (OPTIONAL (binding | IDENTIFIER)*)? CLOSE_PAREN (atom_helper)+;
+calling_functions :  IDENTIFIER ((KEYWORD)? NUMBER)* ;
 
+condition_helper:possible_number_helper | T | NIL;
 true : T either ;
 temporary_list : either*;
 
@@ -161,7 +160,7 @@ loop : LOOP (program)* ;
 do : DO OPEN_PAREN iteration_specs* CLOSE_PAREN OPEN_PAREN (termination_condition (program)* ) CLOSE_PAREN ;
 iteration_specs : OPEN_PAREN IDENTIFIER NUMBER NUMBER? (program)* CLOSE_PAREN+ ;
 termination_condition : OPEN_PAREN condition IDENTIFIER? CLOSE_PAREN ;
-
+defvar: DEFVAR SPECIAL_VARIABLE possible_number_helper;
 //
 ////Non-local Exits
 return : RETURN either? ;
@@ -261,6 +260,17 @@ multiple_expression : OPEN_PAREN PROGN (program)* CLOSE_PAREN ;
 cond : COND (cond_exp)*;
 cond_exp : program | OPEN_PAREN (program)* either* CLOSE_PAREN  ;
 ////////////////////////////////////////////////
-//case : CASE IDENTIFIER case_exp* ;
-//case_exp :  OPEN_PAREN (program)* either* CLOSE_PAREN  ;
+case : CASE IDENTIFIER case_exp* ;
+case_exp :  OPEN_PAREN (program)* either* CLOSE_PAREN  ;
 //////////////////////////////////////////////////////////////////////////////////
+
+
+eq : EQ  quote_form quote_form;
+append : APPEND quote_form quote_form ;
+reverse : REVERSE quote_form ;
+member : MEMBER quote_form quote_form ;
+find : FIND quote_form quote_form | FIND quote_form list;
+subsetp : SUBSETP quote_form quote_form ;
+intersection : INTERSECTION quote_form quote_form ;
+union :UNION quote_form quote_form;
+set_difference :SETDIFFERENCE quote_form quote_form;

@@ -1,3 +1,4 @@
+import AST.Programs;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
@@ -29,9 +30,13 @@ public class Main {
             LispLexer lexer = new LispLexer(charStream);
             CommonTokenStream tokens = new CommonTokenStream(lexer);
             LispParser parser = new LispParser(tokens);
-
             ParseTree tree = parser.programs();
-            System.out.println(tree.toStringTree(parser));
+            System.out.println("parse tree" + tree.toStringTree(parser));
+            // Create an instance of your visitor
+            VisitorClass visitor = new VisitorClass();
+            Programs programs =(Programs) visitor.visit(tree);
+            System.out.println(programs);
+
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {

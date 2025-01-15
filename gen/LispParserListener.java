@@ -27,6 +27,56 @@ public interface LispParserListener extends ParseTreeListener {
 	 */
 	void exitProgram(LispParser.ProgramContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link LispParser#math_operation}.
+	 * @param ctx the parse tree
+	 */
+	void enterMath_operation(LispParser.Math_operationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LispParser#math_operation}.
+	 * @param ctx the parse tree
+	 */
+	void exitMath_operation(LispParser.Math_operationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LispParser#list_operation}.
+	 * @param ctx the parse tree
+	 */
+	void enterList_operation(LispParser.List_operationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LispParser#list_operation}.
+	 * @param ctx the parse tree
+	 */
+	void exitList_operation(LispParser.List_operationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LispParser#function_operation}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunction_operation(LispParser.Function_operationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LispParser#function_operation}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunction_operation(LispParser.Function_operationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LispParser#sort_operation}.
+	 * @param ctx the parse tree
+	 */
+	void enterSort_operation(LispParser.Sort_operationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LispParser#sort_operation}.
+	 * @param ctx the parse tree
+	 */
+	void exitSort_operation(LispParser.Sort_operationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LispParser#iteration_operation}.
+	 * @param ctx the parse tree
+	 */
+	void enterIteration_operation(LispParser.Iteration_operationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LispParser#iteration_operation}.
+	 * @param ctx the parse tree
+	 */
+	void exitIteration_operation(LispParser.Iteration_operationContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link LispParser#sum}.
 	 * @param ctx the parse tree
 	 */
@@ -367,46 +417,6 @@ public interface LispParserListener extends ParseTreeListener {
 	 */
 	void exitQuote_form(LispParser.Quote_formContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link LispParser#defining_function}.
-	 * @param ctx the parse tree
-	 */
-	void enterDefining_function(LispParser.Defining_functionContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link LispParser#defining_function}.
-	 * @param ctx the parse tree
-	 */
-	void exitDefining_function(LispParser.Defining_functionContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link LispParser#calling_functions}.
-	 * @param ctx the parse tree
-	 */
-	void enterCalling_functions(LispParser.Calling_functionsContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link LispParser#calling_functions}.
-	 * @param ctx the parse tree
-	 */
-	void exitCalling_functions(LispParser.Calling_functionsContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link LispParser#defvar}.
-	 * @param ctx the parse tree
-	 */
-	void enterDefvar(LispParser.DefvarContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link LispParser#defvar}.
-	 * @param ctx the parse tree
-	 */
-	void exitDefvar(LispParser.DefvarContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link LispParser#condition_helper}.
-	 * @param ctx the parse tree
-	 */
-	void enterCondition_helper(LispParser.Condition_helperContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link LispParser#condition_helper}.
-	 * @param ctx the parse tree
-	 */
-	void exitCondition_helper(LispParser.Condition_helperContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link LispParser#binding}.
 	 * @param ctx the parse tree
 	 */
@@ -436,6 +446,36 @@ public interface LispParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitNil_binding(LispParser.Nil_bindingContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LispParser#defining_function}.
+	 * @param ctx the parse tree
+	 */
+	void enterDefining_function(LispParser.Defining_functionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LispParser#defining_function}.
+	 * @param ctx the parse tree
+	 */
+	void exitDefining_function(LispParser.Defining_functionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LispParser#calling_functions}.
+	 * @param ctx the parse tree
+	 */
+	void enterCalling_functions(LispParser.Calling_functionsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LispParser#calling_functions}.
+	 * @param ctx the parse tree
+	 */
+	void exitCalling_functions(LispParser.Calling_functionsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LispParser#condition_helper}.
+	 * @param ctx the parse tree
+	 */
+	void enterCondition_helper(LispParser.Condition_helperContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LispParser#condition_helper}.
+	 * @param ctx the parse tree
+	 */
+	void exitCondition_helper(LispParser.Condition_helperContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link LispParser#true}.
 	 * @param ctx the parse tree
@@ -516,6 +556,16 @@ public interface LispParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitTermination_condition(LispParser.Termination_conditionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LispParser#defvar}.
+	 * @param ctx the parse tree
+	 */
+	void enterDefvar(LispParser.DefvarContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LispParser#defvar}.
+	 * @param ctx the parse tree
+	 */
+	void exitDefvar(LispParser.DefvarContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link LispParser#return}.
 	 * @param ctx the parse tree
@@ -1076,4 +1126,114 @@ public interface LispParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitCond_exp(LispParser.Cond_expContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LispParser#case}.
+	 * @param ctx the parse tree
+	 */
+	void enterCase(LispParser.CaseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LispParser#case}.
+	 * @param ctx the parse tree
+	 */
+	void exitCase(LispParser.CaseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LispParser#case_exp}.
+	 * @param ctx the parse tree
+	 */
+	void enterCase_exp(LispParser.Case_expContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LispParser#case_exp}.
+	 * @param ctx the parse tree
+	 */
+	void exitCase_exp(LispParser.Case_expContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LispParser#eq}.
+	 * @param ctx the parse tree
+	 */
+	void enterEq(LispParser.EqContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LispParser#eq}.
+	 * @param ctx the parse tree
+	 */
+	void exitEq(LispParser.EqContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LispParser#append}.
+	 * @param ctx the parse tree
+	 */
+	void enterAppend(LispParser.AppendContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LispParser#append}.
+	 * @param ctx the parse tree
+	 */
+	void exitAppend(LispParser.AppendContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LispParser#reverse}.
+	 * @param ctx the parse tree
+	 */
+	void enterReverse(LispParser.ReverseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LispParser#reverse}.
+	 * @param ctx the parse tree
+	 */
+	void exitReverse(LispParser.ReverseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LispParser#member}.
+	 * @param ctx the parse tree
+	 */
+	void enterMember(LispParser.MemberContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LispParser#member}.
+	 * @param ctx the parse tree
+	 */
+	void exitMember(LispParser.MemberContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LispParser#find}.
+	 * @param ctx the parse tree
+	 */
+	void enterFind(LispParser.FindContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LispParser#find}.
+	 * @param ctx the parse tree
+	 */
+	void exitFind(LispParser.FindContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LispParser#subsetp}.
+	 * @param ctx the parse tree
+	 */
+	void enterSubsetp(LispParser.SubsetpContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LispParser#subsetp}.
+	 * @param ctx the parse tree
+	 */
+	void exitSubsetp(LispParser.SubsetpContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LispParser#intersection}.
+	 * @param ctx the parse tree
+	 */
+	void enterIntersection(LispParser.IntersectionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LispParser#intersection}.
+	 * @param ctx the parse tree
+	 */
+	void exitIntersection(LispParser.IntersectionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LispParser#union}.
+	 * @param ctx the parse tree
+	 */
+	void enterUnion(LispParser.UnionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LispParser#union}.
+	 * @param ctx the parse tree
+	 */
+	void exitUnion(LispParser.UnionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LispParser#set_difference}.
+	 * @param ctx the parse tree
+	 */
+	void enterSet_difference(LispParser.Set_differenceContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LispParser#set_difference}.
+	 * @param ctx the parse tree
+	 */
+	void exitSet_difference(LispParser.Set_differenceContext ctx);
 }
