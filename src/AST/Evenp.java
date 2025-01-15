@@ -2,6 +2,15 @@ package AST;
 
 public class Evenp {
     String number;
+
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
+    }
+
     String identifier;
 
     public String getNumber() {

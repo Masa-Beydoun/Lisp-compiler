@@ -18,7 +18,7 @@ MULTI_LINE_COMMENT: '#|' .*? '|#' -> skip;
 CHAR_LITERAL: HASH_TAG BACKSLASH ( [a-zA-Z0-9] | 'newline' | 'space' | 'tab' );
 CHAR : 'char';
 STRING_WORD : 'string';
-LIST: 'list';
+LIST: 'listClass';
 CONCATENATE : 'concatenate';
 VECTOR: 'vector';
 BACKSLASH : '\\';

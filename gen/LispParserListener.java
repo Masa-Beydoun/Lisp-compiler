@@ -207,6 +207,16 @@ public interface LispParserListener extends ParseTreeListener {
 	 */
 	void exitExpt(LispParser.ExptContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link LispParser#identifier_value_qoute_pair}.
+	 * @param ctx the parse tree
+	 */
+	void enterIdentifier_value_qoute_pair(LispParser.Identifier_value_qoute_pairContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LispParser#identifier_value_qoute_pair}.
+	 * @param ctx the parse tree
+	 */
+	void exitIdentifier_value_qoute_pair(LispParser.Identifier_value_qoute_pairContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link LispParser#setq}.
 	 * @param ctx the parse tree
 	 */
@@ -447,6 +457,36 @@ public interface LispParserListener extends ParseTreeListener {
 	 */
 	void exitNil_binding(LispParser.Nil_bindingContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link LispParser#key_function}.
+	 * @param ctx the parse tree
+	 */
+	void enterKey_function(LispParser.Key_functionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LispParser#key_function}.
+	 * @param ctx the parse tree
+	 */
+	void exitKey_function(LispParser.Key_functionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LispParser#rest_function}.
+	 * @param ctx the parse tree
+	 */
+	void enterRest_function(LispParser.Rest_functionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LispParser#rest_function}.
+	 * @param ctx the parse tree
+	 */
+	void exitRest_function(LispParser.Rest_functionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LispParser#option_function}.
+	 * @param ctx the parse tree
+	 */
+	void enterOption_function(LispParser.Option_functionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LispParser#option_function}.
+	 * @param ctx the parse tree
+	 */
+	void exitOption_function(LispParser.Option_functionContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link LispParser#defining_function}.
 	 * @param ctx the parse tree
 	 */
@@ -456,6 +496,16 @@ public interface LispParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitDefining_function(LispParser.Defining_functionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LispParser#keyword_number_helper}.
+	 * @param ctx the parse tree
+	 */
+	void enterKeyword_number_helper(LispParser.Keyword_number_helperContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LispParser#keyword_number_helper}.
+	 * @param ctx the parse tree
+	 */
+	void exitKeyword_number_helper(LispParser.Keyword_number_helperContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link LispParser#calling_functions}.
 	 * @param ctx the parse tree

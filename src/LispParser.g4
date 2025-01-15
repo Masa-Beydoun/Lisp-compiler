@@ -5,11 +5,16 @@ options { tokenVocab=LispLexer; }
 programs : (program | quote_form | forms)* | EOF;
 
 program: OPEN_PAREN(
-        setq | let |let_star |  cons | car | cdr | print | defvar | array| string | structure| assignment
-        | if_statement | condition | when | comparsion | function | defstruct  | return | return_from | block
-        | error | do |  funcall | apply | mapcar | lambda_expression | temporary_list | true | cond | case
-        | iteration_operation | function_operation | math_operation |list_operation | sort_operation
-        | eq | append | reverse | member | find  | subsetp | intersection | union | set_difference
+        setq | let | let_star | function_operation |math_operation |list_operation | print |eq | append | reverse | member | find  | subsetp | intersection | union | set_difference |
+        | if_statement | condition | comparsion | cons | car | cdr
+
+
+        | error | do |  funcall | apply | mapcar | lambda_expression | iteration_operation
+
+
+        | defvar | array| string  // masa
+        | when  | function | defstruct  | return | return_from  // rahaf
+        | temporary_list | true | cond | case  |sort_operation| block | assignment | structure// yara
          ) CLOSE_PAREN;
 
 math_operation: minus | sum  | multiply  | div  | modulas  | floor  | ceiling  | sin  | cos  | tan  | sqrt  | exp  | expt|evenp ;
@@ -111,7 +116,10 @@ expt returns [double result]
              System.out.println("power is: " + $result);
          }
          |EXPT possible_number_helper possible_number_helper;
-setq: SETQ (IDENTIFIER (value_helper | quote_form))+ ;
+
+         //////////////////////////////////////////
+identifier_value_qoute_pair: (IDENTIFIER (value_helper | quote_form));
+setq: SETQ (identifier_value_qoute_pair)+ ;
 let: LET OPEN_PAREN (binding | variable_binding | nil_binding)+ CLOSE_PAREN programs ;
 let_star: LET_STAR OPEN_PAREN (binding | variable_binding | nil_binding)+ CLOSE_PAREN programs ;
 cons: CONS (possible_number_helper | NIL ) (possible_number_helper | NIL)  ;
@@ -144,8 +152,12 @@ binding: OPEN_PAREN variables value_helper CLOSE_PAREN ;
 variable_binding: OPEN_PAREN variables variables CLOSE_PAREN ;
 nil_binding : OPEN_PAREN variables NIL CLOSE_PAREN ;
 //<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>
-defining_function :  DEFUN IDENTIFIER OPEN_PAREN IDENTIFIER* (KEY (binding | IDENTIFIER)*)? (REST (binding | IDENTIFIER)*)? (OPTIONAL (binding | IDENTIFIER)*)? CLOSE_PAREN (atom_helper)+;
-calling_functions :  IDENTIFIER ((KEYWORD)? NUMBER)* ;
+key_function:KEY (binding | IDENTIFIER);
+rest_function: REST (binding | IDENTIFIER);
+option_function:OPTIONAL (binding | IDENTIFIER);
+defining_function :  DEFUN IDENTIFIER OPEN_PAREN IDENTIFIER* key_function* rest_function* option_function* CLOSE_PAREN (atom_helper)+;
+keyword_number_helper:(KEYWORD)? NUMBER;
+calling_functions :  IDENTIFIER (keyword_number_helper)* ;
 
 condition_helper:possible_number_helper | T | NIL;
 true : T either ;

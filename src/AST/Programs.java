@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class Programs extends  NodeAST{
 
-ArrayList<Program> programs;
+    ArrayList<Program> programs;
 
-public Programs(){
+    public Programs(){
     programs = new ArrayList<>();
 }
 
