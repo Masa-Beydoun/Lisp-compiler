@@ -646,6 +646,24 @@ public interface LispParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCreate_an_instance(LispParser.Create_an_instanceContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link LispParser#create_an_instance1}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCreate_an_instance1(LispParser.Create_an_instance1Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link LispParser#create_an_instance2}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCreate_an_instance2(LispParser.Create_an_instance2Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link LispParser#colorPair}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitColorPair(LispParser.ColorPairContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link LispParser#access}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -729,6 +747,12 @@ public interface LispParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitCond_exp(LispParser.Cond_expContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LispParser#cond_exp1}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCond_exp1(LispParser.Cond_exp1Context ctx);
 	/**
 	 * Visit a parse tree produced by {@link LispParser#case}.
 	 * @param ctx the parse tree

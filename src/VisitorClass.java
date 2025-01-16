@@ -1,3 +1,4 @@
+import AST.Error;
 import AST.*;
 import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.tree.TerminalNode;
@@ -284,6 +285,11 @@ public class VisitorClass extends LispParserBaseVisitor<Object> {
                 let.getNilBinding().add(visitNil_binding(nil));
             }
         }
+        if (ctx.STRING() != null) {
+            for (TerminalNode p : ctx.STRING()) {
+                let.getStringList().add(p.getText());
+            }
+        }
         return let;
     }
 
@@ -303,6 +309,11 @@ public class VisitorClass extends LispParserBaseVisitor<Object> {
         if (ctx.nil_binding() != null) {
             for (LispParser.Nil_bindingContext nil : ctx.nil_binding()) {
                 let.getNilBinding().add(visitNil_binding(nil));
+            }
+        }
+        if (ctx.STRING() != null) {
+            for (TerminalNode p : ctx.STRING()) {
+                let.getStringList().add(p.getText());
             }
         }
         return let;
@@ -675,7 +686,7 @@ public class VisitorClass extends LispParserBaseVisitor<Object> {
         if (ctx.quote_form().get(0) != null) {
             append.setQuoteForm1(visitQuote_form(ctx.quote_form().get(0)));
         }
-        if (ctx.quote_form().get(1)!= null) {
+        if (ctx.quote_form().get(1) != null) {
             append.setQuoteForm2(visitQuote_form(ctx.quote_form().get(1)));
         }
         return append;
@@ -683,7 +694,7 @@ public class VisitorClass extends LispParserBaseVisitor<Object> {
 
     @Override
     public Reverse visitReverse(LispParser.ReverseContext ctx) {
-        Reverse reverse = new Reverse() ;
+        Reverse reverse = new Reverse();
         if (ctx.quote_form() != null) {
             reverse.setQuoteForm(visitQuote_form(ctx.quote_form()));
         }
@@ -693,10 +704,10 @@ public class VisitorClass extends LispParserBaseVisitor<Object> {
     @Override
     public Member visitMember(LispParser.MemberContext ctx) {
         Member member = new Member();
-        if(ctx.quote_form().get(0) != null){
+        if (ctx.quote_form().get(0) != null) {
             member.setQuoteForm1(visitQuote_form(ctx.quote_form().get(0)));
         }
-        if(ctx.quote_form().get(1) != null){
+        if (ctx.quote_form().get(1) != null) {
             member.setQuoteForm1(visitQuote_form(ctx.quote_form().get(1)));
         }
         return member;
@@ -705,10 +716,10 @@ public class VisitorClass extends LispParserBaseVisitor<Object> {
     @Override
     public Subsetp visitSubsetp(LispParser.SubsetpContext ctx) {
         Subsetp subsetp = new Subsetp();
-        if(ctx.quote_form().get(0) != null){
+        if (ctx.quote_form().get(0) != null) {
             subsetp.setQuoteForm1(visitQuote_form(ctx.quote_form().get(0)));
         }
-        if(ctx.quote_form().get(1) != null){
+        if (ctx.quote_form().get(1) != null) {
             subsetp.setQuoteForm1(visitQuote_form(ctx.quote_form().get(1)));
         }
         return subsetp;
@@ -717,10 +728,10 @@ public class VisitorClass extends LispParserBaseVisitor<Object> {
     @Override
     public Intersection visitIntersection(LispParser.IntersectionContext ctx) {
         Intersection intersection = new Intersection();
-        if(ctx.quote_form().get(0) != null){
+        if (ctx.quote_form().get(0) != null) {
             intersection.setQuoteForm1(visitQuote_form(ctx.quote_form().get(0)));
         }
-        if(ctx.quote_form().get(1) != null){
+        if (ctx.quote_form().get(1) != null) {
             intersection.setQuoteForm1(visitQuote_form(ctx.quote_form().get(1)));
         }
         return intersection;
@@ -729,10 +740,10 @@ public class VisitorClass extends LispParserBaseVisitor<Object> {
     @Override
     public Union visitUnion(LispParser.UnionContext ctx) {
         Union union = new Union();
-        if(ctx.quote_form().get(0) != null){
+        if (ctx.quote_form().get(0) != null) {
             union.setQuoteForm1(visitQuote_form(ctx.quote_form().get(0)));
         }
-        if(ctx.quote_form().get(1) != null){
+        if (ctx.quote_form().get(1) != null) {
             union.setQuoteForm1(visitQuote_form(ctx.quote_form().get(1)));
         }
         return union;
@@ -741,13 +752,13 @@ public class VisitorClass extends LispParserBaseVisitor<Object> {
     @Override
     public Find visitFind(LispParser.FindContext ctx) {
         Find find = new Find();
-        if(ctx.quote_form().get(0) != null){
+        if (ctx.quote_form().get(0) != null) {
             find.setQuoteForm1(visitQuote_form(ctx.quote_form().get(0)));
         }
-        if(ctx.quote_form().get(1) != null){
+        if (ctx.quote_form().get(1) != null) {
             find.setQuoteForm1(visitQuote_form(ctx.quote_form().get(1)));
         }
-        if(ctx.list() != null){
+        if (ctx.list() != null) {
             find.setListClass(visitList(ctx.list()));
         }
         return find;
@@ -756,10 +767,10 @@ public class VisitorClass extends LispParserBaseVisitor<Object> {
     @Override
     public SetDifference visitSet_difference(LispParser.Set_differenceContext ctx) {
         SetDifference setDifference = new SetDifference();
-        if(ctx.quote_form().get(0) != null){
+        if (ctx.quote_form().get(0) != null) {
             setDifference.setQuoteForm1(visitQuote_form(ctx.quote_form().get(0)));
         }
-        if(ctx.quote_form().get(1) != null){
+        if (ctx.quote_form().get(1) != null) {
             setDifference.setQuoteForm1(visitQuote_form(ctx.quote_form().get(1)));
         }
         return setDifference;
@@ -768,19 +779,19 @@ public class VisitorClass extends LispParserBaseVisitor<Object> {
     @Override
     public Cons visitCons(LispParser.ConsContext ctx) {
         Cons cons = new Cons();
-        if(ctx.possible_number_helper().get(0) != null){
+        if (ctx.possible_number_helper().get(0) != null) {
             cons.setPossibleNumberHelper1(visitPossible_number_helper(ctx.possible_number_helper().get(0)));
         }
-        if(ctx.possible_number_helper().get(1) != null){
+        if (ctx.possible_number_helper().get(1) != null) {
             cons.setPossibleNumberHelper1(visitPossible_number_helper(ctx.possible_number_helper().get(1)));
         }
-        if(ctx.NIL().get(0) != null){
-            for(TerminalNode p  : ctx.NIL()){
+        if (ctx.NIL().get(0) != null) {
+            for (TerminalNode p : ctx.NIL()) {
                 cons.setNull1(p.getText());
             }
         }
-        if(ctx.NIL().get(1) != null){
-            for(TerminalNode p  : ctx.NIL()){
+        if (ctx.NIL().get(1) != null) {
+            for (TerminalNode p : ctx.NIL()) {
                 cons.setNull2(p.getText());
 
             }
@@ -861,6 +872,27 @@ public class VisitorClass extends LispParserBaseVisitor<Object> {
     }
 
     @Override
+    public TemporaryList visitTemporary_list(LispParser.Temporary_listContext ctx) {
+        TemporaryList temporaryList = new TemporaryList();
+        if (ctx.either() != null) {
+            for (LispParser.EitherContext p : ctx.either()) {
+                Either either = visitEither(p);
+                temporaryList.getEitherList().add(either);
+            }
+        }
+        return temporaryList;
+
+    }
+
+    @Override
+    public True visitTrue(LispParser.TrueContext ctx) {
+        True trueValue = new True();
+        trueValue.setTrue(ctx.T().getText());
+        trueValue.setEither(visitEither(ctx.either()));
+        return trueValue;
+    }
+
+    @Override
     public IfStatement1 visitIf_statement1(LispParser.If_statement1Context ctx) {
         IfStatement1 ifStatement1 = new IfStatement1();
         ifStatement1.setCondition1(visitCondition_helper(ctx.condition_helper(0)));
@@ -869,6 +901,194 @@ public class VisitorClass extends LispParserBaseVisitor<Object> {
 
         return ifStatement1;
     }
+
+    @Override
+    public ConditionExpression visitCond_exp(LispParser.Cond_expContext ctx) {
+        ConditionExpression cond = new ConditionExpression();
+        cond.setProgram(visitProgram(ctx.program()));
+        cond.setConditionExpression2(visitCond_exp1(ctx.cond_exp1()));
+        return cond;
+    }
+
+    @Override
+    public ConditionExpression2 visitCond_exp1(LispParser.Cond_exp1Context ctx) {
+        ConditionExpression2 cond = new ConditionExpression2();
+        if (ctx.program() != null) {
+            for (LispParser.ProgramContext p : ctx.program()) {
+                Program cond1 = visitProgram(p);
+                cond.getProgramList().add(cond1);
+            }
+        }
+        if (ctx.either() != null) {
+            for (LispParser.EitherContext p : ctx.either()) {
+                Either cond1 = visitEither(p);
+                cond.getEithers().add(cond1);
+            }
+        }
+
+        return cond;
+    }
+
+    @Override
+    public Case visitCase(LispParser.CaseContext ctx) {
+        Case case1 = new Case();
+        case1.setIdentifier(ctx.IDENTIFIER().getText());
+        for (LispParser.Case_expContext p : ctx.case_exp()) {
+            CaseExpression case2 = visitCase_exp(p);
+            case1.getCaseExpressions().add(case2);
+        }
+        return case1;
+    }
+
+    @Override
+    public CaseExpression visitCase_exp(LispParser.Case_expContext ctx) {
+        CaseExpression case1 = new CaseExpression();
+        if (ctx.program() != null) {
+            for (LispParser.ProgramContext p : ctx.program()) {
+                Program cond1 = visitProgram(p);
+                case1.getPrograms().add(cond1);
+            }
+        }
+        if (ctx.either() != null) {
+            for (LispParser.EitherContext p : ctx.either()) {
+                Either cond1 = visitEither(p);
+                case1.getEithers().add(cond1);
+            }
+        }
+        return case1;
+    }
+
+
+    @Override
+    public Block visitBlock(LispParser.BlockContext ctx) {
+        Block block = new Block();
+        if (ctx.program() != null) {
+            for (LispParser.ProgramContext p : ctx.program()) {
+                Program cond1 = visitProgram(p);
+                block.getPrograms().add(cond1);
+            }
+            if (ctx.IDENTIFIER() != null) {
+                ctx.IDENTIFIER().getText();
+            }
+            if (ctx.T() != null) {
+                ctx.T().getText();
+            }
+            if (ctx.NIL() != null) {
+                ctx.NIL().getText();
+            }
+        }
+        return block;
+    }
+
+    @Override
+    public Assignment visitAssignment(LispParser.AssignmentContext ctx) {
+        Assignment assignment = new Assignment();
+        if (ctx.setf_assignment() != null) {
+            assignment.setSetfAssignment(visitSetf_assignment(ctx.setf_assignment()));
+        }
+        if (ctx.setq_assignment() != null) {
+            assignment.setSetqAssignment(visitSetq_assignment(ctx.setq_assignment()));
+        }
+        return assignment;
+    }
+
+
+    @Override
+    public SetqAssignment visitSetq_assignment(LispParser.Setq_assignmentContext ctx) {
+        SetqAssignment setqAssignment = new SetqAssignment();
+        setqAssignment.getEither(visitEither(ctx.either()));
+        setqAssignment.setIdentifier(ctx.IDENTIFIER().getText());
+        return setqAssignment;
+    }
+
+    @Override
+    public SetfAssignment visitSetf_assignment(LispParser.Setf_assignmentContext ctx) {
+        SetfAssignment setfAssignment = new SetfAssignment();
+        setfAssignment.setEither1(visitEither(ctx.either(0)));
+        setfAssignment.setEither2(visitEither(ctx.either(1)));
+        return setfAssignment;
+    }
+
+    @Override
+    public Structure visitStructure(LispParser.StructureContext ctx) {
+        Structure structure = new Structure();
+        if (ctx.create_structures() != null) {
+            structure.setCreateStructure(visitCreate_structures(ctx.create_structures()));
+        }
+        if (ctx.create_an_instance() != null) {
+            structure.setCreateAnInstance(visitCreate_an_instance(ctx.create_an_instance()));
+        }
+        if (ctx.access() != null) {
+            structure.setAccess(visitAccess(ctx.access()));
+        }
+        return structure;
+    }
+
+    @Override
+    public Access visitAccess(LispParser.AccessContext ctx) {
+        Access access = new Access();
+        if (ctx.IDENTIFIER(0) != null) {
+            access.setIdentifier1(ctx.IDENTIFIER(0).getText());
+        }
+        if (ctx.IDENTIFIER(1) != null) {
+            access.setIdentifier2(ctx.IDENTIFIER(1).getText());
+        }
+
+        return access;
+    }
+
+    @Override
+    public CreateStructure visitCreate_structures(LispParser.Create_structuresContext ctx) {
+        CreateStructure createStructure = new CreateStructure();
+        for (TerminalNode identifierNode : ctx.IDENTIFIER()) {
+            createStructure.getIdentifiers().add(identifierNode.getText());
+        }
+        if (!ctx.IDENTIFIER().isEmpty()) {
+            createStructure.setIdentifier(ctx.IDENTIFIER(0).getText());
+        }
+        return createStructure;
+    }
+
+    @Override
+    public CreateAnInstance visitCreate_an_instance(LispParser.Create_an_instanceContext ctx) {
+        CreateAnInstance createAnInstance = new CreateAnInstance();
+        if (ctx.create_an_instance1() != null) {
+            createAnInstance.setCreateAnInstance1(visitCreate_an_instance1(ctx.create_an_instance1()));
+        }
+        if (ctx.create_an_instance2() != null) {
+            createAnInstance.setCreateAnInstance2(visitCreate_an_instance2(ctx.create_an_instance2()));
+        }
+        return createAnInstance;
+    }
+
+    @Override
+    public CreateAnInstance1 visitCreate_an_instance1(LispParser.Create_an_instance1Context ctx) {
+        CreateAnInstance1 createAnInstance1 = new CreateAnInstance1();
+        createAnInstance1.setEither(visitEither(ctx.either()));
+        return createAnInstance1;
+    }
+
+    @Override
+    public CreateAnInstance2 visitCreate_an_instance2(LispParser.Create_an_instance2Context ctx) {
+        CreateAnInstance2 createAnInstance2 = new CreateAnInstance2();
+        if (ctx.IDENTIFIER() != null) {
+            createAnInstance2.setIdentifier(ctx.IDENTIFIER().getText());
+        }
+        for (LispParser.ColorPairContext p : ctx.colorPair()) {
+            ColonPair colonPair = visitColorPair(p);
+            createAnInstance2.getColonPairs().add(colonPair);
+        }
+        return createAnInstance2;
+    }
+
+    @Override
+    public ColonPair visitColorPair(LispParser.ColorPairContext ctx) {
+        ColonPair colonPair = new ColonPair();
+        colonPair.setIdentifier(ctx.IDENTIFIER().getText());
+        colonPair.setEither(visitEither(ctx.either()));
+        return colonPair;
+    }
+
 
     @Override
     public ConditionHelper visitCondition_helper(LispParser.Condition_helperContext ctx) {
@@ -968,20 +1188,6 @@ public class VisitorClass extends LispParserBaseVisitor<Object> {
         }
         return lessThan;
     }
-    @Override
-    public Return visitReturn(LispParser.ReturnContext ctx) {
-        Return areturn = new Return();
-        areturn.setEither(visitEither(ctx.either()));
-        return areturn;
-    }
-
-    @Override
-    public ReturnForm visitReturn_from(LispParser.Return_fromContext ctx) {
-        ReturnForm returnForm = new ReturnForm();
-        returnForm.setEither(visitEither(ctx.either()));
-        returnForm.setIDENTIFIER(ctx.IDENTIFIER().getText());
-        return returnForm;
-    }
 
     @Override
     public Field visitField(LispParser.FieldContext ctx) {
@@ -994,7 +1200,7 @@ public class VisitorClass extends LispParserBaseVisitor<Object> {
     public DefStruct visitDefstruct(LispParser.DefstructContext ctx) {
         DefStruct defStruct = new DefStruct();
         defStruct.setIdentifier(ctx.IDENTIFIER().getText());
-        for(LispParser.FieldContext field : ctx.field()){
+        for (LispParser.FieldContext field : ctx.field()) {
             defStruct.getFields().add(visitField(field));
         }
         return defStruct;
@@ -1004,7 +1210,7 @@ public class VisitorClass extends LispParserBaseVisitor<Object> {
     public When visitWhen(LispParser.WhenContext ctx) {
         When when = new When();
         when.setCondition(visitCondition(ctx.condition()));
-        for(LispParser.ProgramContext programContext : ctx.program()){
+        for (LispParser.ProgramContext programContext : ctx.program()) {
             when.getPrograms().add(visitProgram(programContext));
         }
         return when;
@@ -1013,15 +1219,14 @@ public class VisitorClass extends LispParserBaseVisitor<Object> {
     @Override
     public Lambda visitLambda_expression(LispParser.Lambda_expressionContext ctx) {
         Lambda lambda = new Lambda();
-        for(TerminalNode p : ctx.IDENTIFIER()){
+        for (TerminalNode p : ctx.IDENTIFIER()) {
             lambda.getIdentifier().add(p.getText());
         }
-        for(LispParser.ProgramContext programContext : ctx.program()){
+        for (LispParser.ProgramContext programContext : ctx.program()) {
             lambda.getPrograms().add(visitProgram(programContext));
         }
-        return  lambda;
+        return lambda;
     }
-
 
 
     @Override
@@ -1050,6 +1255,226 @@ public class VisitorClass extends LispParserBaseVisitor<Object> {
         return greaterOrEqual;
     }
 
+
+    @Override
+    public Dotimes visitDotimes(LispParser.DotimesContext ctx) {
+
+        Dotimes dotimes = new Dotimes();
+
+        dotimes.setNumber(ctx.NUMBER().getText());
+        dotimes.setIdentifier(ctx.IDENTIFIER().getText());
+
+        if (ctx.program() != null) {
+            for (LispParser.ProgramContext p : ctx.program()) {
+                Program program = visitProgram(p);
+                dotimes.getProgram().add(program);
+            }
+        }
+
+        return dotimes;
+    }
+
+    @Override
+    public Dolist visitDolist(LispParser.DolistContext ctx) {
+
+        Dolist dolist = new Dolist();
+
+        dolist.setIdentifier(ctx.IDENTIFIER().getText());
+
+        if (ctx.program() != null) {
+            for (LispParser.ProgramContext p : ctx.program()) {
+                Program program = visitProgram(p);
+                dolist.getProgram().add(program);
+            }
+        }
+
+        return dolist;
+
+    }
+
+    @Override
+    public Loop visitLoop(LispParser.LoopContext ctx) {
+
+        Loop loop = new Loop();
+
+        if (ctx.program() != null) {
+            for (LispParser.ProgramContext p : ctx.program()) {
+                Program program = visitProgram(p);
+                loop.getProgram().add(program);
+            }
+        }
+
+        return loop;
+    }
+
+    @Override
+    public IterationOperation visitIteration_operation(LispParser.Iteration_operationContext ctx) {
+
+        IterationOperation iterationOperation = new IterationOperation();
+
+        if (ctx.dotimes() != null) {
+            iterationOperation.setDotimes(visitDotimes(ctx.dotimes()));
+        } else if (ctx.dolist() != null) {
+            iterationOperation.setDolist(visitDolist(ctx.dolist()));
+        } else if (ctx.loop() != null) {
+            iterationOperation.setLoop(visitLoop(ctx.loop()));
+        }
+
+        return iterationOperation;
+    }
+
+    @Override
+    public Do visitDo(LispParser.DoContext ctx) {
+        Do do_exp = new Do();
+
+        if (ctx.iteration_specs() != null) {
+            for (LispParser.Iteration_specsContext i : ctx.iteration_specs()) {
+                IterationSpecs iterationSpecs = visitIteration_specs(i);
+                do_exp.getIterationSpecs().add(iterationSpecs);
+            }
+        }
+        if (ctx.termination_condition() != null) {
+            do_exp.setTerminationCondition(visitTermination_condition(ctx.termination_condition()));
+        }
+        if (ctx.program() != null) {
+            for (LispParser.ProgramContext p : ctx.program()) {
+                Program program = visitProgram(p);
+                do_exp.getProgram().add(program);
+            }
+        }
+
+        return do_exp;
+    }
+
+    @Override
+    public IterationSpecs visitIteration_specs(LispParser.Iteration_specsContext ctx) {
+
+        IterationSpecs iterationSpecs = new IterationSpecs();
+
+        iterationSpecs.setIdentifier(ctx.IDENTIFIER().getText());
+        iterationSpecs.setNumber(ctx.NUMBER().getText());
+        if (ctx.program() != null) {
+            for (LispParser.ProgramContext p : ctx.program()) {
+                Program program = visitProgram(p);
+                iterationSpecs.getProgram().add(program);
+            }
+        }
+
+        return iterationSpecs;
+    }
+
+    @Override
+    public TerminationCondition visitTermination_condition(LispParser.Termination_conditionContext ctx) {
+
+        TerminationCondition terminationCondition = new TerminationCondition();
+
+        terminationCondition.setCondition(visitCondition(ctx.condition()));
+        if (ctx.IDENTIFIER() != null) {
+            terminationCondition.setIdentifier(ctx.IDENTIFIER().getText());
+        }
+
+        return terminationCondition;
+    }
+
+    @Override
+    public Return visitReturn(LispParser.ReturnContext ctx) {
+
+        Return return_exp = new Return();
+
+        if (ctx.either() != null) {
+            return_exp.setEither(visitEither(ctx.either()));
+        }
+
+        return return_exp;
+    }
+
+    @Override
+    public ReturnFrom visitReturn_from(LispParser.Return_fromContext ctx) {
+
+        ReturnFrom returnFrom = new ReturnFrom();
+
+        returnFrom.setIdentifier(ctx.IDENTIFIER().getText());
+        if (ctx.either() != null) {
+            returnFrom.setEither(visitEither(ctx.either()));
+        }
+
+        return returnFrom;
+    }
+
+
+
+    @Override
+    public Error visitError(LispParser.ErrorContext ctx) {
+
+        Error error = new Error();
+
+        error.setString(ctx.STRING().getText());
+        if (ctx.either() != null) {
+            for (LispParser.EitherContext e : ctx.either()) {
+                Either either = visitEither(e);
+                error.getEither().add(either);
+            }
+        }
+
+        return error;
+    }
+
+    @Override
+    public Funcall visitFuncall(LispParser.FuncallContext ctx) {
+
+        Funcall funcall = new Funcall();
+
+        if (ctx.program() != null) {
+            funcall.setProgram(visitProgram(ctx.program()));
+        }
+
+        if (ctx.either() != null) {
+            for (LispParser.EitherContext e : ctx.either()) {
+                Either either = visitEither(e);
+                funcall.getEither().add(either);
+            }
+        }
+
+        return funcall;
+    }
+
+    @Override
+    public Apply visitApply(LispParser.ApplyContext ctx) {
+
+        Apply apply = new Apply();
+
+        if (ctx.program() != null) {
+            apply.setProgram(visitProgram(ctx.program()));
+        }
+
+        if (ctx.either() != null) {
+            for (LispParser.EitherContext e : ctx.either()) {
+                Either either = visitEither(e);
+                apply.getEither().add(either);
+            }
+        }
+
+        if (ctx.list() != null) {
+            apply.setList(visitList(ctx.list()));
+        }
+
+        return apply;
+    }
+
+    @Override
+    public Mapcar visitMapcar(LispParser.MapcarContext ctx) {
+
+        Mapcar mapcar = new Mapcar();
+
+        if (ctx.program() != null) {
+            mapcar.setProgram(visitProgram(ctx.program()));
+        }
+        if (ctx.list() != null) {
+            mapcar.setList(visitList(ctx.list()));
+        }
+
+        return mapcar;
+    }
 
     @Override
     public ExpressionSequence visitExpression_sequence(LispParser.Expression_sequenceContext ctx) {
@@ -1118,11 +1543,12 @@ public class VisitorClass extends LispParserBaseVisitor<Object> {
         if (ctx.quote_form().get(0) != null) {
             eq.setQuoteForm1(visitQuote_form(ctx.quote_form().get(0)));
         }
-        if (ctx.quote_form().get(1)!= null) {
+        if (ctx.quote_form().get(1) != null) {
             eq.setQuoteForm2(visitQuote_form(ctx.quote_form().get(1)));
         }
         return eq;
     }
+
     @Override
     public Cdr visitCdr(LispParser.CdrContext ctx) {
         Cdr cdr = new Cdr();
@@ -1130,12 +1556,41 @@ public class VisitorClass extends LispParserBaseVisitor<Object> {
         return cdr;
     }
 
+    @Override
     public Car visitCar(LispParser.CarContext ctx) {
         Car car = new Car();
         car.setPossibleNumberHelper(visitPossible_number_helper(ctx.possible_number_helper()));
         return car;
     }
 
+
+    @Override
+    public Format visitFormat(LispParser.FormatContext ctx) {
+        Format format = new Format();
+        if (ctx.T2() != null) {
+            format.setT(ctx.T2().getText());
+        } else if (ctx.NIL2() != null) {
+            format.setNil(ctx.NIL2().getText());
+        }
+        if (ctx.possible_number_helper() != null) {
+            for (LispParser.Possible_number_helperContext p : ctx.possible_number_helper()) {
+                format.getPossibleNumberHelperList().add(visitPossible_number_helper(p));
+            }
+        }
+        return format;
+    }
+
+    @Override
+    public Cond visitCond(LispParser.CondContext ctx) {
+        Cond cond = new Cond();
+        if (ctx.cond_exp() != null) {
+            for (LispParser.Cond_expContext p : ctx.cond_exp()) {
+                ConditionExpression cond1 = visitCond_exp(p);
+                cond.getConditionExpressions().add(cond1);
+            }
+        }
+        return cond;
+    }
 
     @Override
     public Program visitProgram(LispParser.ProgramContext ctx) {
@@ -1157,42 +1612,82 @@ public class VisitorClass extends LispParserBaseVisitor<Object> {
             program.setArray(visitArray(ctx.array()));
         } else if (ctx.string() != null) {
             program.setStringClass(visitString(ctx.string()));
-        }else if(ctx.print() != null){
+        } else if (ctx.print() != null) {
             program.setPrint(visitPrint(ctx.print()));
-        } else if(ctx.if_statement() != null){
+        } else if (ctx.if_statement() != null) {
             program.setIfStatement(visitIf_statement(ctx.if_statement()));
-        } else if(ctx.comparsion() != null){
+        } else if (ctx.comparsion() != null) {
             program.setComparsion(visitComparsion(ctx.comparsion()));
-        } else if(ctx.condition() != null){
+        } else if (ctx.condition() != null) {
             program.setCondition(visitCondition(ctx.condition()));
-        }else if (ctx.eq() != null){
+        } else if (ctx.eq() != null) {
             program.setEq(visitEq(ctx.eq()));
-        } else  if (ctx.reverse() != null){
+        } else if (ctx.reverse() != null) {
             program.setReverse(visitReverse(ctx.reverse()));
-        } else if (ctx.member() != null){
+        } else if (ctx.member() != null) {
             program.setMember(visitMember(ctx.member()));
-        } else if (ctx.subsetp() != null){
+        } else if (ctx.subsetp() != null) {
             program.setSubsetp(visitSubsetp(ctx.subsetp()));
-        } else if (ctx.intersection() != null){
+        } else if (ctx.intersection() != null) {
             program.setIntersection(visitIntersection(ctx.intersection()));
-        } else if (ctx.union() != null){
+        } else if (ctx.union() != null) {
             program.setUnion(visitUnion(ctx.union()));
-        } else if (ctx.find() != null){
+        } else if (ctx.find() != null) {
             program.setFind(visitFind(ctx.find()));
-        }else if (ctx.return_() != null) {
+        } else if (ctx.return_() != null) {
             program.setAreturn(visitReturn(ctx.return_()));
-        } else if (ctx.return_from() != null){
+        } else if (ctx.return_from() != null) {
             program.setReturnForm(visitReturn_from(ctx.return_from()));
-        } else if (ctx.defstruct() != null){
+        } else if (ctx.defstruct() != null) {
             program.setDefStruct(visitDefstruct(ctx.defstruct()));
-        }
-        else if (ctx.lambda_expression() != null){
+        } else if (ctx.lambda_expression() != null) {
             program.setLambda(visitLambda_expression(ctx.lambda_expression()));
-        }else if(ctx.cdr()!=null){
+        } else if (ctx.cdr() != null) {
             program.setCdr(visitCdr(ctx.cdr()));
-        }else if(ctx.car()!= null){
+        } else if (ctx.car() != null) {
             program.setCar(visitCar(ctx.car()));
+        } else if (ctx.temporary_list() != null) {
+            program.setTemporaryList(visitTemporary_list(ctx.temporary_list()));
+        } else if (ctx.print() != null) {
+            program.setPrint(visitPrint(ctx.print()));
+        } else if (ctx.if_statement() != null) {
+            program.setIfStatement(visitIf_statement(ctx.if_statement()));
+        } else if (ctx.comparsion() != null) {
+            program.setComparsion(visitComparsion(ctx.comparsion()));
+        } else if (ctx.condition() != null) {
+            program.setCondition(visitCondition(ctx.condition()));
+        } else if (ctx.true_() != null) {
+            program.setT(visitTrue(ctx.true_()));
+        } else if (ctx.cond() != null) {
+            program.setCond(visitCond(ctx.cond()));
+        } else if (ctx.case_() != null) {
+            program.setCase(visitCase(ctx.case_()));
+        } else if (ctx.block() != null) {
+            program.setBlock(visitBlock(ctx.block()));
+        } else if (ctx.structure() != null) {
+            program.setStructure(visitStructure(ctx.structure()));
+        } else if (ctx.format() != null) {
+            program.setFormat(visitFormat(ctx.format()));
+        } else if (ctx.iteration_operation() != null) {
+            program.setIterationOperation(visitIteration_operation(ctx.iteration_operation()));
+        } else if (ctx.do_() != null) {
+            program.setDo_exp(visitDo(ctx.do_()));
+        } else if (ctx.return_() != null) {
+            program.setReturn_exp(visitReturn(ctx.return_()));
+        } else if (ctx.return_from() != null) {
+            program.setReturnFrom(visitReturn_from(ctx.return_from()));
+        } else if (ctx.block() != null) {
+            program.setBlock(visitBlock(ctx.block()));
+        } else if (ctx.error() != null) {
+            program.setError(visitError(ctx.error()));
+        } else if (ctx.funcall() != null) {
+            program.setFuncall(visitFuncall(ctx.funcall()));
+        } else if (ctx.apply() != null) {
+            program.setApply(visitApply(ctx.apply()));
+        } else if (ctx.mapcar() != null) {
+            program.setMapcar(visitMapcar(ctx.mapcar()));
         }
+
 
         return program;
     }

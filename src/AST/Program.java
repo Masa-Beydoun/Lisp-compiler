@@ -24,14 +24,159 @@ public class Program extends NodeAST {
     Union union;
     Find find;
     Return areturn;
-    ReturnForm returnForm;
+    ReturnFrom returnForm;
     DefStruct defStruct;
     When when;
     Lambda lambda;
     Function function;
     Cdr cdr;
     Car car;
+    TemporaryList temporaryList;
+    True t;
+    Cond cond;
+    Case Case;
+    Block block;
+    Structure structure;
+    Format format;
+    IterationOperation iterationOperation;
+    Do do_exp;
+    Return return_exp;
+    ReturnFrom returnFrom;
+    Error error;
+    Funcall funcall;
+    Apply apply;
+    Mapcar mapcar;
 
+
+    public ReturnFrom getReturnForm() {
+        return returnForm;
+    }
+
+    public void setReturnForm(ReturnFrom returnForm) {
+        this.returnForm = returnForm;
+    }
+
+    public IterationOperation getIterationOperation() {
+        return iterationOperation;
+    }
+
+    public void setIterationOperation(IterationOperation iterationOperation) {
+        this.iterationOperation = iterationOperation;
+    }
+
+    public Do getDo_exp() {
+        return do_exp;
+    }
+
+
+
+    public void setDo_exp(Do do_exp) {
+        this.do_exp = do_exp;
+    }
+
+    public Return getReturn_exp() {
+        return return_exp;
+    }
+
+    public void setReturn_exp(Return return_exp) {
+        this.return_exp = return_exp;
+    }
+
+    public ReturnFrom getReturnFrom() {
+        return returnFrom;
+    }
+
+    public void setReturnFrom(ReturnFrom returnFrom) {
+        this.returnFrom = returnFrom;
+    }
+
+    public Error getError() {
+        return error;
+    }
+
+    public void setError(Error error) {
+        this.error = error;
+    }
+
+    public Funcall getFuncall() {
+        return funcall;
+    }
+
+    public void setFuncall(Funcall funcall) {
+        this.funcall = funcall;
+    }
+
+    public Apply getApply() {
+        return apply;
+    }
+
+    public void setApply(Apply apply) {
+        this.apply = apply;
+    }
+
+    public Mapcar getMapcar() {
+        return mapcar;
+    }
+
+    public void setMapcar(Mapcar mapcar) {
+        this.mapcar = mapcar;
+    }
+
+    public Format getFormat() {
+        return format;
+    }
+
+    public void setFormat(Format format) {
+        this.format = format;
+    }
+
+    public TemporaryList getTemporaryList() {
+        return temporaryList;
+    }
+
+    public void setTemporaryList(TemporaryList temporaryList) {
+        this.temporaryList = temporaryList;
+    }
+
+    public True getT() {
+        return t;
+    }
+
+    public void setT(True t) {
+        this.t = t;
+    }
+
+    public Cond getCond() {
+        return cond;
+    }
+
+    public void setCond(Cond cond) {
+        this.cond = cond;
+    }
+
+    public AST.Case getCase() {
+        return Case;
+    }
+
+    public void setCase(AST.Case aCase) {
+        Case = aCase;
+    }
+
+    public Block getBlock() {
+        return block;
+    }
+
+    public void setBlock(Block block) {
+        this.block = block;
+    }
+
+    public Structure getStructure() {
+        return structure;
+    }
+
+    public void setStructure(Structure structure) {
+        this.structure = structure;
+    }
 
     public Cdr getCdr() {
         return cdr;
@@ -57,13 +202,7 @@ public class Program extends NodeAST {
         this.areturn = areturn;
     }
 
-    public ReturnForm getReturnForm() {
-        return returnForm;
-    }
 
-    public void setReturnForm(ReturnForm returnForm) {
-        this.returnForm = returnForm;
-    }
 
     public DefStruct getDefStruct() {
         return defStruct;

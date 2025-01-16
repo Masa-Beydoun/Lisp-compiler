@@ -7,6 +7,15 @@ public class Let {
     List<Binding> binding;
     List<VariableBinding> variableBinding;
     List<NilBinding> nilBinding;
+    List<String> stringList;
+
+    public List<String> getStringList() {
+        return stringList;
+    }
+
+    public void setStringList(List<String> stringList) {
+        this.stringList = stringList;
+    }
 
     public List<Binding> getBinding() {
         return binding;

@@ -128,8 +128,8 @@ expt returns [double result]
          //////////////////////////////////////////
 identifier_value_qoute_pair: (IDENTIFIER (value_helper | quote_form));
 setq: SETQ (identifier_value_qoute_pair)+ ;
-let: LET OPEN_PAREN (binding | variable_binding | nil_binding)+ CLOSE_PAREN programs ;
-let_star: LET_STAR OPEN_PAREN (binding | variable_binding | nil_binding)+ CLOSE_PAREN programs ;
+let: LET OPEN_PAREN (binding | variable_binding | nil_binding | STRING)+ CLOSE_PAREN programs ;
+let_star: LET_STAR OPEN_PAREN (binding | variable_binding | nil_binding | STRING)+ CLOSE_PAREN programs ;
 cons: CONS (possible_number_helper | NIL ) (possible_number_helper | NIL)  ;
 car: CAR possible_number_helper ;
 cdr: CDR possible_number_helper ;
@@ -149,7 +149,7 @@ variables: IDENTIFIER | SPECIAL_VARIABLE;
 possible_number_helper: NUMBER |variables | program;
 atom_helper: possible_number_helper | STRING ;
 expression_helper: atom_helper | variables (KEYWORD expression_helper)* ;
-value_helper: NUMBER | STRING | program;
+value_helper: NUMBER | STRING | program ;
 value_helper2: CHAR_LITERAL| atom_helper OPEN_PAREN value_helper2+ CLOSE_PAREN| NIL ;
 either : possible_number_helper | SINGLE_QUOTE;
 function_form: HASH_QUOTE atom_helper | FUNCTION atom_helper ;
@@ -171,14 +171,13 @@ condition_helper:possible_number_helper | T | NIL;
 true : T either ;
 temporary_list : either*;
 
-//TODO format
 ////Iteration
 dotimes : DOTIMES OPEN_PAREN IDENTIFIER NUMBER (program)* CLOSE_PAREN ;
-dolist : DOLIST OPEN_PAREN IDENTIFIER IDENTIFIER? (program)* CLOSE_PAREN ;
+dolist : DOLIST OPEN_PAREN IDENTIFIER SINGLE_QUOTE? (program)* CLOSE_PAREN ;
 loop : LOOP (program)* ;
 //
 do : DO OPEN_PAREN iteration_specs* CLOSE_PAREN OPEN_PAREN (termination_condition (program)* ) CLOSE_PAREN ;
-iteration_specs : OPEN_PAREN IDENTIFIER NUMBER NUMBER? (program)* CLOSE_PAREN+ ;
+iteration_specs : OPEN_PAREN IDENTIFIER NUMBER (program)* CLOSE_PAREN+ ;
 termination_condition : OPEN_PAREN condition IDENTIFIER? CLOSE_PAREN ;
 defvar: DEFVAR SPECIAL_VARIABLE possible_number_helper;
 //
@@ -247,11 +246,11 @@ element_access : CHAR | AREF ;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Structures :
 structure: create_structures| create_an_instance| access ;
-
 create_structures: DEFSTRUCT IDENTIFIER (IDENTIFIER)* ;
-create_an_instance :  MAKE either // TODO
-                    | MAKE MINUS IDENTIFIER (COLON IDENTIFIER either)* ;
-
+create_an_instance : create_an_instance1 | create_an_instance2;
+create_an_instance1 : MAKE either ; // TODO
+create_an_instance2 : MAKE MINUS IDENTIFIER (colorPair)* ;
+colorPair : COLON IDENTIFIER either ;
 // (foo-bar *)
 // (foo-baaz **)
 //(foo-baaz *my-foo*)
@@ -281,7 +280,9 @@ expression_sequence: program | multiple_expression ;
 multiple_expression : OPEN_PAREN PROGN (program)* CLOSE_PAREN ;
 ////////////////////////////////////////////////////
 cond : COND (cond_exp)*;
-cond_exp : program | OPEN_PAREN (program)* either* CLOSE_PAREN  ;
+cond_exp : program | cond_exp1;
+cond_exp1 :OPEN_PAREN (program)* either* CLOSE_PAREN  ;
+
 ////////////////////////////////////////////////
 case : CASE IDENTIFIER case_exp* ;
 case_exp :  OPEN_PAREN (program)* either* CLOSE_PAREN  ;

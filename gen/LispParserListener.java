@@ -1067,6 +1067,36 @@ public interface LispParserListener extends ParseTreeListener {
 	 */
 	void exitCreate_an_instance(LispParser.Create_an_instanceContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link LispParser#create_an_instance1}.
+	 * @param ctx the parse tree
+	 */
+	void enterCreate_an_instance1(LispParser.Create_an_instance1Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link LispParser#create_an_instance1}.
+	 * @param ctx the parse tree
+	 */
+	void exitCreate_an_instance1(LispParser.Create_an_instance1Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link LispParser#create_an_instance2}.
+	 * @param ctx the parse tree
+	 */
+	void enterCreate_an_instance2(LispParser.Create_an_instance2Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link LispParser#create_an_instance2}.
+	 * @param ctx the parse tree
+	 */
+	void exitCreate_an_instance2(LispParser.Create_an_instance2Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link LispParser#colorPair}.
+	 * @param ctx the parse tree
+	 */
+	void enterColorPair(LispParser.ColorPairContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LispParser#colorPair}.
+	 * @param ctx the parse tree
+	 */
+	void exitColorPair(LispParser.ColorPairContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link LispParser#access}.
 	 * @param ctx the parse tree
 	 */
@@ -1206,6 +1236,16 @@ public interface LispParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitCond_exp(LispParser.Cond_expContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LispParser#cond_exp1}.
+	 * @param ctx the parse tree
+	 */
+	void enterCond_exp1(LispParser.Cond_exp1Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link LispParser#cond_exp1}.
+	 * @param ctx the parse tree
+	 */
+	void exitCond_exp1(LispParser.Cond_exp1Context ctx);
 	/**
 	 * Enter a parse tree produced by {@link LispParser#case}.
 	 * @param ctx the parse tree
