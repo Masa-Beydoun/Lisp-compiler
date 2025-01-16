@@ -1,14 +1,15 @@
 package AST;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DefiningFunction {
     String functionName;
-    List<String> parameters;
-    List<KeyFunction> keyFunctions;
-    List<OptionFunction> optionFunctions;
-    List<RestFunction> restFunctions;
-    List<AtomHelper> atomHelpers;
+    List<String> parameters = new ArrayList<>();
+    List<KeyFunction> keyFunctions= new ArrayList<>();
+    List<OptionFunction> optionFunctions= new ArrayList<>();
+    List<RestFunction> restFunctions= new ArrayList<>();
+    List<AtomHelper> atomHelpers= new ArrayList<>();
 
 
     public List<AtomHelper> getAtomHelpers() {

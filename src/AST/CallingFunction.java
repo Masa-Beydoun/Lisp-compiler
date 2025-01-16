@@ -1,11 +1,12 @@
 package AST;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CallingFunction {
 
     String name;
-    List<KeywordNumberHelper> keywordNumberHelperList;
+    List<KeywordNumberHelper> keywordNumberHelperList = new ArrayList<>();
 
     public String getName() {
         return name;

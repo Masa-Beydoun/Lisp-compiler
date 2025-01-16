@@ -34,7 +34,7 @@ public class VariableBinding {
             result.append("variable2=").append(variable2);
         }
 
-        result.append('}');
+        result.append("\n");
         return result.toString();
     }
 

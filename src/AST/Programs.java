@@ -25,7 +25,7 @@ public class Programs extends NodeAST {
     @Override
     public String toString() {
         return "Programs{" +
-                "programs=" + programs +
+                "programs=" + programs +"\n"+
                 '}';
     }
 }

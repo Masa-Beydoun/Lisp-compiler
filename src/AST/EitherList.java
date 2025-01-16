@@ -1,10 +1,11 @@
 package AST;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EitherList {
 
-    List<String> chars;
+    List<String> chars= new ArrayList<>();
 
     public List<String> getChars() {
         return chars;

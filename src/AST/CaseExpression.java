@@ -1,10 +1,11 @@
 package AST;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CaseExpression {
-    private List<Program> programs;
-    private List<Either> eithers;
+    private List<Program> programs = new ArrayList<>();
+    private List<Either> eithers = new ArrayList<>();
 
     public List<Program> getPrograms() {
         return programs;

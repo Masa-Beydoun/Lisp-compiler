@@ -1,10 +1,10 @@
 package AST;
 
 public class Either {
-String number;
-String identifier;
-String singleQuote;
-        Program program;
+    String number;
+    String identifier;
+    String singleQuote;
+    Program program;
 
     public String getNumber() {
         return number;

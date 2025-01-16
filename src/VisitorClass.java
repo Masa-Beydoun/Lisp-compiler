@@ -285,11 +285,17 @@ public class VisitorClass extends LispParserBaseVisitor<Object> {
                 let.getNilBinding().add(visitNil_binding(nil));
             }
         }
-        if (ctx.STRING() != null) {
-            for (TerminalNode p : ctx.STRING()) {
-                let.getStringList().add(p.getText());
+        if (ctx.possible_number_helper() != null) {
+            for(LispParser.Possible_number_helperContext p : ctx.possible_number_helper()) {
+                let.getPossibleNumberHelperList().add(visitPossible_number_helper(p));
             }
         }
+        if(ctx.temporary_list()!=null){
+            for(LispParser.Temporary_listContext p: ctx.temporary_list()) {
+                let.getTemporaryListList().add(visitTemporary_list(p));
+            }
+        }
+
         return let;
     }
 
@@ -311,11 +317,17 @@ public class VisitorClass extends LispParserBaseVisitor<Object> {
                 let.getNilBinding().add(visitNil_binding(nil));
             }
         }
-        if (ctx.STRING() != null) {
-            for (TerminalNode p : ctx.STRING()) {
-                let.getStringList().add(p.getText());
+        if (ctx.possible_number_helper() != null) {
+            for(LispParser.Possible_number_helperContext p : ctx.possible_number_helper()) {
+                let.getPossibleNumberHelperLists().add(visitPossible_number_helper(p));
             }
         }
+        if(ctx.temporary_list()!=null){
+            for(LispParser.Temporary_listContext p: ctx.temporary_list()) {
+                let.getTemporaryListList().add(visitTemporary_list(p));
+            }
+        }
+
         return let;
     }
 
@@ -482,9 +494,94 @@ public class VisitorClass extends LispParserBaseVisitor<Object> {
             possibleNumberHelper.setVariable(visitVariables(ctx.variables()));
         } else if (ctx.program() != null) {
             possibleNumberHelper.setProgram(visitProgram(ctx.program()));
+        } else if(ctx.quote_form()!=null){
+            possibleNumberHelper.setQuoteForm(visitQuote_form(ctx.quote_form()));
+        }else if(ctx.function_form()!=null){
+            possibleNumberHelper.setFunctionForm(visitFunction_form(ctx.function_form()));
         }
         return possibleNumberHelper;
+    }
 
+    @Override
+    public FunctionForm visitFunction_form(LispParser.Function_formContext ctx) {
+        FunctionForm functionForm = new FunctionForm();
+        functionForm.setAtomHelper(visitAtom_helper(ctx.atom_helper()));
+        return functionForm;
+    }
+
+    @Override
+    public SortOperation visitSort_operation(LispParser.Sort_operationContext ctx) {
+        SortOperation sortOperation = new SortOperation();
+        if (ctx.sort()!=null) {
+            sortOperation.setSort(visitSort(ctx.sort()));
+        }
+        if (ctx.stable_sort()!=null) {
+            sortOperation.setStableSort(visitStable_sort(ctx.stable_sort()));
+        }
+        return sortOperation;
+    }
+
+    @Override
+    public Sort visitSort(LispParser.SortContext ctx) {
+        Sort sort = new Sort();
+        sort.setListElement(visitList_elements(ctx.list_elements()));
+        sort.setComparisonFunction(visitComparison_function(ctx.comparison_function()));
+        return sort;
+    }
+
+    @Override
+    public StableSort visitStable_sort(LispParser.Stable_sortContext ctx) {
+        StableSort stableSort = new StableSort();
+        stableSort.setListElement(visitList_elements(ctx.list_elements()));
+        stableSort.setComparisonFunction(visitComparison_function(ctx.comparison_function()));
+        return stableSort;
+    }
+    @Override
+    public ComparisonFunction visitComparison_function(LispParser.Comparison_functionContext ctx) {
+        ComparisonFunction comparisonFunction = new ComparisonFunction();
+        comparisonFunction.setComparison_operator(visitComparison_operator(ctx.comparison_operator()));
+        return comparisonFunction;
+    }
+
+
+    @Override
+    public ComparisonOperator visitComparison_operator(LispParser.Comparison_operatorContext ctx) {
+        ComparisonOperator comparisonOperator = new ComparisonOperator();
+        if (ctx.GREATER_THAN() != null) {
+            comparisonOperator.setGreaterThan(ctx.GREATER_THAN().getText());
+        } else if (ctx.LESS_THAN() != null) {
+            comparisonOperator.setLessThan(ctx.LESS_THAN().getText());
+        } else if (ctx.EQUALS() != null) {
+            comparisonOperator.setEquals(ctx.EQUALS().getText());
+        }
+        return comparisonOperator;
+    }
+
+    @Override
+    public ListElement visitList_elements(LispParser.List_elementsContext ctx) {
+        ListElement listElement = new ListElement();
+        if(ctx.NUMBER()!=null) {
+            for (TerminalNode node : ctx.NUMBER()) {
+                listElement.getNumbers().add(node.getText());
+            }
+        }
+        if(ctx.IDENTIFIER()!=null) {
+            for (TerminalNode node : ctx.IDENTIFIER()) {
+                listElement.getIdentifier().add(node.getText());
+            }
+        }
+        if(ctx.NIL()!=null) {
+            for (TerminalNode node : ctx.NIL()) {
+                listElement.getNils().add(node.getText());
+            }
+        }
+        if(ctx.T()!=null) {
+            for (TerminalNode node : ctx.T()) {
+                listElement.getTrues().add(node.getText());
+            }
+        }
+
+        return listElement;
     }
 
     @Override
@@ -1279,13 +1376,19 @@ public class VisitorClass extends LispParserBaseVisitor<Object> {
 
         Dolist dolist = new Dolist();
 
-        dolist.setIdentifier(ctx.IDENTIFIER().getText());
+        dolist.setIdentifier(ctx.IDENTIFIER().get(0).getText());
 
         if (ctx.program() != null) {
             for (LispParser.ProgramContext p : ctx.program()) {
                 Program program = visitProgram(p);
                 dolist.getProgram().add(program);
             }
+        }
+        if(ctx.IDENTIFIER().get(1).getText()!=null){
+            dolist.setIdentifier2(ctx.IDENTIFIER().get(1).getText());
+        }
+        if(ctx.list()!=null){
+            dolist.setListClass(visitList(ctx.list()));
         }
 
         return dolist;
@@ -1592,6 +1695,7 @@ public class VisitorClass extends LispParserBaseVisitor<Object> {
         return cond;
     }
 
+
     @Override
     public Program visitProgram(LispParser.ProgramContext ctx) {
         Program program = new Program();
@@ -1686,11 +1790,14 @@ public class VisitorClass extends LispParserBaseVisitor<Object> {
             program.setApply(visitApply(ctx.apply()));
         } else if (ctx.mapcar() != null) {
             program.setMapcar(visitMapcar(ctx.mapcar()));
+        }else if(ctx.sort_operation()!= null){
+            program.setSortOperation(visitSort_operation(ctx.sort_operation()));
         }
 
 
         return program;
     }
+
 
 
 }

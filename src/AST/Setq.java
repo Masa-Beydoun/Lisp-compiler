@@ -1,10 +1,11 @@
 package AST;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Setq {
 
-    List<IdentifierValueQuotePair> identifierValueQuotePair;
+    List<IdentifierValueQuotePair> identifierValueQuotePair = new ArrayList<>();
 
     public List<IdentifierValueQuotePair> getIdentifierValueQuotePair() {
         return identifierValueQuotePair;

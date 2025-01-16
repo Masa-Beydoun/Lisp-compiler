@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class CreateAnInstance2 {
     private String identifier;
-    private ArrayList<ColonPair> colonPairs;
+    private ArrayList<ColonPair> colonPairs = new ArrayList<>();
 
     public String getIdentifier() {
         return identifier;

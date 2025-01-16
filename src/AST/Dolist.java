@@ -5,7 +5,26 @@ import java.util.ArrayList;
 public class Dolist {
     String identifier;
     String singleQuote;
+    String identifier2;
+    ListClass listClass;
     ArrayList<Program> program = new ArrayList<>();
+
+
+    public String getIdentifier2() {
+        return identifier2;
+    }
+
+    public void setIdentifier2(String identifier2) {
+        this.identifier2 = identifier2;
+    }
+
+    public ListClass getListClass() {
+        return listClass;
+    }
+
+    public void setListClass(ListClass listClass) {
+        this.listClass = listClass;
+    }
 
     public String getSingleQuote() {
         return singleQuote;
@@ -48,6 +67,18 @@ public class Dolist {
         if (program != null) {
             if (!firstField) result.append(", ");
             result.append("program=").append(program);
+            firstField = false;
+
+        }
+        if(identifier2 != null) {
+            if (!firstField) result.append(", ");
+            result.append("identifier2='").append(identifier2).append('\'');
+            firstField = false;
+        }
+        if(listClass != null) {
+            if (!firstField) result.append(", ");
+            result.append("listClass=").append(listClass);
+            firstField = false;
         }
 
         result.append('}');

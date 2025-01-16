@@ -4,6 +4,25 @@ public class PossibleNumberHelper {
     String number;
     Variable variable;
     Program program;
+    QuoteForm quoteForm;
+    FunctionForm functionForm;
+
+
+    public QuoteForm getQuoteForm() {
+        return quoteForm;
+    }
+
+    public void setQuoteForm(QuoteForm quoteForm) {
+        this.quoteForm = quoteForm;
+    }
+
+    public FunctionForm getFunctionForm() {
+        return functionForm;
+    }
+
+    public void setFunctionForm(FunctionForm functionForm) {
+        this.functionForm = functionForm;
+    }
 
     public String getNumber() {
         return number;
@@ -47,6 +66,14 @@ public class PossibleNumberHelper {
         if (program != null) {
             if (!firstField) result.append(", ");
             result.append("program=").append(program);
+        }
+        if (quoteForm != null) {
+            if (!firstField) result.append(", ");
+            result.append("quoteForm=").append(quoteForm);
+        }
+        if (functionForm != null) {
+            if (!firstField) result.append(", ");
+            result.append("functionForm=").append(functionForm);
         }
 
         result.append('}');

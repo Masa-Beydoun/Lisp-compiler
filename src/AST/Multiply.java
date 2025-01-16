@@ -3,8 +3,8 @@ package AST;
 import java.util.ArrayList;
 
 public class Multiply {
-    ArrayList<String> parameters;
-    ArrayList<PossibleNumberHelper> possibleNumbers;
+    ArrayList<String> parameters= new ArrayList<>();
+    ArrayList<PossibleNumberHelper> possibleNumbers= new ArrayList<>();
 
 
     public ArrayList<String> getParameters() {

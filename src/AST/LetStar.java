@@ -1,22 +1,30 @@
 package AST;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LetStar {
-    List<Binding> binding;
-    List<VariableBinding> variableBinding;
-    List<NilBinding> nilBinding;
+    List<Binding> binding= new ArrayList<>();
+    List<VariableBinding> variableBinding= new ArrayList<>();
+    List<NilBinding> nilBinding= new ArrayList<>();
+    List<PossibleNumberHelper>  possibleNumberHelperLists= new ArrayList<>();
 
-    List<String> stringList;
+    List<TemporaryList> temporaryListList = new ArrayList<>() ;
 
-    public List<String> getStringList() {
-        return stringList;
+    public List<TemporaryList> getTemporaryListList() {
+        return temporaryListList;
     }
 
-    public void setStringList(List<String> stringList) {
-        this.stringList = stringList;
+    public void setTemporaryListList(List<TemporaryList> temporaryListList) {
+        this.temporaryListList = temporaryListList;
+    }
+    public List<PossibleNumberHelper> getPossibleNumberHelperLists() {
+        return possibleNumberHelperLists;
     }
 
+    public void setPossibleNumberHelperLists(List<PossibleNumberHelper> possibleNumberHelperLists) {
+        this.possibleNumberHelperLists = possibleNumberHelperLists;
+    }
 
     public List<Binding> getBinding() {
         return binding;
@@ -59,6 +67,10 @@ public class LetStar {
         if (nilBinding != null) {
             if (!firstField) result.append(", ");
             result.append("nilBinding=").append(nilBinding);
+        }
+        if(possibleNumberHelperLists!=null){
+            if (!firstField) result.append(", ");
+            result.append("quoteForms=").append(possibleNumberHelperLists);
         }
 
         result.append('}');

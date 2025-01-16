@@ -1,11 +1,12 @@
 package AST;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ListClass {
 
-    List<AtomHelper> atomHelper;
-    List<String> nil;
+    List<AtomHelper> atomHelper= new ArrayList<>();
+    List<String> nil= new ArrayList<>();
 
 
     public List<AtomHelper> getAtomHelper() {

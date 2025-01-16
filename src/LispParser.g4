@@ -128,8 +128,8 @@ expt returns [double result]
          //////////////////////////////////////////
 identifier_value_qoute_pair: (IDENTIFIER (value_helper | quote_form));
 setq: SETQ (identifier_value_qoute_pair)+ ;
-let: LET OPEN_PAREN (binding | variable_binding | nil_binding | STRING)+ CLOSE_PAREN programs ;
-let_star: LET_STAR OPEN_PAREN (binding | variable_binding | nil_binding | STRING)+ CLOSE_PAREN programs ;
+let: LET OPEN_PAREN (binding | variable_binding | nil_binding | possible_number_helper |temporary_list)+ CLOSE_PAREN programs ;
+let_star: LET_STAR OPEN_PAREN (binding | variable_binding | nil_binding |possible_number_helper|temporary_list)+ CLOSE_PAREN programs ;
 cons: CONS (possible_number_helper | NIL ) (possible_number_helper | NIL)  ;
 car: CAR possible_number_helper ;
 cdr: CDR possible_number_helper ;
@@ -146,14 +146,15 @@ forms : (STARS |MULTIPLY) | quote_form | function_form | possible_number_helper 
 print : PRINT (either | STRING | list | NIL) ;
 //<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>
 variables: IDENTIFIER | SPECIAL_VARIABLE;
-possible_number_helper: NUMBER |variables | program;
+possible_number_helper: NUMBER |variables | program | quote_form | function_form;
 atom_helper: possible_number_helper | STRING ;
 expression_helper: atom_helper | variables (KEYWORD expression_helper)* ;
 value_helper: NUMBER | STRING | program ;
 value_helper2: CHAR_LITERAL| atom_helper OPEN_PAREN value_helper2+ CLOSE_PAREN| NIL ;
+
 either : possible_number_helper | SINGLE_QUOTE;
 function_form: HASH_QUOTE atom_helper | FUNCTION atom_helper ;
-quote_form: SINGLE_QUOTE (atom_helper | (OPEN_PAREN atom_helper+ CLOSE_PAREN)) |  QUOTE OPEN_PAREN (atom_helper)* CLOSE_PAREN;  //TODO
+quote_form: (SINGLE_QUOTE (atom_helper | (OPEN_PAREN atom_helper+ CLOSE_PAREN))) | ( QUOTE OPEN_PAREN (atom_helper)* CLOSE_PAREN);
 
 //<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>
 binding: OPEN_PAREN variables value_helper CLOSE_PAREN ;
@@ -169,15 +170,15 @@ calling_functions :  IDENTIFIER (keyword_number_helper)* ;
 
 condition_helper:possible_number_helper | T | NIL;
 true : T either ;
-temporary_list : either*;
+temporary_list : either+;
 
 ////Iteration
 dotimes : DOTIMES OPEN_PAREN IDENTIFIER NUMBER (program)* CLOSE_PAREN ;
-dolist : DOLIST OPEN_PAREN IDENTIFIER SINGLE_QUOTE? (program)* CLOSE_PAREN ;
+dolist : DOLIST OPEN_PAREN IDENTIFIER SINGLE_QUOTE? (list|IDENTIFIER) (program)* CLOSE_PAREN ;
 loop : LOOP (program)* ;
 //
 do : DO OPEN_PAREN iteration_specs* CLOSE_PAREN OPEN_PAREN (termination_condition (program)* ) CLOSE_PAREN ;
-iteration_specs : OPEN_PAREN IDENTIFIER NUMBER (program)* CLOSE_PAREN+ ;
+iteration_specs : OPEN_PAREN IDENTIFIER NUMBER (program)* CLOSE_PAREN ;
 termination_condition : OPEN_PAREN condition IDENTIFIER? CLOSE_PAREN ;
 defvar: DEFVAR SPECIAL_VARIABLE possible_number_helper;
 //

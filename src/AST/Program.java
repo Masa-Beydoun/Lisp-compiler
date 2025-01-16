@@ -46,7 +46,16 @@ public class Program extends NodeAST {
     Funcall funcall;
     Apply apply;
     Mapcar mapcar;
+    SortOperation  sortOperation;
 
+
+    public SortOperation getSortOperation() {
+        return sortOperation;
+    }
+
+    public void setSortOperation(SortOperation sortOperation) {
+        this.sortOperation = sortOperation;
+    }
 
     public ReturnFrom getReturnForm() {
         return returnForm;
@@ -404,11 +413,237 @@ public class Program extends NodeAST {
         this.mathOperation = mathOperation;
     }
 
-
     @Override
     public String toString() {
-        return "Program{" +
-                "mathOperation=" + mathOperation +
-                '}';
+        StringBuilder result = new StringBuilder("Program{");
+        boolean firstField = true;
+
+        if (mathOperation != null) {
+            result.append("mathOperation=").append(mathOperation);
+            firstField = false;
+        }
+        if (setQ != null) {
+            if (!firstField) result.append(", ");
+            result.append("setQ=").append(setQ);
+            firstField = false;
+        }
+        if (let != null) {
+            if (!firstField) result.append(", ");
+            result.append("let=").append(let);
+            firstField = false;
+        }
+        if (letStar != null) {
+            if (!firstField) result.append(", ");
+            result.append("letStar=").append(letStar);
+            firstField = false;
+        }
+        if (listOperation != null) {
+            if (!firstField) result.append(", ");
+            result.append("listOperation=").append(listOperation);
+            firstField = false;
+        }
+        if (functionOperation != null) {
+            if (!firstField) result.append(", ");
+            result.append("functionOperation=").append(functionOperation);
+            firstField = false;
+        }
+        if (defvar != null) {
+            if (!firstField) result.append(", ");
+            result.append("defvar=").append(defvar);
+            firstField = false;
+        }
+        if (array != null) {
+            if (!firstField) result.append(", ");
+            result.append("array=").append(array);
+            firstField = false;
+        }
+        if (stringClass != null) {
+            if (!firstField) result.append(", ");
+            result.append("stringClass=").append(stringClass);
+            firstField = false;
+        }
+        if (print != null) {
+            if (!firstField) result.append(", ");
+            result.append("print=").append(print);
+            firstField = false;
+        }
+        if (ifStatement != null) {
+            if (!firstField) result.append(", ");
+            result.append("ifStatement=").append(ifStatement);
+            firstField = false;
+        }
+        if (comparsion != null) {
+            if (!firstField) result.append(", ");
+            result.append("comparsion=").append(comparsion);
+            firstField = false;
+        }
+        if (condition != null) {
+            if (!firstField) result.append(", ");
+            result.append("condition=").append(condition);
+            firstField = false;
+        }
+        if (eq != null) {
+            if (!firstField) result.append(", ");
+            result.append("eq=").append(eq);
+            firstField = false;
+        }
+        if (reverse != null) {
+            if (!firstField) result.append(", ");
+            result.append("reverse=").append(reverse);
+            firstField = false;
+        }
+        if (member != null) {
+            if (!firstField) result.append(", ");
+            result.append("member=").append(member);
+            firstField = false;
+        }
+        if (subsetp != null) {
+            if (!firstField) result.append(", ");
+            result.append("subsetp=").append(subsetp);
+            firstField = false;
+        }
+        if (intersection != null) {
+            if (!firstField) result.append(", ");
+            result.append("intersection=").append(intersection);
+            firstField = false;
+        }
+        if (cons != null) {
+            if (!firstField) result.append(", ");
+            result.append("cons=").append(cons);
+            firstField = false;
+        }
+        if (union != null) {
+            if (!firstField) result.append(", ");
+            result.append("union=").append(union);
+            firstField = false;
+        }
+        if (find != null) {
+            if (!firstField) result.append(", ");
+            result.append("find=").append(find);
+            firstField = false;
+        }
+        if (areturn != null) {
+            if (!firstField) result.append(", ");
+            result.append("areturn=").append(areturn);
+            firstField = false;
+        }
+        if (returnForm != null) {
+            if (!firstField) result.append(", ");
+            result.append("returnForm=").append(returnForm);
+            firstField = false;
+        }
+        if (defStruct != null) {
+            if (!firstField) result.append(", ");
+            result.append("defStruct=").append(defStruct);
+            firstField = false;
+        }
+        if (when != null) {
+            if (!firstField) result.append(", ");
+            result.append("when=").append(when);
+            firstField = false;
+        }
+        if (lambda != null) {
+            if (!firstField) result.append(", ");
+            result.append("lambda=").append(lambda);
+            firstField = false;
+        }
+        if (function != null) {
+            if (!firstField) result.append(", ");
+            result.append("function=").append(function);
+            firstField = false;
+        }
+        if (cdr != null) {
+            if (!firstField) result.append(", ");
+            result.append("cdr=").append(cdr);
+            firstField = false;
+        }
+        if (car != null) {
+            if (!firstField) result.append(", ");
+            result.append("car=").append(car);
+            firstField = false;
+        }
+        if (temporaryList != null) {
+            if (!firstField) result.append(", ");
+            result.append("temporaryList=").append(temporaryList);
+            firstField = false;
+        }
+        if (t != null) {
+            if (!firstField) result.append(", ");
+            result.append("t=").append(t);
+            firstField = false;
+        }
+        if (cond != null) {
+            if (!firstField) result.append(", ");
+            result.append("cond=").append(cond);
+            firstField = false;
+        }
+        if (Case != null) {
+            if (!firstField) result.append(", ");
+            result.append("Case=").append(Case);
+            firstField = false;
+        }
+        if (block != null) {
+            if (!firstField) result.append(", ");
+            result.append("block=").append(block);
+            firstField = false;
+        }
+        if (structure != null) {
+            if (!firstField) result.append(", ");
+            result.append("structure=").append(structure);
+            firstField = false;
+        }
+        if (format != null) {
+            if (!firstField) result.append(", ");
+            result.append("format=").append(format);
+            firstField = false;
+        }
+        if (iterationOperation != null) {
+            if (!firstField) result.append(", ");
+            result.append("iterationOperation=").append(iterationOperation);
+            firstField = false;
+        }
+        if (do_exp != null) {
+            if (!firstField) result.append(", ");
+            result.append("do_exp=").append(do_exp);
+            firstField = false;
+        }
+        if (return_exp != null) {
+            if (!firstField) result.append(", ");
+            result.append("return_exp=").append(return_exp);
+            firstField = false;
+        }
+        if (returnFrom != null) {
+            if (!firstField) result.append(", ");
+            result.append("returnFrom=").append(returnFrom);
+            firstField = false;
+        }
+        if (error != null) {
+            if (!firstField) result.append(", ");
+            result.append("error=").append(error);
+            firstField = false;
+        }
+        if (funcall != null) {
+            if (!firstField) result.append(", ");
+            result.append("funcall=").append(funcall);
+            firstField = false;
+        }
+        if (apply != null) {
+            if (!firstField) result.append(", ");
+            result.append("apply=").append(apply);
+            firstField = false;
+        }
+        if (mapcar != null) {
+            if (!firstField) result.append(", ");
+            result.append("mapcar=").append(mapcar);
+            firstField = false;
+        }
+        if (sortOperation != null) {
+            if (!firstField) result.append(", ");
+            result.append("sortOperation=").append(sortOperation);
+        }
+
+        result.append("\n");
+        return result.toString();
     }
+
 }

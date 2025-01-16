@@ -1,49 +1,115 @@
+(setq a 5)
+
+;/////////////////////////////////
+
+(if t 5 6)
+(if nil 5 6)
+(if 4 5 6)
+
+; ////////////////////////////
+
+(+ 3 3/4)
+
+; ////////////////////////////
+
+(car (cons 4 5))
+
+; ////////////////////////////
+
+(setq a nil)
+
+; ////////////////////////////
+
+(loop
+(setq a (+ a 1))
+    (when (> a 7)
+        (return a)))
+
+; ////////////////////////////
+
+(defun fact (x)
+        (if (> x 0)
+        (* x (fact (- x 1)))
+1))
+
+(fact 5) ; This will return 120
 
 
-(defun check-string (str)
-  "Check if the string starts with 'a' and has a length greater than 5."
-  (and (string= (subseq str 0 1) "a")
-       (> (length str) 5)))
-
-(defun process-strings ()
-  (let ((string-array '("apple" "apricot" "avocado" "banana" "cherry")))
-    (dolist (str string-array)
-      (when (check-string str)
-        (format t "String matching criteria: ~A~%" str)))))
-
-(process-strings)
+; ////////////////////////////
 
 
+(defun bar (x)
+(setq x (* x 3))
+(setq x (/ x 2))
+(+ x 4))
 
-(defun process-strings2 ()
-  "Process a list of strings and print those starting with 'a'."
-  (let ((string-array '("apple" "banana" "avocado" "cherry" "apricot")))
-    (dolist (str string-array)
-      (when (funcall (lambda (s) (string= (subseq s 0 1) "a")) str)
-        (format t "String starts with 'a': ~A~%" str)))))
-(process-strings2)
+(bar 6)
 
+; ////////////////////////////
 
+(let ((a 2) (b 3) (c 0))(setq c (+ a b))c)
 
-
-
-
-(defun process-strings4 ()
-  (let ((string-array '("apple\\napple" "apricot\\\"apricot" "avocado\\\\" "banana\\t" "cherry\\\"")))
-    (dolist (str string-array)
-        (format t "String matching criteria: ~A~%" str))))
-
-(process-strings4)
+; ////////////////////////////
 
 
+(defvar *special* 5
+(print *special*)
 
 
-(write ((lambda (a b c x)
-   (* a b c x))
-   4 2 9 3)
-)
+; ////////////////////////////
+
+(concatenate 'list "abc" "de")
+
+; ////////////////////////////
 
 
+(defun foo (x)
+(return-from foo 3)
+x)
+(foo 17)
 
 
+; ////////////////////////////
 
+
+(do ((x 1 (+ x 1))
+(y 1 (* y 2)))
+((> x 5) y)
+(print y)
+(print 'working))
+
+
+; ////////////////////////////
+
+ (if t 5 6)
+ (if nil 5 6)
+ (if 4 5 6)
+
+; ////////////////////////////
+
+(defstruct foo bar baaz quux)
+
+; ////////////////////////////
+
+
+(sort '(2 1 5 4 6) #'<)
+
+; ////////////////////////////
+
+
+(do ((x '(1 2 3 4 5) (cdr x))
+       (y nil))
+      ((null x) (reverse y))
+    (push (+ (car x) 2) y))
+    
+    ; ////////////////////////////
+
+    
+    #'(lambda (x) (+ x 3))
+    
+    ; ////////////////////////////
+
+    (do ((x '(1 2 3 4 5) (cdr x))
+       (y nil))
+      ((null x) (reverse y))
+    (push (+ (car x) 2) y))

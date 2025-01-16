@@ -1,20 +1,31 @@
 package AST;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Let {
 
-    List<Binding> binding;
-    List<VariableBinding> variableBinding;
-    List<NilBinding> nilBinding;
-    List<String> stringList;
+    List<Binding> binding = new ArrayList<>();
+    List<VariableBinding> variableBinding = new ArrayList<>();
+    List<NilBinding> nilBinding = new ArrayList<>();
+    List<PossibleNumberHelper> possibleNumberHelperList = new ArrayList<>() ;
 
-    public List<String> getStringList() {
-        return stringList;
+    List<TemporaryList> temporaryListList = new ArrayList<>() ;
+
+    public List<TemporaryList> getTemporaryListList() {
+        return temporaryListList;
     }
 
-    public void setStringList(List<String> stringList) {
-        this.stringList = stringList;
+    public void setTemporaryListList(List<TemporaryList> temporaryListList) {
+        this.temporaryListList = temporaryListList;
+    }
+
+    public List<PossibleNumberHelper> getPossibleNumberHelperList() {
+        return possibleNumberHelperList;
+    }
+
+    public void setPossibleNumberHelperList(List<PossibleNumberHelper> possibleNumberHelperList) {
+        this.possibleNumberHelperList = possibleNumberHelperList;
     }
 
     public List<Binding> getBinding() {
@@ -58,6 +69,10 @@ public class Let {
         if (nilBinding != null) {
             if (!firstField) result.append(", ");
             result.append("nilBinding=").append(nilBinding);
+        }
+        if(possibleNumberHelperList!=null){
+            if (!firstField) result.append(", ");
+            result.append("possibleNumberHelperList=").append(possibleNumberHelperList);
         }
 
         result.append('}');
