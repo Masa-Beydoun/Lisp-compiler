@@ -23,6 +23,15 @@ public class Program extends NodeAST {
     Cons cons;
     Union union;
     Find find;
+    IterationOperation iterationOperation;
+    Do do_exp;
+    Return return_exp;
+    ReturnFrom returnFrom;
+    Block block;
+    Error error;
+    Funcall funcall;
+    Apply apply;
+    Mapcar mapcar;
 
     public Find getFind() {
         return find;
@@ -192,6 +201,77 @@ public class Program extends NodeAST {
         this.mathOperation = mathOperation;
     }
 
+    public IterationOperation getIterationOperation() {
+        return iterationOperation;
+    }
+
+    public void setIterationOperation(IterationOperation iterationOperation) {
+        this.iterationOperation = iterationOperation;
+    }
+
+    public Do getDo_exp() {
+        return do_exp;
+    }
+
+    public void setDo_exp(Do do_exp) {
+        this.do_exp = do_exp;
+    }
+
+    public Return getReturn_exp() {
+        return return_exp;
+    }
+
+    public void setReturn_exp(Return return_exp) {
+        this.return_exp = return_exp;
+    }
+
+    public ReturnFrom getReturnFrom() {
+        return returnFrom;
+    }
+
+    public void setReturnFrom(ReturnFrom returnFrom) {
+        this.returnFrom = returnFrom;
+    }
+
+    public Block getBlock() {
+        return block;
+    }
+
+    public void setBlock(Block block) {
+        this.block = block;
+    }
+
+    public Error getError() {
+        return error;
+    }
+
+    public void setError(Error error) {
+        this.error = error;
+    }
+
+    public Funcall getFuncall() {
+        return funcall;
+    }
+
+    public void setFuncall(Funcall funcall) {
+        this.funcall = funcall;
+    }
+
+    public Apply getApply() {
+        return apply;
+    }
+
+    public void setApply(Apply apply) {
+        this.apply = apply;
+    }
+
+    public Mapcar getMapcar() {
+        return mapcar;
+    }
+
+    public void setMapcar(Mapcar mapcar) {
+        this.mapcar = mapcar;
+    }
 
     @Override
     public String toString() {

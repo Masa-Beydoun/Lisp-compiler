@@ -174,11 +174,11 @@ temporary_list : either*;
 //TODO format
 ////Iteration
 dotimes : DOTIMES OPEN_PAREN IDENTIFIER NUMBER (program)* CLOSE_PAREN ;
-dolist : DOLIST OPEN_PAREN IDENTIFIER IDENTIFIER? (program)* CLOSE_PAREN ;
+dolist : DOLIST OPEN_PAREN IDENTIFIER SINGLE_QUOTE? (program)* CLOSE_PAREN ;
 loop : LOOP (program)* ;
 //
 do : DO OPEN_PAREN iteration_specs* CLOSE_PAREN OPEN_PAREN (termination_condition (program)* ) CLOSE_PAREN ;
-iteration_specs : OPEN_PAREN IDENTIFIER NUMBER NUMBER? (program)* CLOSE_PAREN+ ;
+iteration_specs : OPEN_PAREN IDENTIFIER NUMBER (program)* CLOSE_PAREN+ ;
 termination_condition : OPEN_PAREN condition IDENTIFIER? CLOSE_PAREN ;
 defvar: DEFVAR SPECIAL_VARIABLE possible_number_helper;
 //

@@ -1,0 +1,3 @@
+(loop
+   (setq a (+ a 1))
+   (when (> a 7) (return a)))
